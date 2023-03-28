@@ -3,7 +3,7 @@ import csv
 from pyppeteer import launch
 from datetime import datetime
 
-async def main():
+async def main(url):
     # Launch the browser
     browser = await launch(headless=False)
 
@@ -11,7 +11,7 @@ async def main():
     page = await browser.newPage()
     
     # Go to the desired URL
-    await page.goto('https://www.flashscore.com/basketball/usa/nba/results/')
+    await page.goto(url)
    
     # Get all elements that contain the class name "event"
     
@@ -113,4 +113,4 @@ async def main():
     await browser.close()
 
 # Run the async function
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.get_event_loop().run_until_complete(main("https://www.flashscore.com/basketball/usa/nba/results/"))
