@@ -2,16 +2,17 @@ import asyncio
 import csv
 from pyppeteer import launch
 from datetime import datetime
+from urllib.parse import urlparse
 
-async def main(url):
+async def main(uri):
     # Launch the browser
     browser = await launch(headless=False)
-
+    
     # Open a new page
     page = await browser.newPage()
     
     # Go to the desired URL
-    await page.goto(url)
+    await page.goto(uri)
    
     # Get all elements that contain the class name "event"
     
@@ -30,6 +31,14 @@ async def main(url):
     
     # Create an empty list to store the data
     data = []
+    
+    uri_parts = uri.split("/")
+    text = f"{uri_parts[4]} {uri_parts[5]} {uri_parts[6]}"
+    result = "{}_{}_{}".format(*text.split())
+    
+    now = datetime.now()
+    time_str = now.strftime("%Y-%m-%d_%H_%M_%S")
+    time_str = time_str.replace(":", "_")
             
     # Extract the text content of each element and append to the data list
     for i in range(len(events)):
@@ -90,10 +99,16 @@ async def main(url):
         timestamp = int(date_time_obj.timestamp())
         
         data.append([timestamp, time_string_with_year, home_text, away_text, p1_text, p2_text, p3_text, p4_text, p5_text_home,p1_away,p2_away,p3_away,p4_away,p5_text_away])
+    # extract the domain name from the URL
+    parsed_url = urlparse(uri)
+    domain_name = parsed_url.netloc.replace('.', '_')
 
+    # use the domain name as the file name
+    file_name = f'{domain_name}.csv'
+    
     # Print the data
     # Open the CSV file in write mode
-    with open('data.csv', mode='w', newline='') as csv_file:
+    with open(result+"_"+time_str+".csv", mode='w', newline='') as csv_file:
         # Create a CSV writer object
         writer = csv.writer(csv_file, delimiter=';')
 
@@ -111,6 +126,3 @@ async def main(url):
 
     # Close the browser
     await browser.close()
-
-# Run the async function
-asyncio.get_event_loop().run_until_complete(main("https://www.flashscore.com/basketball/usa/nba/results/"))
