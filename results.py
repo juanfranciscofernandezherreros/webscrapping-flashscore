@@ -16,6 +16,13 @@ async def main(uri):
    
     # Get all elements that contain the class name "event"
     
+    elements = await page.querySelectorAll('[id^="g_3"]')
+    ids = []
+    for element in elements:
+        property = await element.getProperty('id')
+        value = await property.jsonValue()
+        ids.append(value)
+        
     events = await page.querySelectorAll('.event__time')
     eventHome = await page.querySelectorAll('.event__participant--home')
     awayHome = await page.querySelectorAll('.event__participant--away')
@@ -42,7 +49,7 @@ async def main(uri):
             
     # Extract the text content of each element and append to the data list
     for i in range(len(events)):
-       
+        identificador = ids[i]
         event_text = await page.evaluate('(element) => element.textContent', events[i])
         home_text = await page.evaluate('(element) => element.textContent', eventHome[i])
         away_text = await page.evaluate('(element) => element.textContent', awayHome[i])
@@ -98,7 +105,7 @@ async def main(uri):
         date_time_obj = datetime.strptime(timeLong, "%d.%m.%Y-%H:%M")
         timestamp = int(date_time_obj.timestamp())
         
-        data.append([timestamp, time_string_with_year, home_text, away_text, p1_text, p2_text, p3_text, p4_text, p5_text_home,p1_away,p2_away,p3_away,p4_away,p5_text_away])
+        data.append([timestamp, time_string_with_year, home_text, away_text, p1_text, p2_text, p3_text, p4_text, p5_text_home,p1_away,p2_away,p3_away,p4_away,p5_text_away,identificador])
     # extract the domain name from the URL
     parsed_url = urlparse(uri)
     domain_name = parsed_url.netloc.replace('.', '_')
@@ -113,7 +120,7 @@ async def main(uri):
         writer = csv.writer(csv_file, delimiter=';')
 
         # Write the headers to the CSV file
-        headers = ['Event Time UTC','Event Time', 'Home Team', 'Away Team', '1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter', 'Overtime Home', '1st Quarter Away', '2nd Quarter Away', '3rd Quarter Away', '4th Quarter Away', 'Overtime Away']
+        headers = ['Event Time UTC','Event Time', 'Home Team', 'Away Team', '1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter', 'Overtime Home', '1st Quarter Away', '2nd Quarter Away', '3rd Quarter Away', '4th Quarter Away', 'Overtime Away','MatchId']
         writer.writerow(headers)
 
         # Write the rows to the CSV file
