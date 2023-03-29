@@ -1,0 +1,5 @@
+This is a Python script that extracts all hrefs from a web page using Pyppeteer and stores them in a MySQL database. It also updates the isOpened column of the corresponding row in the database to T after the hrefs have been extracted.
+
+The script takes a single command-line argument, which is the URL of the web page to extract the hrefs from. It first connects to the MySQL server and selects all rows from the urls table where the isOpened column is set to F. It then loops through the selected rows and extracts the hrefs from the web page. It filters the hrefs to only include those that contain the string "basketball" and have between 5 and 7 forward slashes in the URL. It then inserts the filtered hrefs into the urls table with the isOpened column set to F. Finally, it updates the isOpened column of the row corresponding to the input URL to T.
+
+The script is asynchronous and uses the asyncio library to manage coroutines. It also uses the argparse library to parse command-line arguments.
