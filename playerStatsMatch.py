@@ -1,5 +1,6 @@
 import mysql.connector
 import playerStatsMatchsSummary
+import playerStatsQuarters
 import asyncio
 
 async def main():
@@ -28,6 +29,10 @@ async def main():
             if len(parts) == 3:
                 second_part = parts[2]
         await playerStatsMatchsSummary.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/player-statistics/0")
+        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/1")
+        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/2")
+        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/3")
+        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/4")
 
 # call the asynchronous function
 asyncio.run(main())
