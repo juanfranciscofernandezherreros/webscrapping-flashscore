@@ -3,7 +3,6 @@ import csv
 import sys
 from pyppeteer import launch
 
-
 async def main(url):
     browser = await launch(headless=False)
     page = await browser.newPage()
