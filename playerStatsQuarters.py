@@ -39,9 +39,12 @@ async def main(url):
     # Create a bidimensional array by zipping the three arrays together
     stats = list(zip(name, texts, away))
 
-    # Print the bidimensional array
-    print(stats[0][1])
-    
+    # Write the bidimensional array to a CSV file
+    with open('stats.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Name', 'Home', 'Away'])
+        writer.writerows(stats)
+
     await browser.close()
 
 
