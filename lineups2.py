@@ -3,6 +3,8 @@ import csv
 import sys
 from pyppeteer import launch
 
+#py lineups.py https://www.flashscore.com/match/CbOSqht1/#/match-summary/lineups
+
 async def main(url):
     browser = await launch(headless=False)
     page = await browser.newPage()
@@ -40,24 +42,7 @@ async def main(url):
             ids.append(result)
     print(ids)
     
-    # Combine the arrays into a bidimensional array
-     # Combine the arrays into a bidimensional array
-    results = []
-    for i in range(len(number)):
-        item = [number[i], texts[i], ids[i]]
-        if i < 10:
-            item.append('Starter')
-        else:
-            item.append('Substitute')
-        results.append(item)
-
-    # Export the bidimensional array to a CSV file
-    with open('output.csv', mode='w', newline='') as file:
-        fieldnames = ['Number', 'Name', 'ID', 'Status']
-        writer = csv.writer(file)
-        writer.writerow(fieldnames)
-        writer.writerows(results)
-    
+        
     await browser.close()
 
 

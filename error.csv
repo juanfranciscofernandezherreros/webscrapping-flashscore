@@ -1,3 +1,0 @@
-Event Time UTC,Event Time,Home Team,Away Team,1st Quarter,2nd Quarter,3rd Quarter,4th Quarter,Overtime Home,1st Quarter Away,2nd Quarter Away,3rd Quarter Away,4th Quarter Away,Overtime Away,Error
-1679970600,28.03.2023-04:30,Los Angeles Clippers,Chicago Bulls,2799999,3599999,3799999,2599999,99999,3299999,2399999,2299999,3599999,,1406 (22001): Data too long for column 'Quarter1Home' at row 1
-1679868000,27.03.2023-00:00,Boston Celtics,San Antonio Spurs,3099999,3899999000,2899999,4199999,99999,3299999,2699999,1999999,1699999,,1406 (22001): Data too long for column 'Quarter1Home' at row 1

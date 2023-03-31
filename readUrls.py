@@ -1,7 +1,9 @@
 import asyncio
 import csv
+import os
 from pyppeteer import launch
-import readCsvUrls
+import sys
+
 async def get_hrefs(url, num_slashes):
     browser = await launch(headless=True)
     page = await browser.newPage()
@@ -15,16 +17,25 @@ async def get_hrefs(url, num_slashes):
     filtered_hrefs = set(filter(lambda x: 'basketball' in x and x.count('/') == num_slashes, hrefs))        
     await browser.close()
     return filtered_hrefs
+
 async def export_to_csv(url, num_slashes, filename):
+    # Check if URL contains the word 'basketball'
+    if 'basketball' in url:
+        # Create subfolder 'basketball' if it doesn't exist
+        if not os.path.exists('csv/basketball'):
+            os.makedirs('csv/basketball')
+        csv_path = os.path.join('csv/basketball', filename + '.csv')
+    else:
+        print("No functionality available for this URL.")
+        return
     hrefs = await get_hrefs(url, num_slashes)    
-    readCsvUrls.main();
-    with open(filename, 'a', newline='') as csvfile:
+    with open(csv_path, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         for href in hrefs:
             writer.writerow([href])
 
 if __name__ == '__main__':
-    url = 'https://www.flashscore.com/basketball/spain'
-    num_slashes = 6
-    filename = 'newUrls.csv'
+    url = input("Enter the URL: ")
+    num_slashes = int(input("Enter the number of slashes: "))
+    filename = input("Enter the filename: ")
     asyncio.run(export_to_csv(url, num_slashes, filename))

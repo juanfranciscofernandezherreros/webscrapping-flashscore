@@ -1,17 +1,16 @@
-This is a Python script that extracts all hrefs from a web page using Pyppeteer and stores them in a MySQL database. It also updates the isOpened column of the corresponding row in the database to T after the hrefs have been extracted.
+Multiples Scripts Working
 
-The script takes a single command-line argument, which is the URL of the web page to extract the hrefs from. It first connects to the MySQL server and selects all rows from the urls table where the isOpened column is set to F. It then loops through the selected rows and extracts the hrefs from the web page. It filters the hrefs to only include those that contain the string "basketball" and have between 5 and 7 forward slashes in the URL. It then inserts the filtered hrefs into the urls table with the isOpened column set to F. Finally, it updates the isOpened column of the row corresponding to the input URL to T.
+1 python script.py https://www.example.com/basketball/ 3 basketball_urls
 
-The script is asynchronous and uses the asyncio library to manage coroutines. It also uses the argparse library to parse command-line arguments.
+El código que proporcionaste utiliza pyppeteer para extraer los atributos href de las etiquetas "a" de una página web y luego guardar los datos extraídos en un archivo CSV.
 
-result.py
+Así es como funciona el código:
 
-This is a Python script that uses the Pyppeteer library to scrape data from a website and save it to a CSV file. Pyppeteer is a Python library that provides a way to control and automate a headless version of the Chrome browser using the DevTools Protocol.
+La función get_hrefs() utiliza pyppeteer para lanzar un navegador sin cabeza y navegar hasta la URL especificada. Luego utiliza page.querySelectorAllEval() para encontrar todas las etiquetas "a" de la página y sus atributos href. La función set() se utiliza para eliminar los href duplicados. Finalmente, los href se filtran para incluir solo aquellos que contienen la palabra "basketball" y tienen un número específico de barras diagonales en la ruta de la URL (según lo especificado por num_slashes).
 
-The script first launches a new instance of the Chrome browser in headless mode (meaning there is no graphical user interface) using the launch function provided by Pyppeteer. Then it creates a new page in the browser and navigates to the specified URL using the goto method of the page object.
+La función export_to_csv() llama a get_hrefs() para obtener los href filtrados y luego los guarda en un archivo CSV utilizando el objeto csv.writer y el método writerow(). El archivo CSV se crea en una carpeta llamada csv en el directorio de trabajo actual. Si la carpeta no existe, se crea con os.makedirs().
 
-Next, it uses the querySelectorAll method of the page object to find all the elements that match a given CSS selector. It extracts the text content of these elements using the evaluate method of the page object, which allows it to execute JavaScript code in the context of the page.
+El bloque if __name__ == '__main__': llama a export_to_csv() con la URL, el número de barras diagonales y el nombre de archivo especificados.
 
-The script then processes the extracted data and saves it to a CSV file using the built-in csv module.
+Es importante tener en cuenta que el código utiliza el módulo asyncio de Python para ejecutar las funciones get_hrefs() y export_to_csv() de manera asíncrona. La función asyncio.run() se utiliza para ejecutar la función export_to_csv().
 
-The data being extracted appears to be related to sports events, including the teams, scores, and quarters or periods. It also appears to handle events that have gone into overtime or extra time, as indicated by the "AOT" (after overtime) tag in the event name.
