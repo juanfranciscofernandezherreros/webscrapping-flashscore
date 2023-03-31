@@ -1,9 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/poland/super-cup-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/polish-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/energa-basket-liga-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/1-liga/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/energa-basket-liga/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/super-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/poland/polish-cup-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

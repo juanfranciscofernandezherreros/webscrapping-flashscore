@@ -1,8 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/#/vJr2YZd5,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/#/Yur6XgCB,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3-u23-women/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

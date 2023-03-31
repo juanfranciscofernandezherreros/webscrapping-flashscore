@@ -1,5 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/canada/u-sports/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/canada/nbl/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/canada/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/canada/cebl/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

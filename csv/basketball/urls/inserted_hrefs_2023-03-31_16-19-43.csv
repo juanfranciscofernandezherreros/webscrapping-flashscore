@@ -1,3 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/turkmenistan/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/turkmenistan/nblt/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

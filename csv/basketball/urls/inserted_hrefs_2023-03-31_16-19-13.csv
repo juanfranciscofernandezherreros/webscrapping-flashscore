@@ -1,3 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/indonesia/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/indonesia/ibl/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

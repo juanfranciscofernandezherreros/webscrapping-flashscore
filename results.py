@@ -5,8 +5,24 @@ from pyppeteer import launch
 from datetime import datetime
 from urllib.parse import urlparse
 import glob
+import os
 
 async def main(uri):
+
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "lineups"
+    urls_folder = os.path.join(basketball_folder, "results")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+
     # Launch the browser
     browser = await launch(headless=False)
     
@@ -117,7 +133,7 @@ async def main(uri):
     
     # Print the data
     # Open the CSV file in write mode
-    with open(result+"_"+time_str+".csv", mode='w', newline='') as csv_file:
+    with open('csv/basketball/results/'+result+"_"+time_str+".csv", mode='w', newline='') as csv_file:
         # Create a CSV writer object
         writer = csv.writer(csv_file, delimiter=';')
 

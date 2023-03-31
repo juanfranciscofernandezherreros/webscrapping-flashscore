@@ -1,6 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/lithuania/lkl/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/lithuania/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/lithuania/nkl/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/lithuania/king-mindaugas-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/lithuania/moteru-lyga-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

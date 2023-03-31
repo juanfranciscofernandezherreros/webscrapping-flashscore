@@ -1,8 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/world/americup-women/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/#/6y1XJcfK,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/#/OCexJH9Q,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/americup-women/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

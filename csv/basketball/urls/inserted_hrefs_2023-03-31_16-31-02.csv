@@ -1,2 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/world/world-cup/#/lODnX6wI,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

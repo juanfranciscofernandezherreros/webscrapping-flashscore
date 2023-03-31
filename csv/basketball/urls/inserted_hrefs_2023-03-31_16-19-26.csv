@@ -1,7 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/ukraine/superleague-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/ukraine/ukrainian-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/ukraine/super-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/ukraine/fbu-superleague/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/ukraine/acbu-superleague/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/ukraine/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

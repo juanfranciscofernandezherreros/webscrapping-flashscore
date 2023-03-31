@@ -1,8 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/world/champions-league-americas/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/#/EcI34xap,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/#/M5Qy9IjT,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/champions-league-americas/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

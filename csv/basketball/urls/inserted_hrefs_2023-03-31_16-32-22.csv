@@ -1,8 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/world/world-cup-3x3/#/COpc12SD,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/#/ll8Qqzct,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/world/world-cup-3x3/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

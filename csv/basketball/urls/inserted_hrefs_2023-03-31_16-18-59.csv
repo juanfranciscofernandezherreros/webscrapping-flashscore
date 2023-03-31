@@ -1,5 +1,0 @@
-href,sql_query
-https://www.flashscore.com/basketball/slovakia/extraliga-women/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/slovakia/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/slovakia/slovakia-cup/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
-https://www.flashscore.com/basketball/slovakia/extraliga/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
