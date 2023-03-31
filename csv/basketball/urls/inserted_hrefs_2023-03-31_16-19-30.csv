@@ -1,0 +1,10 @@
+href,sql_query
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/#/QkeA55ba,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/#/dGj66oqg,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/#/APJ9yhae,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/#/dMF5xYqk,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/mediterranean-games-3x3-women/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

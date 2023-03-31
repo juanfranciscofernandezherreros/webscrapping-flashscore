@@ -1,0 +1,8 @@
+href,sql_query
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/#/U1fsRbB5,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/#/OOgoQIQB,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/standings/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/world-cup-3x3-u18/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

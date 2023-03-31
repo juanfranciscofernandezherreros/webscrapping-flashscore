@@ -3,7 +3,8 @@ import asyncio
 import csv
 import mysql.connector
 from pyppeteer import launch
-
+from datetime import datetime  # add this import
+import os
 
 async def main():
 
@@ -14,6 +15,20 @@ async def main():
         password="password_bigdataetl",
         database="bigdataetl"
     )
+    
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "urls"
+    urls_folder = os.path.join(basketball_folder, "urls")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
 
     while True:
         # Get list of urls to open
@@ -24,7 +39,8 @@ async def main():
         select_query = "SELECT urls FROM urls WHERE isOpened = 'F' LIMIT 1"
         # Execute the SELECT query
         mycursor.execute(select_query)
-
+        
+        
         # Get the result
         result = mycursor.fetchone()
         if result is None:
@@ -49,6 +65,8 @@ async def main():
         # Insert filtered hrefs into the database
         inserted_count = 0
         error_count = 0
+        inserted_hrefs = []
+        errored_hrefs = []
         for href in filtered_hrefs:
             try:
                 insert_query = "INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
@@ -56,9 +74,29 @@ async def main():
                 mycursor.execute(insert_query, val)
                 db.commit()
                 inserted_count += 1
+                inserted_hrefs.append({'href': href, 'sql_query': insert_query})
             except Exception as e:
+                error_msg = f"Error inserting href {href}: {str(e)}"
+                print(error_msg)
+                errored_hrefs.append({'href': href, 'error_msg': error_msg})
                 error_count += 1
 
+        # Save inserted and errored hrefs to CSV files
+        now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        with open(f"csv/basketball/urls/inserted_hrefs_{now}.csv", mode='w') as file:
+            fieldnames = ['href', 'sql_query']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for href in inserted_hrefs:
+                writer.writerow(href)
+                    
+        with open(f"csv/basketball/urls/errored_hrefs_{now}.csv", mode='w') as file:
+            fieldnames = ['href', 'error_msg']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for href in errored_hrefs:
+                writer.writerow(href)
+        
         # Update URL state in database to 'T'
         update_query = "UPDATE urls SET isOpened = 'T' WHERE urls = %s"
         val = (url_to_open,)
