@@ -2,11 +2,27 @@ import asyncio
 import csv
 import sys
 from pyppeteer import launch
-
+import os
 async def main(url):
+    
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "lineups"
+    urls_folder = os.path.join(basketball_folder, "lineups")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+
+
     browser = await launch(headless=False)
     page = await browser.newPage()
-    await page.goto("https://www.flashscore.com/match/CbOSqht1/#/match-summary/lineups")        
+    await page.goto(url)        
     
     # Get all elements with the class name "lf__participantNumber"
     participantNumber = await page.querySelectorAll('.lf__participantNumber')
@@ -50,9 +66,10 @@ async def main(url):
         else:
             item.append('Substitute')
         results.append(item)
-
-    # Export the bidimensional array to a CSV file
-    with open('output.csv', mode='w', newline='') as file:
+        
+    match_id = url.split("/")[-4]
+    print("MatchId" + match_id)
+    with open(f"csv/basketball/lineups/lineups_{match_id}.csv", 'w', newline='') as file:
         fieldnames = ['Number', 'Name', 'ID', 'Status']
         writer = csv.writer(file)
         writer.writerow(fieldnames)

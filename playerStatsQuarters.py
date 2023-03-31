@@ -4,6 +4,22 @@ import sys
 from pyppeteer import launch
 
 async def main(url):
+    
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "quarters"
+    urls_folder = os.path.join(basketball_folder, "quarters")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+
+    
     browser = await launch(headless=False)
     page = await browser.newPage()
     await page.goto(url)    
@@ -39,7 +55,12 @@ async def main(url):
     stats = list(zip(name, texts, away))
 
     # Write the bidimensional array to a CSV file
-    with open('stats.csv', 'w', newline='') as file:
+    
+    number = url.split("/")[-1]
+    print("Quarter" + number)
+    match_id = url.split("/")[-2]
+    print("MatchId" + match_id)
+    with open('csv/basketball/quarters/'+match_id+'_'+number+'.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Name', 'Home', 'Away'])
         writer.writerows(stats)

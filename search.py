@@ -6,8 +6,8 @@ from pyppeteer import launch
 from datetime import datetime  # add this import
 import os
 
-async def main():
-
+async def main(url=None):
+    
     # Connect to the MySQL server
     db = mysql.connector.connect(
         host="localhost",

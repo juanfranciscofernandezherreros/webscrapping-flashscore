@@ -1,0 +1,5 @@
+href,sql_query
+https://www.flashscore.com/basketball/world/club-friendly/#,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/club-friendly/results/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/club-friendly/archive/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"
+https://www.flashscore.com/basketball/world/club-friendly/fixtures/,"INSERT INTO urls (urls, isOpened) VALUES (%s, %s)"

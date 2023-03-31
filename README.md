@@ -1,16 +1,25 @@
 Multiples Scripts Working
 
-1 python script.py https://www.example.com/basketball/ 3 basketball_urls
+py search.py
 
-El código que proporcionaste utiliza pyppeteer para extraer los atributos href de las etiquetas "a" de una página web y luego guardar los datos extraídos en un archivo CSV.
+El código se encarga de abrir URLs de una tabla en una base de datos MySQL, tomar capturas de pantalla para obtener todos los enlaces que contienen la palabra "basketball" y "/5", "/6" o "/7" en su URL, insertar los enlaces filtrados en la base de datos, actualizar el estado de la URL a "T" en la base de datos y guardar los enlaces insertados y los que generaron errores en archivos CSV.
 
-Así es como funciona el código:
+Primero, se conecta a la base de datos especificada y verifica si existe la carpeta "csv" en el directorio actual, si no existe la crea. Luego crea una subcarpeta llamada "basketball" dentro de la carpeta "csv" y otra subcarpeta llamada "urls" dentro de la carpeta "basketball".
 
-La función get_hrefs() utiliza pyppeteer para lanzar un navegador sin cabeza y navegar hasta la URL especificada. Luego utiliza page.querySelectorAllEval() para encontrar todas las etiquetas "a" de la página y sus atributos href. La función set() se utiliza para eliminar los href duplicados. Finalmente, los href se filtran para incluir solo aquellos que contienen la palabra "basketball" y tienen un número específico de barras diagonales en la ruta de la URL (según lo especificado por num_slashes).
+Después, el código entra en un bucle y ejecuta una consulta SQL en la tabla "urls" para obtener la primera URL que tenga un estado de "F" (no abierta). Si no hay URL con estado "F", el bucle se detiene y el programa espera 10 segundos antes de volver a intentar.
 
-La función export_to_csv() llama a get_hrefs() para obtener los href filtrados y luego los guarda en un archivo CSV utilizando el objeto csv.writer y el método writerow(). El archivo CSV se crea en una carpeta llamada csv en el directorio de trabajo actual. Si la carpeta no existe, se crea con os.makedirs().
+Luego, el código toma una captura de pantalla de la URL y obtiene todos los enlaces en la página. Se filtran los enlaces que contienen "basketball" y "/5", "/6" o "/7" en su URL.
 
-El bloque if __name__ == '__main__': llama a export_to_csv() con la URL, el número de barras diagonales y el nombre de archivo especificados.
+A continuación, se insertan los enlaces filtrados en la base de datos y se actualiza el estado de la URL a "T". Si se genera un error al insertar un enlace, se guarda el enlace y el mensaje de error en una lista para ser guardado en un archivo CSV más tarde.
 
-Es importante tener en cuenta que el código utiliza el módulo asyncio de Python para ejecutar las funciones get_hrefs() y export_to_csv() de manera asíncrona. La función asyncio.run() se utiliza para ejecutar la función export_to_csv().
+Finalmente, se imprimen estadísticas sobre la cantidad total de enlaces, la cantidad de enlaces insertados correctamente y la cantidad de enlaces que generaron errores. Los enlaces insertados y los que generaron errores se guardan en archivos CSV en la subcarpeta "urls" de la carpeta "basketball".
 
+Luego, se crea una carpeta llamada "basketball" dentro de la carpeta "csv" si no existe aún.
+Después, se crea una subcarpeta llamada "urls" dentro de la carpeta "basketball" si no existe aún.
+Se inicia un bucle infinito que se detiene cuando no hay más URLs por abrir en la base de datos.
+Se obtiene la siguiente URL por abrir de la base de datos. La consulta se realiza con la ayuda de un cursor de MySQL. La consulta selecciona la primera URL que tenga el estado "F" (no abierta) de la tabla "urls".
+Se toma una captura de pantalla de la página correspondiente a la URL obtenida para obtener todos los enlaces que contienen la palabra "basketball" y que tienen 5, 6 o 7 barras después del dominio en su dirección URL. Se utiliza la biblioteca pyppeteer para automatizar un navegador web y realizar esta tarea.
+Se filtran los enlaces obtenidos para que solo contengan la palabra "basketball" y tengan 5, 6 o 7 barras después del dominio en su dirección URL. Estos enlaces se insertan en la tabla "urls" de la base de datos, marcándolos como no abiertos ("F").
+Se guardan los enlaces insertados con éxito y los enlaces con errores en dos archivos CSV diferentes en la subcarpeta "urls" de la carpeta "basketball".
+Se actualiza el estado de la URL obtenida inicialmente en la base de datos a "T" (abierta).
+Se imprimen algunas estadísticas, como la cantidad total de enlaces que se intentaron insertar y la cantidad de enlaces insertados correctamente y con errores.
