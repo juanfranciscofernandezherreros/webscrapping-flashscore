@@ -2,6 +2,7 @@ import asyncio
 import csv
 import sys
 from pyppeteer import launch
+import os
 
 async def main(url):
     
@@ -58,9 +59,9 @@ async def main(url):
     
     number = url.split("/")[-1]
     print("Quarter" + number)
-    match_id = url.split("/")[-2]
+    match_id = url.split("/")[-5]
     print("MatchId" + match_id)
-    with open('csv/basketball/quarters/'+match_id+'_'+number+'.csv', 'w', newline='') as file:
+    with open(f"csv/basketball/quarters/quarters_{number}_{match_id}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Name', 'Home', 'Away'])
         writer.writerows(stats)
