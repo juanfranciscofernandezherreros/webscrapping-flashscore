@@ -22,9 +22,20 @@ async def export_to_csv(url, num_slashes, filename):
     # Check if URL contains the word 'basketball'
     if 'basketball' in url:
         # Create subfolder 'basketball' if it doesn't exist
-        if not os.path.exists('csv/basketball'):
-            os.makedirs('csv/basketball')
-        csv_path = os.path.join('csv/basketball', filename + '.csv')
+        # Make sure the "csv" folder exists
+        if not os.path.exists("csv"):
+            os.mkdir("csv")
+        # Create a subfolder called "basketball"
+        basketball_folder = os.path.join("csv", "basketball")
+        if not os.path.exists(basketball_folder):
+            os.mkdir(basketball_folder)
+
+        # Create a subfolder called "lineups"
+        urls_folder = os.path.join(basketball_folder, "urls")
+        if not os.path.exists(urls_folder):
+            os.mkdir(urls_folder)
+            
+        csv_path = os.path.join('csv/basketball/urls', filename + '.csv')
     else:
         print("No functionality available for this URL.")
         return

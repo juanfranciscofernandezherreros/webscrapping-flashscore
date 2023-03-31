@@ -48,5 +48,5 @@ def read_csv_files(csv_files):
             cursor.close()
     
 if __name__ == '__main__':
-    csv_files = glob.glob('spain_acb_*.csv')
+    csv_files = glob.glob('csv/basketball/results/spain_acb_*.csv')
     all_data = read_csv_files(csv_files)
