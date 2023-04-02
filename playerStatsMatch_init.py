@@ -59,6 +59,5 @@ async def main():
         #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/3")
         #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/4")
         #await lineups.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/lineups")
-        #await pointByPoints.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/point-by-point/0")
-        await h2.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/point-by-point/0")
+        #await h2.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/point-by-point/0")
 asyncio.run(main())

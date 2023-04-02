@@ -14,6 +14,6 @@ CREATE TABLE matchs (
     Quarter3Away VARCHAR(50),
     Quarter4Away VARCHAR(50),
     OvertimeAway VARCHAR(50),
-	matchId VARCHAR(50zzzz),
+	matchId VARCHAR(50),
     PRIMARY KEY (id)
 );
