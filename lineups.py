@@ -69,7 +69,7 @@ async def main(url):
         
     match_id = url.split("/")[-4]
     print("MatchId" + match_id)
-    with open(f"csv/basketball/lineups/lineups_{match_id}.csv", 'w', newline='') as file:
+    with open(vv, 'w', newline='') as file:
         fieldnames = ['Number', 'Name', 'ID', 'Status']
         writer = csv.writer(file)
         writer.writerow(fieldnames)

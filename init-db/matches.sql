@@ -17,4 +17,3 @@ CREATE TABLE matchs (
 	matchId VARCHAR(50zzzz),
     PRIMARY KEY (id)
 );
-ALTER TABLE matchs ADD COLUMN matchId VARCHAR(50) AFTER id;

@@ -4,6 +4,9 @@ import playerStatsQuarters
 import asyncio
 import datetime
 import lineups
+import pointByPoints
+import h2
+
 async def main():
     # establish a connection to the MySQL database
     mydb = mysql.connector.connect(
@@ -49,13 +52,13 @@ async def main():
             parts = s.split("_")
             if len(parts) == 3:
                 second_part = parts[2]
-        await playerStatsMatchsSummary.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/player-statistics/0")
-        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/0")
-        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/1")
-        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/2")
-        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/3")
-        await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/4")
-        await lineups.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/lineups")
-
-# call the asynchronous function
+        #await playerStatsMatchsSummary.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/player-statistics/0")
+        #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/0")
+        #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/1")
+        #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/2")
+        #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/3")
+        #await playerStatsQuarters.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/match-statistics/4")
+        #await lineups.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/lineups")
+        #await pointByPoints.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/point-by-point/0")
+        await h2.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/point-by-point/0")
 asyncio.run(main())
