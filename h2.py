@@ -1,9 +1,10 @@
 import asyncio
-from pyppeteer import launch
 import os
 import csv
+from pyppeteer import launch
 
-async def main():
+async def main(url):
+    # rest of the code
     
     # Make sure the "csv" folder exists
     if not os.path.exists("csv"):
@@ -14,10 +15,10 @@ async def main():
     if not os.path.exists(basketball_folder):
         os.mkdir(basketball_folder)
 
-    # Create a subfolder called "quarters"
-    urls_folder = os.path.join(basketball_folder, "pointByPoint")
-    if not os.path.exists(urls_folder):
-        os.mkdir(urls_folder)
+    # Create a subfolder called "pointByPoint"
+    point_by_point_folder = os.path.join(basketball_folder, "pointByPoint")
+    if not os.path.exists(point_by_point_folder):
+        os.mkdir(point_by_point_folder)
 
     browser = await launch(headless=False)
     page = await browser.newPage()
@@ -73,13 +74,16 @@ async def main():
     print(match_type)
     print(match_number)
 
+    # Write data to CSV file
     with open(f"csv/basketball/pointByPoint/pointByPoint_{match_id}_{match_number}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Name', 'Home', 'Away', 'Time'])
-        writer.writerows(result_array)
-
+        writer.writerow(['Name', 'Home', 'Away', 'Time', 'MatchId', 'MatchNumber'])
+        for row in result_array:
+            row.append(match_number)
+            row.insert(4, match_id)
+            writer.writerow(row)
     
     await browser.close()
 
 url = 'https://www.flashscore.com/match/CbOSqht1/#/match-summary/point-by-point/0'
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.get_event_loop().run_until_complete(main(url))
