@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-folder_path = './init-db'
+folder_path = './init-mysql'
 
 sql_files = [file for file in os.listdir(folder_path) if file.endswith('.sql')]
 
@@ -22,8 +22,11 @@ for sql_file in sql_files:
         mydb.commit()
         print(sql_file, "se ha ejecutado correctamente.")
     except mysql.connector.Error as error:
-        print(sql_file, "no se ha podido ejecutar. Error:", error)
-        
+        if "insert" in query.lower():
+            print("No se ha podido insertar en el archivo", sql_file, ". Error:", error)
+            continue
+        else:
+            print(sql_file, "no se ha podido ejecutar. Error:", error)
 
 mycursor.close()
 mydb.close()
