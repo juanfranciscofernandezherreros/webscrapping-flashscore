@@ -66,14 +66,12 @@ def read_csv_files(csv_files):
         
         try:
             cursor.execute(sql, values)
-            print(f"Executing SQL: {sql} with values: {values}")
             db.commit()
             success_count += 1
             successes.append(row)
         except mysql.connector.Error as error:
             db.rollback()
             error_count += 1
-            print(f"Error SQL: {sql} with values: {values}")
             errors.append(row)
         finally:
             cursor.close()
