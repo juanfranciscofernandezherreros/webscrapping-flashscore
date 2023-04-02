@@ -55,12 +55,19 @@ async def main(url):
 
     # Replace "/" with "_" in the required portion
     required_portion = "_".join(required_portion)
-
-    print(required_portion)
+    
+    # Define function to extract team name and team ID from URL
+def extract_team_info(url):
+    parts = url.split('/')
+    team_name = parts[4]
+    team_id = parts[5]
+    return team_name, team_id
+    
     # Export team URLs to CSV
     with open(os.path.join(teams_folder, required_portion+'team_urls.csv'), mode='w', newline='') as file:
         writer = csv.writer(file)
         for url in team_urls:
+            
             writer.writerow([url])
 
     # Export other URLs to CSV
@@ -78,3 +85,4 @@ if __name__ == '__main__':
 
     url = sys.argv[1]
     asyncio.run(main(url))
+
