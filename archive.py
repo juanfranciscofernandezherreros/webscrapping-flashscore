@@ -6,6 +6,13 @@ import os
 import asyncio
 import re
 
+# Define function to extract team name and team ID from URL
+def extract_team_info(url):
+    parts = url.split('/')
+    team_name = parts[4]
+    team_id = parts[5]
+    return team_name, team_id
+
 async def main(url):
     
     # Make sure the "csv" folder exists
@@ -35,48 +42,22 @@ async def main(url):
         const elements = Array.from(document.querySelectorAll(".archive a"));
         return elements.map(element => element.href.trim());
     }''')
-
-    team_urls = []
-    other_urls = []
-
-    for url in hrefs:
-        if 'team' in url:
-            team_urls.append(url)
+        
+    new_hrefs = []
+    new_hrefs1 = []
+    for href in hrefs[1:]:
+        if "team" not in href:
+            new_hrefs.append(href)
         else:
-            other_urls.append(url)
-
-    print("Team URLs:")
-    print(team_urls)
-
-    print("Other URLs:")
-    url_parts = other_urls[0]
-    # Split the URL and extract the required portion
-    required_portion = url_parts.split("/")[4:]
-
-    # Replace "/" with "_" in the required portion
-    required_portion = "_".join(required_portion)
+            new_hrefs1.append(href)
     
-    # Define function to extract team name and team ID from URL
-def extract_team_info(url):
-    parts = url.split('/')
-    team_name = parts[4]
-    team_id = parts[5]
-    return team_name, team_id
-    
-    # Export team URLs to CSV
-    with open(os.path.join(teams_folder, required_portion+'team_urls.csv'), mode='w', newline='') as file:
-        writer = csv.writer(file)
-        for url in team_urls:
-            
-            writer.writerow([url])
-
-    # Export other URLs to CSV
-    with open(os.path.join(season_folder, required_portion+'season_urls.csv'), mode='w', newline='') as file:
-        writer = csv.writer(file)
-        for url in other_urls:
-            writer.writerow([url])
-
+    for h1 in new_hrefs:
+        print(h1)
+    for h2 in new_hrefs1:
+        print(h2)
     await browser.close()
+        
+    
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -85,4 +66,3 @@ if __name__ == '__main__':
 
     url = sys.argv[1]
     asyncio.run(main(url))
-
