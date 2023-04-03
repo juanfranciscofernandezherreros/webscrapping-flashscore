@@ -61,11 +61,12 @@ async def main(url):
     print("Quarter" + number)
     match_id = url.split("/")[-5]
     print("MatchId" + match_id)
+    print(f"Saving stats to: csv/basketball/quarters/quarters_{number}_{match_id}.csv")
     with open(f"csv/basketball/quarters/quarters_{number}_{match_id}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Name', 'Home', 'Away'])
-        writer.writerows(stats)
-
+        writer.writerow(['Name', 'Home', 'Away', 'MatchId', 'Quarter'])
+        for row in stats:
+            writer.writerow(row + (match_id, number))
     await browser.close()
 
 
