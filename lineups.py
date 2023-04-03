@@ -3,6 +3,7 @@ import csv
 import sys
 from pyppeteer import launch
 import os
+
 async def main(url):
     
     # Make sure the "csv" folder exists
@@ -38,14 +39,7 @@ async def main(url):
     # Get all elements with the class name "lf__participantNumber"
     participantName = await page.querySelectorAll('.lf__participantName')
     
-    # Extract the text content of each element and the href attribute value of the "a" element inside each ".lf__participantName" element
-    texts = []
-    for element in participantName:
-        text = await page.evaluate('(element) => element.textContent.trim()', element)
-        texts.append(text)    
-
-    print(texts)
-    
+    # Get all links and extract the "href" attribute value for the player pages
     ids = []
     links = await page.querySelectorAll('a')
     for link in links:
@@ -55,9 +49,16 @@ async def main(url):
             result = split_href[-2]
             ids.append(result)
     print(ids)
+
+    # Extract the text content of each ".lf__participantName" element
+    texts = []
+    for element in participantName:
+        text = await page.evaluate('(element) => element.textContent.trim()', element)
+        texts.append(text)    
+
+    print(texts)
     
     # Combine the arrays into a bidimensional array
-     # Combine the arrays into a bidimensional array
     results = []
     for i in range(len(number)):
         item = [number[i], texts[i], ids[i]]
@@ -65,15 +66,19 @@ async def main(url):
             item.append('Starter')
         else:
             item.append('Substitute')
-        results.append(item)
-        
-    match_id = url.split("/")[-4]
-    print("MatchId" + match_id)
-    with open(vv, 'w', newline='') as file:
-        fieldnames = ['Number', 'Name', 'ID', 'Status']
+        results.append(item)         
+    
+    url_parts = url.split("/")
+    match_id = url_parts[4]
+    print(match_id)
+    
+    # Write data to CSV file
+    with open(f"csv/basketball/lineups/lineups_{match_id}.csv", 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(fieldnames)
-        writer.writerows(results)
+        writer.writerow(['numberPlayer', 'namePlayer', 'playerId', 'Starter', 'MatchId'])
+        for row in results:
+            row.insert(4, match_id)
+            writer.writerow(row)
     
     await browser.close()
 
