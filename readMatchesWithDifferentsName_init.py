@@ -26,6 +26,8 @@ def read_csv_files(csv_files):
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
     
     # Create arrays to store successes and errors
+    success_count = 0
+    error_count = 0
     successes = []
     errors = []
            
@@ -37,16 +39,17 @@ def read_csv_files(csv_files):
         try:
             cursor.execute(sql, values)
             db.commit()
+            success_count += 1
             successes.append(row)
-            
         except mysql.connector.Error as error:
             db.rollback()
+            error_count += 1
             errors.append(row)
-            print("Error inserting row {}: {}".format(row, error))
-
         finally:
             cursor.close()
     
+    print(f"Total Successes: {success_count}, Total Errors: {error_count}")
+ 
 if __name__ == '__main__':
-    csv_files = glob.glob('csv/basketball/results/spain_acb_*.csv')
+    csv_files = glob.glob('csv/basketball/results/*.csv')
     all_data = read_csv_files(csv_files)

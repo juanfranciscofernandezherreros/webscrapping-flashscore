@@ -1,4 +1,13 @@
 Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarter;4th Quarter;Overtime Home;1st Quarter Away;2nd Quarter Away;3rd Quarter Away;4th Quarter Away;Overtime Away;MatchId
+1680458400;02.04.2023-20:00;Valencia;Baskonia;18;17;20;26;;14;23;19;29;;g_3_GCYmB4Em
+1680447600;02.04.2023-17:00;Manresa;Obradoiro CAB;21;23;21;15;;9;11;14;31;;g_3_AgWjBkdc
+1680433200;02.04.2023-13:00;Tenerife;Barcelona;21;11;24;20;;24;18;15;22;;g_3_W2XnCVti
+1680431400;02.04.2023-12:30;Murcia;Basquet Girona;26;21;30;25;;20;26;14;19;;g_3_Iaq5mn4j
+1680430500;02.04.2023-12:15;Real Madrid;Granada;30;29;22;27;;15;22;21;17;;g_3_YmqqCpas
+1680374700;01.04.2023-20:45;Bilbao;Basket Zaragoza;18;15;23;25;;16;8;23;21;;g_3_jkaQfUBG
+1680374700;01.04.2023-20:45;Gran Canaria;Real Betis;16;30;19;22;;30;10;20;11;;g_3_4du1lSlp
+1680364800;01.04.2023-18:00;Breogan;Joventut Badalona;19;10;22;14;;19;27;23;16;;g_3_bF2Yh8tT
+1680364800;01.04.2023-18:00;Unicaja;Fuenlabrada;24;28;27;21;;14;28;16;17;;g_3_KO3UglRM
 1680116400;29.03.2023-21:00;Tenerife;Manresa;28;23;17;32;;28;31;8;20;;g_3_CbOSqht1
 1679853600;26.03.2023-20:00;Basket Zaragoza;Valencia;24;14;20;28;;22;14;19;20;;g_3_WvcHGQjQ
 1679848200;26.03.2023-18:30;Fuenlabrada;Real Madrid;13;18;26;21;;29;21;32;20;;g_3_OEcDH6yK
@@ -97,8 +106,3 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1672774200;03.01.2023-20:30;Basquet Girona;Joventut Badalona;19;22;18;20;;17;11;15;23;;g_3_YeBljEpp
 1672771500;03.01.2023-19:45;Real Betis;Gran Canaria;26;24;16;22;;24;23;15;20;;g_3_WnPMffxT
 1672768800;03.01.2023-19:00;Valencia;Fuenlabrada;18;22;26;26;;13;23;17;33;;g_3_lOZHezNM
-1672689600;02.01.2023-21:00;Real Madrid;Barcelona;26;18;13;21;;28;14;20;25;;g_3_jwHEdG7G
-1703966400;30.12.2023-21:00;Manresa;Basquet Girona;14;22;27;19;;23;8;22;26;;g_3_dGHAcdhA
-1703957400;30.12.2023-18:30;Fuenlabrada;Obradoiro CAB;8;25;21;25;;18;21;22;21;;g_3_IPI6bxw4
-1703881800;29.12.2023-21:30;Tenerife;Granada;35;17;24;22;;17;18;12;19;;g_3_0lO1aINc
-1703878200;29.12.2023-20:30;Joventut Badalona;Real Betis;26;26;20;21;;16;18;25;22;;g_3_McPc0b8i

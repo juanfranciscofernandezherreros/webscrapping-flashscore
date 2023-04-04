@@ -1,6 +1,6 @@
 import asyncio
 import csv
-import readCsvWithDifferentsName
+import readMatchesWithDifferentsName_init
 from pyppeteer import launch
 from datetime import datetime
 from urllib.parse import urlparse
@@ -150,7 +150,7 @@ async def main(uri):
     result = "{}_{}".format(*text.split())
     nameCsv = result+"_*.csv"
     #Call a Script to read CSV
-    csv_files = glob.glob(nameCsv)
-    readCsvWithDifferentsName.read_csv_files(csv_files);
+    csv_files = glob.glob('csv/basketball/results/*.csv')
+    readMatchesWithDifferentsName_init.read_csv_files(csv_files);
     # Close the browser
     await browser.close()
