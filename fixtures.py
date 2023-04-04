@@ -3,8 +3,25 @@ import re
 import asyncio
 import csv
 from pyppeteer import launch
+import os
 
 async def main(url):
+    
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "fixtures"
+    urls_folder = os.path.join(basketball_folder, "fixtures")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+
+
     browser = await launch()
     page = await browser.newPage()
     await page.goto(url)
@@ -41,10 +58,10 @@ async def main(url):
     csv_filename = re.sub(r'/$', '', csv_filename)
     csv_filename = re.sub(r'/', '_', csv_filename)
     csv_filename = csv_filename + '.csv'
-    csv_filename = 'spain_acb_fixtures_' + csv_filename
+    csv_filename = 'spain_acb_fixtures' + csv_filename
 
     # Export the matches array to a CSV file with headers
-    with open(csv_filename, 'w', newline='') as csvfile:
+    with open(f"csv/basketball/fixtures/{csv_filename}", 'w', newline='') as csvfile:
         fieldnames = ['Match ID', 'Date', 'Home Team Logo', 'Away Team Logo', 'Time', 'Home Team', 'Away Team', 'Score Home', 'Score Away']
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fieldnames)
