@@ -91,8 +91,9 @@ async def main(url):
     
     parts = url.split('/')
     country = parts[4]
+    league = parts[5]
 
-    with open(f"csv/basketball/archive/archive_{country}.csv", 'w', newline='') as file:
+    with open(f"csv/basketball/archive/archive_{country}_{league}.csv", 'w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=['Country', 'League', 'Season', 'Team name', 'Team ID'])
         writer.writeheader()
         for row in result:
