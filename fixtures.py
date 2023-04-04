@@ -3,7 +3,8 @@ import re
 import asyncio
 import csv
 from pyppeteer import launch
-import os
+import os 
+
 
 async def main(url):
     
@@ -30,7 +31,7 @@ async def main(url):
     elements = await page.querySelectorAll('[id^="g_3_"]')
 
     # Initialize an empty two-dimensional array to store the match data
-    matches = []
+    matches_data = []
 
     # Loop through each element and get its text content and ID
     for element in elements:
@@ -48,29 +49,34 @@ async def main(url):
         match_data.insert(3, away_team_logo_src)
 
         # Add the match data into the matches array
-        matches.append(match_data)
+        matches_data.append(match_data)
 
     await browser.close()
 
     # Extract the relevant parts of the URL to generate the CSV filename
-    pattern = r'https://www\.flashscore\.com/basketball/spain/acb/fixtures/'
-    csv_filename = re.sub(pattern, '', url)
-    csv_filename = re.sub(r'/$', '', csv_filename)
-    csv_filename = re.sub(r'/', '_', csv_filename)
-    csv_filename = csv_filename + '.csv'
-    csv_filename = 'spain_acb_fixtures' + csv_filename
+    pattern = r'https://www\.flashscore\.com/basketball/(\w+)/([\w-]+)/fixtures/'
+    matches = re.findall(pattern, url)
+    if matches:
+        country, competition = matches[0]
+    else:
+        raise ValueError("URL pattern doesn't match")
+
+    csv_filename = f"{country}_{competition}.csv"
 
     # Export the matches array to a CSV file with headers
     with open(f"csv/basketball/fixtures/{csv_filename}", 'w', newline='') as csvfile:
-        fieldnames = ['Match ID', 'Date', 'Home Team Logo', 'Away Team Logo', 'Time', 'Home Team', 'Away Team', 'Score Home', 'Score Away']
+        fieldnames = ['Match ID', 'Country', 'Competition', 'Date', 'Home Team Logo', 'Away Team Logo', 'Time', 'Home Team', 'Away Team', 'Score Home', 'Score Away']
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fieldnames)
-        for match in matches:
-            csvwriter.writerow(match)
+        for match_data in matches_data:
+            match_data.insert(1, country)
+            match_data.insert(2, competition)
+            csvwriter.writerow(match_data)
+
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         url = sys.argv[1]
         asyncio.get_event_loop().run_until_complete(main(url))
     else:
-        print('Usage: python script.py <url>')
+        print("Usage: python3 main.py <URL>")
