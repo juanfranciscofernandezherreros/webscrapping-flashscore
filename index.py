@@ -9,6 +9,7 @@ import asyncio
 import datetime
 import os
 from pyppeteer import launch
+from config import DATABASE_CONFIG
 import sys
 
 def consulta_count(mycursor):
@@ -45,13 +46,8 @@ async def main():
         filename = sys.argv[0]
         
         # Conecta a la base de datos
-        mydb = mysql.connector.connect(
-            host="localhost",
-            user="user_bigdataetl",
-            password="password_bigdataetl",
-            database="bigdataetl"
-        )
-        
+        mydb = mysql.connector.connect(**DATABASE_CONFIG)
+       
         if mydb.is_connected():
             print("Connected to database")
                
@@ -189,9 +185,10 @@ async def main():
                     with open(f"csv/basketball/errors_events/{filename}", mode="w", newline="") as csvfile:
                         fieldnames = ["error"]
                         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                     
+                        
                 if len(count) == 0:                        
-                    break
+                        break         
+                
 
         time.sleep(1)
         
