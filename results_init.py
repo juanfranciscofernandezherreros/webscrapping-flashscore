@@ -51,7 +51,6 @@ async def main():
             if len(parts) == 3:
                 second_part = parts[2]
                 await playerStatsMatchsSummary.main("https://www.flashscore.com/match/"+second_part+"/#/match-summary/player-statistics/0")
-
     # Cerrar el cursor y la conexión a la base de datos
     cursor.close()
     cnx.close()

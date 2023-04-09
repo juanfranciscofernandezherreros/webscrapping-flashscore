@@ -19,6 +19,7 @@ async def main(url):
     # Hacer clic en cada enlace y tomar una captura de pantalla
     for i, link in enumerate(links):
         href = await page.evaluate('(element) => element.href', link)
+        print(href)
         if "/match-summary/match-summary" in href:
             player_links = []
             player_info = []
