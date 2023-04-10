@@ -4,7 +4,6 @@ from config import DATABASE_CONFIG
 import asyncio
 import playerStatsMatchsSummary
 
-
 async def main():
     # Conecta a la base de datos
     cnx = mysql.connector.connect(**DATABASE_CONFIG)
