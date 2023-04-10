@@ -11,7 +11,7 @@ import os
 from pyppeteer import launch
 from config import DATABASE_CONFIG
 import sys
-
+import csv
 def consulta_count(mycursor):
     # Generate the SELECT statement
     select_query = "SELECT urls,isOpened FROM urls WHERE isOpened='F'"
