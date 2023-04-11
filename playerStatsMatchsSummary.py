@@ -10,6 +10,35 @@ async def main(url):
     browser = await launch(headless=False)
     page = await browser.newPage()
     await page.goto(url)
+    # Make sure the "csv" folder exists
+    if not os.path.exists("csv"):
+        os.mkdir("csv")
+
+    # Create a subfolder called "basketball"
+    basketball_folder = os.path.join("csv", "basketball")
+    if not os.path.exists(basketball_folder):
+        os.mkdir(basketball_folder)
+
+    # Create a subfolder called "players"
+    urls_folder = os.path.join(basketball_folder, "players")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+    # Create a subfolder called "summary"
+    urls_folder = os.path.join(basketball_folder, "summary")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+    # Create a subfolder called "lineups"
+    urls_folder = os.path.join(basketball_folder, "lineups")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+    # Create a subfolder called "pointByPoint"
+    urls_folder = os.path.join(basketball_folder, "pointByPoint")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
+    # Create a subfolder called "quarters"
+    urls_folder = os.path.join(basketball_folder, "quarters")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
     # Obtener el elemento contenedor de los enlaces
     tabs_container = await page.waitForSelector('.tabs__group')
     # Obtener todos los elementos "a" dentro del contenedor
@@ -34,23 +63,11 @@ async def main(url):
         for link in tabs_links:
             href = await (await link.getProperty('href')).jsonValue()
             print("URL",href)
-            id = href.split('/')[4]
-            if "/match-summary/match-summary" in href:
-                player_links = []
-                player_info = []
-                links = await page.querySelectorAll('div.ui-table__body a')
-                for link in links:
-                    href = await page.evaluate('(element) => element.href', link)
-                    if href and "player" in href and href not in player_links:
-                        player_id = href.split('/')[-2]
-                        player_name = href.split('/')[-3]       
-                        # Agregar el nombre y el id del jugador a la lista
-                        player_info.append([player_name, player_id])              
-                #Exportar CSV                    
-                header = "namePlayer,ids"
-                filename = f"{id}_player.csv"
-                exportarCsv.exportarCsv(player_info, header, "csv/basketball/players/"+filename)
-            if "/match-summary/player-statistics" in href:                
+            id = href.split('/')[4]                
+            if "/match-summary/player-statistics" in href:  
+                await page.goto(href)
+                # Get all elements with the class name "lf__participantNumber"
+                await asyncio.sleep(5)              
                 data = []
                 count = len(await page.querySelectorAll('#detail > div.section.psc__section > div > div.ui-table.playerStatsTable > div.ui-table__body > div:nth-child(n)'))
                 for i in range(1, count+1):
@@ -71,6 +88,21 @@ async def main(url):
                 header = "namePlayer, team, pts, reb, ast, mins, fgm, fga, two_pm,two_pa, three_pm, three_pa, ftm, fta, valoracion, offensiverebounds,deffensiverebounds, personalFours, steals, turnovers,blockedShot, blockedAgains, technicalFouls, playerId, matchId "
                 filename = f"{id}_stats.csv"
                 exportarCsv.exportarCsv(data, header, "csv/basketball/summary/"+filename)
+                #Players
+                player_links = []
+                player_info = []
+                links = await page.querySelectorAll('div.ui-table__body a')
+                for link in links:
+                    href = await page.evaluate('(element) => element.href', link)
+                    if href and "player" in href and href not in player_links:
+                        player_id = href.split('/')[-2]
+                        player_name = href.split('/')[-3]       
+                        # Agregar el nombre y el id del jugador a la lista
+                        player_info.append([player_name, player_id])              
+                #Exportar CSV                    
+                header = "namePlayer,ids"
+                filename = f"{id}_player.csv"
+                exportarCsv.exportarCsv(player_info, header, "csv/basketball/players/"+filename)
             if "/match-summary/lineups" in href:                
                 await page.goto(href)
                 # Get all elements with the class name "lf__participantNumber"
@@ -186,21 +218,59 @@ async def main(url):
                     result_array.append(row)
                 
                 url_parts = url.split("/")
-                match_id = url_parts[8]
-                match_type = url_parts[6]
-                match_number = url_parts[4]
-                print(match_id)
-                print(match_type)
-                print(match_number)
-
+            
                 # Write data to CSV file
-                with open(f"csv/basketball/pointByPoint/pointByPoint_{match_id}_{match_number}.csv", 'w', newline='') as file:
+                with open(f"csv/basketball/pointByPoint/pointByPoint.csv", 'w', newline='') as file:
                     writer = csv.writer(file)
                     writer.writerow(['Name', 'Home', 'Away', 'Time', 'MatchId', 'MatchNumber'])
                     for row in result_array:
-                        row.append(match_id)
-                        row.insert(4, match_number)
                         writer.writerow(row)
+            if "/match-summary/match-statistics" in href: 
+                print("stats")
+                await page.goto(href)
+                await asyncio.sleep(5)
+                 # Get all elements with the class name "stat__homeValue"
+                elementsHome = await page.querySelectorAll('.stat__homeValue')
+                
+                # Extract the text content of each element
+                texts = []
+                for element in elementsHome:
+                    text = await page.evaluate('(element) => element.textContent', element)
+                    texts.append(text)
+
+                # Get all elements with the class name "stat__awayValue"
+                elementsAway = await page.querySelectorAll('.stat__awayValue')
+                
+                # Extract the text content of each element
+                away = []
+                for element in elementsAway:
+                    text = await page.evaluate('(element) => element.textContent', element)
+                    away.append(text)
+
+                # Get all elements with the class name "stat__categoryName"
+                elementsName = await page.querySelectorAll('.stat__categoryName')
+                
+                # Extract the text content of each element
+                name = []
+                for element in elementsName:
+                    text = await page.evaluate('(element) => element.textContent', element)
+                    name.append(text)
+
+                # Create a bidimensional array by zipping the three arrays together
+                stats = list(zip(name, texts, away))
+
+                # Write the bidimensional array to a CSV file
+                
+                number = url.split("/")[-1]
+                print("Quarter" + number)
+                match_id = url.split("/")[-5]
+                print("MatchId" + match_id)
+                print(f"Saving stats to: csv/basketball/quarters/quarters_{number}_{match_id}.csv")
+                with open(f"csv/basketball/quarters/quarters_{number}_{match_id}.csv", 'w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(['Name', 'Home', 'Away', 'MatchId', 'Quarter'])
+                    for row in stats:
+                        writer.writerow(row + (match_id, number))
                 
     await browser.close()
 

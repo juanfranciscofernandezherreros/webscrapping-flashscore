@@ -1,0 +1,21 @@
+Name,Home,Away,MatchId,Quarter
+Field Goals Attempted,67,64,match,match-summary
+Field Goals Made,36,36,match,match-summary
+Field Goals %,53.7%,56.3%,match,match-summary
+2-Point Field G. Attempted,25,48,match,match-summary
+2-Point Field Goals Made,19,31,match,match-summary
+2-Point Field Goals %,76%,64.6%,match,match-summary
+3-Point Field G. Attempted,42,16,match,match-summary
+3-Point Field Goals Made,17,5,match,match-summary
+3-Point Field Goals %,40.5%,31.3%,match,match-summary
+Free Throws Attempted,24,20,match,match-summary
+Free Throws Made,18,15,match,match-summary
+Free Throws %,75%,75%,match,match-summary
+Offensive Rebounds,9,5,match,match-summary
+Defensive Rebounds,21,25,match,match-summary
+Total Rebounds,30,30,match,match-summary
+Assists,24,14,match,match-summary
+Blocks,3,2,match,match-summary
+Turnovers,14,15,match,match-summary
+Steals,10,7,match,match-summary
+Personal Fouls,18,24,match,match-summary
