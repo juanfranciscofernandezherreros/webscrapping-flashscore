@@ -69,7 +69,7 @@ async def main(url):
                         row.append(playerId)
                         row.append(matchId)
                     data.append(row)
-                header = "namePlayer,team,pts,reb,ast,min,fgm,fga,2pm,2pa,3pm,3pa,ftm,val,playerId,matchId"
+                header = "namePlayer, team, pts, reb, ast, mins, fgm, fga, two_pm,two_pa, three_pm, three_pa, ftm, valoracion, offensiverebounds,deffensiverebounds, personalFours, steals, turnovers,blockedShot, blockedAgains, technicalFouls, playerId, matchId "
                 filename = f"{id}_stats.csv"
                 exportarCsv.exportarCsv(data, header, "csv/basketball/summary/"+filename)
     await browser.close()
