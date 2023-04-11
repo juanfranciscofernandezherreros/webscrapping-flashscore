@@ -3,7 +3,6 @@ import csv
 from pyppeteer import launch
 from datetime import datetime
 from urllib.parse import urlparse
-import readMatchesWithDifferentsName_init
 import glob
 import os
 
@@ -148,4 +147,3 @@ async def main(uri):
     # Close the CSV file
     csv_file.close()
     await browser.close()
-    await readMatchesWithDifferentsName_init.run()

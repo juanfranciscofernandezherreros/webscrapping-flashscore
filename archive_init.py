@@ -29,6 +29,11 @@ async def main(url):
     if not os.path.exists(season_folder):
         os.mkdir(season_folder)    
 
+    # Create a subfolder called "season"
+    season_folder = os.path.join(basketball_folder, "teams")
+    if not os.path.exists(season_folder):
+        os.mkdir(season_folder) 
+
     browser = await launch(headless=False)
     page = await browser.newPage()
     await page.goto(url)
@@ -63,6 +68,7 @@ async def main(url):
             })
             
     new_hrefs1_info = []
+
     for h2 in new_hrefs1:
         parts = h2.split("/")
         team_name = parts[4]
@@ -71,9 +77,16 @@ async def main(url):
                 "team_name": team_name,
                 "team_id": team_id
             })
+    
             
     result = []
-    
+
+    with open(f"csv/basketball/teams/teams.csv", 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=['team_name', 'team_id'])
+        writer.writeheader()
+        for row in new_hrefs1_info:
+            writer.writerow(row)
+
     for info, info1 in zip(new_hrefs_info, new_hrefs1_info):
         print("Country:", info["country"])
         print("League:", info["league"])
@@ -91,9 +104,8 @@ async def main(url):
     
     parts = url.split('/')
     country = parts[4]
-    league = parts[5]
 
-    with open(f"csv/basketball/archive/archive_{country}_{league}.csv", 'w', newline='') as file:
+    with open(f"csv/basketball/archive/archive_{country}.csv", 'w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=['Country', 'League', 'Season', 'Team name', 'Team ID'])
         writer.writeheader()
         for row in result:
