@@ -7,6 +7,42 @@ from config import DATABASE_CONFIG
 # Connect to the MySQL server
 db = mysql.connector.connect(**DATABASE_CONFIG)
 
+def create_table():
+    cursor = db.cursor()
+
+    cursor.execute("""
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_name = 'matchs'
+    """)
+    table_exists = cursor.fetchone()[0]
+
+    if not table_exists:
+        cursor.execute("""
+            CREATE TABLE matchs (
+                id BIGINT NOT NULL AUTO_INCREMENT,
+                EventTimeUTC INT,
+                EventTime VARCHAR(20),
+                HomeTeam VARCHAR(50),
+                AwayTeam VARCHAR(50),
+                Quarter1Home VARCHAR(4),
+                Quarter2Home VARCHAR(50),
+                Quarter3Home VARCHAR(50),
+                Quarter4Home VARCHAR(50),
+                OvertimeHome VARCHAR(50),
+                Quarter1Away VARCHAR(50),
+                Quarter2Away VARCHAR(50),
+                Quarter3Away VARCHAR(50),
+                Quarter4Away VARCHAR(50),
+                OvertimeAway VARCHAR(50),
+                matchId VARCHAR(50) UNIQUE,
+                PRIMARY KEY (id)
+            );
+
+        """)
+    
+    cursor.close()
+
 async def main(csv_files):
     all_data = []
     print("readDiMatches")
@@ -50,6 +86,7 @@ async def main(csv_files):
     print(f"Total Successes: {success_count}, Total Errors: {error_count}")
 
 async def run():
+    create_table()
     csv_files = glob.glob('csv/basketball/results/*.csv')
     await main(csv_files)
 

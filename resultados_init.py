@@ -2,6 +2,7 @@ import mysql.connector
 import asyncio
 from config import DATABASE_CONFIG
 import resultsMatch
+
 async def main():
     # establish a connection to the MySQL database
     mydb = mysql.connector.connect(**DATABASE_CONFIG)
