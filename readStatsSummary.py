@@ -77,11 +77,17 @@ def read_csv_files(csv_files):
                 parts14 = row[13]
                 parts15 = row[14]
                 parts16 = row[15]
-                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10,parts11,parts12,parts13,parts14,parts15,parts16]) # Add row to all_data                
+                parts17 = row[16]
+                parts18 = row[17]
+                parts19 = row[18]
+                parts20 = row[19]
+                parts21 = row[20]
+                parts22 = row[21]
+                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10,parts11,parts12,parts13,parts14,parts15,parts16,parts17,parts18,parts19,parts20,parts21,parts22]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,valoracion,offensiverebounds,deffensiverebounds) \
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,valoracion,offensiverebounds,deffensiverebounds,personalFours,steals,turnovers,blockedShot,blockedAgains,technicalFouls) \
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
     # Create arrays to store successes and errors
     success_count = 0
