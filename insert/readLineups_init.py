@@ -87,7 +87,7 @@ def read_csv_files(csv_files):
 
 if __name__ == '__main__':
     create_table()
-    csv_files = glob.glob('csv/basketball/lineups/*.csv')
+    csv_files = glob.glob('../csv/basketball/lineups/*.csv')
     all_data = read_csv_files(csv_files)
     
     # Close the database connection

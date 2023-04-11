@@ -1,6 +1,7 @@
 import csv
 import glob
 import mysql.connector
+import asyncio
 
 # Connect to the MySQL server
 db = mysql.connector.connect(
@@ -16,58 +17,61 @@ def create_table():
     cursor.execute("""
         SELECT COUNT(*)
         FROM information_schema.tables
-        WHERE table_name = 'archive'
+        WHERE table_name = 'matchs'
     """)
     table_exists = cursor.fetchone()[0]
 
     if not table_exists:
         cursor.execute("""
-            CREATE TABLE archive (
+            CREATE TABLE matchs (
                 id BIGINT NOT NULL AUTO_INCREMENT,
-                country VARCHAR(50),
-                league VARCHAR(50),
-                sessionYear VARCHAR(50),
-                teamName VARCHAR(50),
-                teamId VARCHAR(50),
+                EventTimeUTC INT,
+                EventTime VARCHAR(20),
+                HomeTeam VARCHAR(50),
+                AwayTeam VARCHAR(50),
+                Quarter1Home VARCHAR(4),
+                Quarter2Home VARCHAR(50),
+                Quarter3Home VARCHAR(50),
+                Quarter4Home VARCHAR(50),
+                OvertimeHome VARCHAR(50),
+                Quarter1Away VARCHAR(50),
+                Quarter2Away VARCHAR(50),
+                Quarter3Away VARCHAR(50),
+                Quarter4Away VARCHAR(50),
+                OvertimeAway VARCHAR(50),
+                matchId VARCHAR(50) UNIQUE,
                 PRIMARY KEY (id)
             );
+
         """)
     
     cursor.close()
 
-
-def read_csv_files(csv_files):
+async def main(csv_files):
     all_data = []
+    print("readDiMatches")
     
     for file in csv_files:
-        print("File: " + file)
+        print("File" + file)
         with open(file, newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',')  # Use semicolon as delimiter
+            reader = csv.reader(csvfile, delimiter=';', quotechar='"')
             next(reader) # Skip header row
             for row in reader:
-                print(row)
-                # Split the row into parts using ',' as a separator
-                parts1 = row[0]
-                parts2 = row[1]
-                parts3 = row[2]
-                parts4 = row[3]
-                parts5 = row[4]
-
-
-                all_data.append([parts1, parts2, parts3, parts4, parts5]) # Add row to all_data                
+                all_data.append(row) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO archive (country, league, sessionYear , teamName, teamId) \
-    VALUES (%s, %s, %s, %s, %s)"
-
+    sql = "INSERT INTO matchs (EventTimeUTC, EventTime, HomeTeam, AwayTeam, Quarter1Home, Quarter2Home, Quarter3Home, Quarter4Home, OvertimeHome, Quarter1Away, Quarter2Away, Quarter3Away, Quarter4Away, OvertimeAway, matchId) \
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
     
     # Create arrays to store successes and errors
     success_count = 0
     error_count = 0
     successes = []
     errors = []
+    print(sql)
            
     for row in all_data:
+        print("Row" + row[0])
         values = tuple(row)
         cursor = db.cursor()
         
@@ -82,13 +86,13 @@ def read_csv_files(csv_files):
             errors.append(row)
         finally:
             cursor.close()
-            
+    
     print(f"Total Successes: {success_count}, Total Errors: {error_count}")
 
-if __name__ == '__main__':
+async def run():
     create_table()
-    csv_files = glob.glob('../csv/basketball/archive/*.csv')
-    all_data = read_csv_files(csv_files)
-    
-    # Close the database connection
-    db.close()
+    csv_files = glob.glob('../csv/basketball/results/*.csv')
+    await main(csv_files)
+
+if __name__ == '__main__':
+    asyncio.run(run())
