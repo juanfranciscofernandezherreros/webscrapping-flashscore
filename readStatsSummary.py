@@ -33,6 +33,7 @@ def create_table():
                 three_pm VARCHAR(255),
                 three_pa VARCHAR(255),
                 ftm VARCHAR(255),
+                fta VARCHAR(255),
                 valoracion VARCHAR(255),
                 offensiverebounds VARCHAR(255),
                 deffensiverebounds VARCHAR(255),
@@ -83,11 +84,14 @@ def read_csv_files(csv_files):
                 parts20 = row[19]
                 parts21 = row[20]
                 parts22 = row[21]
-                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10,parts11,parts12,parts13,parts14,parts15,parts16,parts17,parts18,parts19,parts20,parts21,parts22]) # Add row to all_data                
+                parts23 = row[22]
+                parts24 = row[23]
+                parts25 = row[24]
+                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10,parts11,parts12,parts13,parts14,parts15,parts16,parts17,parts18,parts19,parts20,parts21,parts22,parts23,parts24,parts25]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,valoracion,offensiverebounds,deffensiverebounds,personalFours,steals,turnovers,blockedShot,blockedAgains,technicalFouls) \
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,fta,valoracion,offensiverebounds,deffensiverebounds,personalFours,steals,turnovers,blockedShot,blockedAgains,technicalFouls,playerId,matchId) \
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
     # Create arrays to store successes and errors
     success_count = 0

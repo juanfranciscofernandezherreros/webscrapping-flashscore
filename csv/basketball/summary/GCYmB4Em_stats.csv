@@ -1,2 +1,2 @@
-namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,valoracion,offensiverebounds,deffensiverebounds,personalFours,steals,turnovers,blockedShot,blockedAgains,technicalFouls,playerId,matchId
+namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm,fta,valoracion,offensiverebounds,deffensiverebounds,personalFours,steals,turnovers,blockedShot,blockedAgains,technicalFouls,playerId,matchId
 Rivero J.,VAL,25,6,-,28:55,-,-,9,11,1,2,4,8,12,2,4,1,1,3,1,-,-,SCxneVDU,GCYmB4Em
