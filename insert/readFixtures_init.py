@@ -24,11 +24,13 @@ def create_table():
         cursor.execute("""
             CREATE TABLE fixtures (
                 id BIGINT NOT NULL AUTO_INCREMENT,
-                EventTimeUTC INT,
                 EventTimeUTC VARCHAR(255),
+                EventTime VARCHAR(255),
                 homeTeam VARCHAR(255),
                 awayTeam VARCHAR(255),
-                matchId VARCHAR(255),                
+                matchId VARCHAR(255),
+                country VARCHAR(255), 
+                competition VARCHAR(255),                                   
                 PRIMARY KEY (id)
             );
         """)
@@ -50,12 +52,14 @@ def read_csv_files(csv_files):
                 parts2 = row[1]
                 parts3 = row[2]
                 parts4 = row[3]
-                parts5 = row[4]                
-                all_data.append([parts1, parts2, parts3, parts4, parts5]) # Add row to all_data                
+                parts5 = row[4]     
+                parts6 = row[5]                
+                parts7 = row[6]                           
+                all_data.append([parts1, parts2, parts3, parts4, parts5,parts6,parts7]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO fixtures (EventTimeUTC, EventTime, homeTeam, awayTeam, matchId) \
-    VALUES (%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO fixtures (EventTimeUTC, EventTime, homeTeam, awayTeam, matchId,country,competition) \
+    VALUES (%s, %s, %s, %s, %s,%s,%s)"
 
     
     # Create arrays to store successes and errors
