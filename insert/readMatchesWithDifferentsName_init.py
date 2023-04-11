@@ -40,6 +40,8 @@ def create_table():
                 Quarter4Away VARCHAR(50),
                 OvertimeAway VARCHAR(50),
                 matchId VARCHAR(50) UNIQUE,
+                country VARCHAR(255),
+                competition VARCHAR(255),
                 PRIMARY KEY (id)
             );
 
@@ -60,8 +62,8 @@ async def main(csv_files):
                 all_data.append(row) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO matchs (EventTimeUTC, EventTime, HomeTeam, AwayTeam, Quarter1Home, Quarter2Home, Quarter3Home, Quarter4Home, OvertimeHome, Quarter1Away, Quarter2Away, Quarter3Away, Quarter4Away, OvertimeAway, matchId) \
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
+    sql = "INSERT INTO matchs (EventTimeUTC, EventTime, HomeTeam, AwayTeam, Quarter1Home, Quarter2Home, Quarter3Home, Quarter4Home, OvertimeHome, Quarter1Away, Quarter2Away, Quarter3Away, Quarter4Away, OvertimeAway, matchId,country,competition) \
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s)"
     
     # Create arrays to store successes and errors
     success_count = 0

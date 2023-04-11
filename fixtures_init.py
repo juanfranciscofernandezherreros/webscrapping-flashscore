@@ -92,7 +92,7 @@ async def main():
         writer = csv.writer(csv_file, delimiter=';')
 
         # Write the headers to the CSV file
-        headers = ['Event Time UTC','Event Time', 'Home Team', 'Away Team', 'MatchId']
+        headers = ['EventTimeUTC','EventTimeUTC', 'homeTeam', 'awayTeam', 'matchId']
         writer.writerow(headers)
 
         # Write the rows to the CSV file

@@ -122,7 +122,7 @@ async def main(uri):
         date_time_obj = datetime.strptime(timeLong, "%d.%m.%Y-%H:%M")
         timestamp = int(date_time_obj.timestamp())
         
-        data.append([timestamp, time_string_with_year, home_text, away_text, p1_text, p2_text, p3_text, p4_text, p5_text_home,p1_away,p2_away,p3_away,p4_away,p5_text_away,identificador])
+        data.append([timestamp, time_string_with_year, home_text, away_text, p1_text, p2_text, p3_text, p4_text, p5_text_home,p1_away,p2_away,p3_away,p4_away,p5_text_away,identificador,uri_parts[4],uri_parts[5]])
     # extract the domain name from the URL
     parsed_url = urlparse(uri)
     domain_name = parsed_url.netloc.replace('.', '_')
@@ -137,7 +137,7 @@ async def main(uri):
         writer = csv.writer(csv_file, delimiter=';')
 
         # Write the headers to the CSV file
-        headers = ['Event Time UTC','Event Time', 'Home Team', 'Away Team', '1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter', 'Overtime Home', '1st Quarter Away', '2nd Quarter Away', '3rd Quarter Away', '4th Quarter Away', 'Overtime Away','MatchId']
+        headers = ['Event Time UTC','Event Time', 'Home Team', 'Away Team', '1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter', 'Overtime Home', '1st Quarter Away', '2nd Quarter Away', '3rd Quarter Away', '4th Quarter Away', 'Overtime Away','MatchId','Country','Competition']
         writer.writerow(headers)
 
         # Write the rows to the CSV file
