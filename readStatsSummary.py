@@ -71,12 +71,14 @@ def read_csv_files(csv_files):
                 parts8 = row[7]
                 parts9 = row[8]
                 parts10 = row[9]
-
-                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10]) # Add row to all_data                
+                parts11 = row[10]
+                parts12 = row[11]
+                parts13 = row[12]
+                all_data.append([parts1, parts2,parts3,parts4,parts5,parts6,parts7,parts8,parts9,parts10,parts11,parts12,parts13]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa) \
-    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO basketball_game (namePlayer,team,pts,reb,ast,mins,fgm,fga,two_pm,two_pa,three_pm,three_pa,ftm) \
+    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
     # Create arrays to store successes and errors
     success_count = 0
