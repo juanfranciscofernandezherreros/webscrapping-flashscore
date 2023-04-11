@@ -1,17 +1,15 @@
 import csv
 import glob
 import mysql.connector
+import asyncio
+from config import DATABASE_CONFIG
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = mysql.connector.connect(**DATABASE_CONFIG)
 
-def read_csv_files(csv_files):
+async def main(csv_files):
     all_data = []
+    print("readDiMatches")
     
     for file in csv_files:
         print("File" + file)
@@ -30,6 +28,7 @@ def read_csv_files(csv_files):
     error_count = 0
     successes = []
     errors = []
+    print(sql)
            
     for row in all_data:
         print("Row" + row[0])
@@ -49,7 +48,10 @@ def read_csv_files(csv_files):
             cursor.close()
     
     print(f"Total Successes: {success_count}, Total Errors: {error_count}")
- 
-if __name__ == '__main__':
+
+async def run():
     csv_files = glob.glob('csv/basketball/results/*.csv')
-    all_data = read_csv_files(csv_files)
+    await main(csv_files)
+
+if __name__ == '__main__':
+    asyncio.run(run())

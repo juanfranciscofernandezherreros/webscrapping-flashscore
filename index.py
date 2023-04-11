@@ -1,5 +1,5 @@
 # -*- coding: latin-1 -*-
-#INSERT INTO bigdataetl.urls (urls, country, isOpened, whenHasOpened) VALUES('https://www.flashscore.com/basketball/', '-', 'F', 0);
+#INSERT INTO urls (urls, country, isOpened, whenHasOpened) VALUES('https://www.flashscore.com/basketball/', '-', 'F', 0);
 # UPDATE urls SET isOpened = 'T'
 #DELETE FROM urls
 import requests

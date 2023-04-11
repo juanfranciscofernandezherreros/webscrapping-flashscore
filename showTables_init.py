@@ -1,5 +1,5 @@
 import mysql.connector
-from database import conectar
+from config.database import conectar
 # Obtener la conexión a la base de datos
 db = conectar()
 

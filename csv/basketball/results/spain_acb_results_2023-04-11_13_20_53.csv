@@ -1,4 +1,14 @@
 Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarter;4th Quarter;Overtime Home;1st Quarter Away;2nd Quarter Away;3rd Quarter Away;4th Quarter Away;Overtime Away;MatchId
+1681063200;09.04.2023-20:00;Baskonia;Manresa;27;26;29;25;;23;23;25;21;;g_3_jTVz15Yk
+1681057800;09.04.2023-18:30;Joventut Badalona;Valencia;21;16;19;29;;17;15;21;17;;g_3_MgRW1oJq
+1681052400;09.04.2023-17:00;Bilbao;Barcelona;18;13;21;30;;22;15;20;23;;g_3_Oxxd9rq0
+1681036200;09.04.2023-12:30;Basquet Girona;Fuenlabrada;20;20;23;22;;19;6;19;16;;g_3_xMk077eM
+1681036200;09.04.2023-12:30;Real Betis;Tenerife;18;21;11;16;14;17;11;21;17;10;g_3_Kpu56RAS
+1680979500;08.04.2023-20:45;Basket Zaragoza;Gran Canaria;16;19;18;23;;19;15;23;16;;g_3_OIod8mtG
+1680973200;08.04.2023-19:00;Breogan;Real Madrid;21;18;31;26;;12;22;17;21;;g_3_UFxhAOTg
+1680969600;08.04.2023-18:00;Granada;Unicaja;14;15;12;28;;20;30;32;19;;g_3_j5mlA9B3
+1680969600;08.04.2023-18:00;Obradoiro CAB;Murcia;20;19;19;23;;15;13;28;23;;g_3_Uenh9TQ9
+1680634800;04.04.2023-21:00;Gran Canaria;Joventut Badalona;20;21;32;27;;23;23;12;30;;g_3_rNfEEO2k
 1680458400;02.04.2023-20:00;Valencia;Baskonia;18;17;20;26;;14;23;19;29;;g_3_GCYmB4Em
 1680447600;02.04.2023-17:00;Manresa;Obradoiro CAB;21;23;21;15;;9;11;14;31;;g_3_AgWjBkdc
 1680433200;02.04.2023-13:00;Tenerife;Barcelona;21;11;24;20;;24;18;15;22;;g_3_W2XnCVti
@@ -42,10 +52,10 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1678017600;05.03.2023-13:00;Gran Canaria;Bilbao;29;16;26;23;;14;23;19;15;;g_3_W2eg0DQs
 1678015800;05.03.2023-12:30;Joventut Badalona;Murcia;20;19;27;28;;17;19;14;18;;g_3_Ug9R4gIQ
 1677959100;04.03.2023-20:45;Basket Zaragoza;Barcelona;19;27;23;16;;12;12;30;29;;g_3_MT5J6FmE
-1677959100;04.03.2023-20:45;Breogan;Real Betis;22;25;22;23;22;22;20;27;23;23;g_3_0K4N5Z2K
+1677959100;04.03.2023-20:45;Breogan;Real Betis;22;25;22;23;14;22;20;27;23;10;g_3_0K4N5Z2K
 1677949200;04.03.2023-18:00;Manresa;Fuenlabrada;23;27;14;28;;18;18;14;28;;g_3_KORzrWAD
 1677949200;04.03.2023-18:00;Unicaja;Basquet Girona;22;19;31;22;;16;19;18;17;;g_3_6LNWrCe7
-1676228400;12.02.2023-20:00;Unicaja;Baskonia;16;23;19;20;22;15;15;21;27;23;g_3_Y7POpYQf
+1676228400;12.02.2023-20:00;Unicaja;Baskonia;16;23;19;20;14;15;15;21;27;10;g_3_Y7POpYQf
 1676223000;12.02.2023-18:30;Murcia;Real Madrid;20;12;23;25;;20;20;31;17;;g_3_6ogSoEBl
 1676217600;12.02.2023-17:00;Valencia;Gran Canaria;16;23;17;26;;22;18;19;17;;g_3_tSktJbeR
 1676201400;12.02.2023-12:30;Barcelona;Breogan;20;15;23;24;;12;12;13;17;;g_3_SffOnfdr
@@ -62,7 +72,7 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1675539900;04.02.2023-20:45;Obradoiro CAB;Bilbao;25;17;28;7;;20;15;17;12;;g_3_0plEvc4L
 1675530000;04.02.2023-18:00;Joventut Badalona;Manresa;20;11;21;21;;16;11;17;21;;g_3_ILrJwHJR
 1675530000;04.02.2023-18:00;Real Betis;Murcia;20;22;23;19;;14;15;21;21;;g_3_EiUlYfsk
-1675018800;29.01.2023-20:00;Basket Zaragoza;Real Betis;24;18;15;19;22;18;12;28;18;23;g_3_MgkAuwkF
+1675018800;29.01.2023-20:00;Basket Zaragoza;Real Betis;24;18;15;19;14;18;12;28;18;10;g_3_MgkAuwkF
 1675013400;29.01.2023-18:30;Gran Canaria;Obradoiro CAB;15;24;17;19;;17;15;20;16;;g_3_ETo2saK2
 1675008000;29.01.2023-17:00;Murcia;Baskonia;19;17;20;24;;23;18;22;24;;g_3_8xbTL0B8
 1674993600;29.01.2023-13:00;Unicaja;Valencia;19;28;24;31;;15;18;32;21;;g_3_SWk6tJZ8
@@ -77,7 +87,7 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1674387000;22.01.2023-12:30;Barcelona;Bilbao;18;29;16;25;;11;18;26;23;;g_3_vesEpVVI
 1674387000;22.01.2023-12:30;Granada;Basquet Girona;16;28;16;18;;23;15;22;32;;g_3_hvu2mXo0
 1674387000;22.01.2023-12:30;Obradoiro CAB;Baskonia;11;24;26;30;;19;14;23;30;;g_3_t0Ld9E8J
-1674330300;21.01.2023-20:45;Manresa;Unicaja;31;15;21;19;22;20;31;18;17;23;g_3_WUw6ni16
+1674330300;21.01.2023-20:45;Manresa;Unicaja;31;15;21;19;14;20;31;18;17;10;g_3_WUw6ni16
 1674330300;21.01.2023-20:45;Tenerife;Real Betis;18;23;28;19;;11;19;16;18;;g_3_QiwAoBGC
 1674320400;21.01.2023-18:00;Fuenlabrada;Murcia;23;15;17;17;;14;17;25;32;;g_3_z3pclDWg
 1673798400;15.01.2023-17:00;Baskonia;Joventut Badalona;25;14;28;17;;17;21;26;19;;g_3_fJVSSa59
@@ -85,7 +95,7 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1673798400;15.01.2023-17:00;Valencia;Manresa;23;19;31;30;;15;36;23;18;;g_3_SWTzRwzM
 1673782200;15.01.2023-12:30;Granada;Real Madrid;14;10;22;16;;19;13;25;25;;g_3_2knkjZ1s
 1673782200;15.01.2023-12:30;Real Betis;Obradoiro CAB;17;16;21;17;;20;16;19;18;;g_3_dCogkgHm
-1673725500;14.01.2023-20:45;Basket Zaragoza;Tenerife;16;17;17;23;22;24;18;15;16;23;g_3_pY5IeevK
+1673725500;14.01.2023-20:45;Basket Zaragoza;Tenerife;16;17;17;23;14;24;18;15;16;10;g_3_pY5IeevK
 1673725500;14.01.2023-20:45;Gran Canaria;Fuenlabrada;19;26;30;35;;19;10;14;22;;g_3_SdeNfFgQ
 1673719200;14.01.2023-19:00;Basquet Girona;Bilbao;22;15;25;22;;14;14;14;17;;g_3_IRDWXinD
 1673715600;14.01.2023-18:00;Unicaja;Breogan;27;26;21;26;;15;12;21;18;;g_3_6s7EdyPD
@@ -98,11 +108,3 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1673120700;07.01.2023-20:45;Joventut Badalona;Granada;21;20;33;16;;13;24;16;19;;g_3_AeNBxGXs
 1673110800;07.01.2023-18:00;Breogan;Obradoiro CAB;14;18;17;15;;9;14;17;19;;g_3_lnMFyzml
 1673110800;07.01.2023-18:00;Fuenlabrada;Basquet Girona;12;23;21;19;;21;19;28;15;;g_3_hKroeOm9
-1673004600;06.01.2023-12:30;Murcia;Tenerife;13;16;29;27;;18;12;19;15;;g_3_tMEdlhFd
-1672864200;04.01.2023-21:30;Unicaja;Bilbao;23;19;28;22;;20;21;15;23;;g_3_bcqsd4Y2
-1672860600;04.01.2023-20:30;Obradoiro CAB;Manresa;21;21;28;21;22;19;30;23;19;23;g_3_2VFhkYaj
-1672855200;04.01.2023-19:00;Basket Zaragoza;Breogan;20;23;19;17;22;25;18;22;14;23;g_3_pfuwcpJd
-1672777800;03.01.2023-21:30;Granada;Baskonia;20;18;20;26;;25;16;30;24;;g_3_pllx6xbd
-1672774200;03.01.2023-20:30;Basquet Girona;Joventut Badalona;19;22;18;20;;17;11;15;23;;g_3_YeBljEpp
-1672771500;03.01.2023-19:45;Real Betis;Gran Canaria;26;24;16;22;;24;23;15;20;;g_3_WnPMffxT
-1672768800;03.01.2023-19:00;Valencia;Fuenlabrada;18;22;26;26;;13;23;17;33;;g_3_lOZHezNM
