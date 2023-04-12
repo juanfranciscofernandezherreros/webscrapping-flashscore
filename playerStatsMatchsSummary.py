@@ -2,7 +2,7 @@ import asyncio
 import csv
 import sys
 from pyppeteer import launch
-import exportarCsv
+import functions.exportarCsv as exportarCsv
 import os 
 import datetime
 #py playerStatsMatchsSummary.py https://www.flashscore.com/match/6eSbIzWE/#/match-summary/player-statistics/0

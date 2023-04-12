@@ -3,7 +3,11 @@ import asyncio
 import resultsMatch
 import config.database
 import sys
-import os 
+import os
+import fixtures_init
+#py .\resultados_init.py results europe euroleague
+#py .\resultados_init.py results france lnb
+#py .\resultados_init.py fixtures france lnb
 
 async def main(url, country, competition):
     # establish a connection to the MySQL database
@@ -26,6 +30,16 @@ async def main(url, country, competition):
             url = row[0]  # extract the URL string from the first (and only) column of the row
             print("URL: " + url)
             await resultsMatch.main(url)
+    else:
+        print("URL does not match criteria:", url)
+
+    if 'fixtures' in url and len(myresult) > 0:
+        print("URL: " + url)
+        # print the results
+        for row in myresult:
+            url = row[0]  # extract the URL string from the first (and only) column of the row
+            print("URL: " + url)
+            await fixtures_init.main(url)
     else:
         print("URL does not match criteria:", url)
 

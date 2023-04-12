@@ -5,9 +5,15 @@ from datetime import datetime
 from urllib.parse import urlparse
 import glob
 import os
+import mysql.connector
+import asyncio
+import resultsMatch
+import config.database
+import sys
+import os
+import fixtures_init
 
-async def main():
-    uri = "https://www.flashscore.com/basketball/spain/acb/fixtures/"
+async def main(uri):
     # Make sure the "csv" folder exists
     if not os.path.exists("csv"):
         os.mkdir("csv")
@@ -77,7 +83,7 @@ async def main():
         date_time_obj = datetime.strptime(timeLong, "%d.%m.%Y-%H:%M")
         timestamp = int(date_time_obj.timestamp())
         
-        data.append([timestamp, time_string_with_year, home_text, away_text, identificador])
+        data.append([timestamp, time_string_with_year, home_text, away_text, identificador,uri_parts[4],uri_parts[5]])
     # extract the domain name from the URL
     parsed_url = urlparse(uri)
     domain_name = parsed_url.netloc.replace('.', '_')
@@ -90,9 +96,8 @@ async def main():
     with open('csv/basketball/fixtures/'+result+"_"+time_str+".csv", mode='w', newline='') as csv_file:
         # Create a CSV writer object
         writer = csv.writer(csv_file, delimiter=';')
-
         # Write the headers to the CSV file
-        headers = ['EventTimeUTC','EventTimeUTC', 'homeTeam', 'awayTeam', 'matchId']
+        headers = ['EventTimeUTC','EventTimeUTC', 'homeTeam', 'awayTeam', 'matchId','Countries','Competitions']
         writer.writerow(headers)
 
         # Write the rows to the CSV file
@@ -104,4 +109,5 @@ async def main():
     await browser.close()
 
 if __name__ == '__main__':
-    asyncio.get_event_loop().run_until_complete(main())
+    url = sys.argv[1]
+    asyncio.run(main(url))

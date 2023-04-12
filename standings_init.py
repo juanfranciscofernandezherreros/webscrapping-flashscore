@@ -1,41 +1,51 @@
 import asyncio
 import csv
-import sys
 from pyppeteer import launch
+from datetime import datetime
+from urllib.parse import urlparse
+import glob
+import os
+import mysql.connector
+import asyncio
+import resultsMatch
+import config.database
+import sys
+import os
+import fixtures_init
 
-async def main(url):
+async def extract_table_data():
+    # Launch a headless Chrome browser
     browser = await launch()
     page = await browser.newPage()
-    await page.goto(url)
-    await asyncio.sleep(5)
-    # Find all the elements that match the CSS selector
-    elements = await page.querySelectorAll('.tableCellParticipant__name')
 
-    # Extract the href attribute value of each element and store it in a list
-    new_hrefs1_info = []
-    for element in elements:
-        link = await (await element.getProperty('href')).jsonValue()
-        segments = link.split("/")
-        team_id = segments[-2]
-        team_name = segments[-3]
-        new_hrefs1_info.append({
-                "team_name": team_name,
-                "team_id": team_id
-            })
-    
-    with open(f"csv/basketball/teams/teams_standings.csv", 'w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=['team_name', 'team_id'])
-        writer.writeheader()
-        for row in new_hrefs1_info:
-            writer.writerow(row)
+    # Navigate to the webpage containing the table
+    await page.goto('https://www.flashscore.com/basketball/spain/acb/standings/')
 
+    # Wait for the table to load
+    await page.waitForSelector('.ui-table__row')
+
+    # Extract the table data
+    table_data = []
+    rows = await page.querySelectorAll('.ui-table__row')
+    for row in rows:
+        cells = await row.querySelectorAll('.table__cell--participant, .table__cell--value')
+        row_data = []
+        for cell in cells:
+            cell_text = await page.evaluate('(element) => element.textContent', cell)
+            row_data.append(cell_text.strip())
+        table_data.append(row_data)
+
+    # Close the browser
     await browser.close()
 
+    return table_data
+
+# Run the extraction function asynchronously
+table_data = asyncio.get_event_loop().run_until_complete(extract_table_data())
+
+# Print the extracted data
+for row in table_data:
+    print(row)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: python script.py url')
-        sys.exit(1)
-
-    url = sys.argv[1]
-    asyncio.run(main(url))
+    asyncio.run(extract_table_data())

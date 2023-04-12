@@ -9,7 +9,7 @@ import asyncio
 import datetime
 import os
 from pyppeteer import launch
-from config import DATABASE_CONFIG
+import config.database
 import sys
 import csv
 def consulta_count(mycursor):
@@ -46,7 +46,7 @@ async def main():
         filename = sys.argv[0]
         
         # Conecta a la base de datos
-        mydb = mysql.connector.connect(**DATABASE_CONFIG)
+        mydb = config.database.conectar()
        
         if mydb.is_connected():
             print("Connected to database")
