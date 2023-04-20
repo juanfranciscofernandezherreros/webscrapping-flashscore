@@ -221,12 +221,25 @@ async def main(url):
                 
                 url_parts = url.split("/")
             
+                print("HREF",href)
+                print(stats)
+                # Extraer el código del partido
+                # Extraer el código del partido
+                identificador = href.split("/match/")[1].split("/")[0]
+                # Imprimir el resultado
+                print(f"El código del partido es: {identificador}")
+                print(f"Saving stats to: csv/basketball/pointByPoint/pointByPoint.csv")
+                # Abrir el archivo CSV en modo escritura
+                # Definir el nombre del archivo CSV            
                 # Write data to CSV file
-                with open(f"csv/basketball/pointByPoint/pointByPoint.csv", 'w', newline='') as file:
+                with open(f"csv/basketball/pointByPoint/pointByPoint_{identificador}.csv", 'w', newline='') as file:
                     writer = csv.writer(file)
-                    writer.writerow(['Name', 'Home', 'Away', 'Time', 'MatchId', 'MatchNumber'])
-                    for row in result_array:
-                        writer.writerow(row)
+                    writer.writerow(['Stat', 'Home', 'Away','MatchId'])
+                    for row in stats:
+                        row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
+                        row_with_id.append(identificador)
+                        writer.writerow(row_with_id)
+                print(f"Archivo CSV guardado exitosamente: {filename}")
             if "/match-summary/match-statistics" in href: 
                 print("Stats")
                 await page.goto(href)
