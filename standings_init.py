@@ -1,3 +1,4 @@
+#py .\standings_init.py https://www.flashscore.com/basketball/turkey/super-lig/standings/
 import asyncio
 import csv
 from pyppeteer import launch
@@ -13,7 +14,7 @@ import sys
 import os
 import fixtures_init
 
-async def extract_table_data():
+async def extract_table_data(url):
 
     # Make sure the "csv" folder exists
     if not os.path.exists("csv"):
@@ -34,7 +35,7 @@ async def extract_table_data():
     page = await browser.newPage()
 
     # Navigate to the webpage containing the table
-    await page.goto('https://www.flashscore.com/basketball/spain/acb/standings/')
+    await page.goto(url)
 
     # Wait for the table to load
     await page.waitForSelector('.ui-table__row')
@@ -60,10 +61,13 @@ async def extract_table_data():
         row_data.append(team_name)
         table_data.append(row_data)
      # Export table data to CSV file
-    with open('csv/basketball/standings/standings', 'w', newline='') as csvfile:
+    segments = url.split('/')
+    league_name = '_'.join([segments[4], segments[5]])
+    print(league_name)  # Output: "turkey_super-lig"
+    with open(f"csv/basketball/standings/standings_{league_name}.csv", 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         # Write the headers to the CSV file
-        headers = ['name_team','match_games', 'wins', 'loses', 'totalPoints','teamId','playerId']
+        headers = ['name_team','match_games', 'wins', 'loses', 'totalPoints','teamId']
         writer.writerow(headers)
         for row in table_data:
             writer.writerow(row)
@@ -73,7 +77,9 @@ async def extract_table_data():
 
     return table_data
 
-
-
 if __name__ == '__main__':
-    asyncio.run(extract_table_data())
+    if len(sys.argv) != 2:
+        print(f"Usage: python {sys.argv[0]} <url>")
+        sys.exit(1)
+    url = sys.argv[1]
+    asyncio.run(extract_table_data(url))

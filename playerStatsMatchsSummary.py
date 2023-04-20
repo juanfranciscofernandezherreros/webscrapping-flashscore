@@ -39,6 +39,10 @@ async def main(url):
     urls_folder = os.path.join(basketball_folder, "quarters")
     if not os.path.exists(urls_folder):
         os.mkdir(urls_folder)
+    # Create a subfolder called "quarters"
+    urls_folder = os.path.join(basketball_folder, "playerStatistics")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
     # Obtener el elemento contenedor de los enlaces
     tabs_container = await page.waitForSelector('.tabs__group')
     # Obtener todos los elementos "a" dentro del contenedor
@@ -88,7 +92,7 @@ async def main(url):
                     data.append(row)
                 header = "namePlayer, team, pts, reb, ast, mins, fgm, fga, two_pm,two_pa, three_pm, three_pa, ftm, fta, valoracion, offensiverebounds,deffensiverebounds, personalFours, steals, turnovers,blockedShot, blockedAgains, technicalFouls, playerId, matchId "
                 filename = f"{id}_stats.csv"
-                exportarCsv.exportarCsv(data, header, "csv/basketball/summary/"+filename)
+                exportarCsv.exportarCsv(data, header, "csv/basketball/playerStatistics/"+filename)
                 #Players
                 player_links = []
                 player_info = []

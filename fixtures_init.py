@@ -1,4 +1,5 @@
 import asyncio
+# py .\fixtures_init.py https://www.flashscore.com/basketball/spain/acb/fixtures/
 import csv
 from pyppeteer import launch
 from datetime import datetime
