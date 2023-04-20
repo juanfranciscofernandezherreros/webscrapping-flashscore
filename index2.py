@@ -98,6 +98,7 @@ async def extract_hrefs(url):
 
 async def main(url=None):
     """Función principal que ejecuta el script"""
+    start_time = time.time() # Guarda la hora de inicio    
     if url:
         print(f"La URL proporcionada es {url}.")
         if(check_url_exists(url) == False):
@@ -106,7 +107,14 @@ async def main(url=None):
         print("No se proporcionó ninguna URL.")
         
     while True:
+
+        # Verifica si han pasado 10 minutos
+        if time.time() - start_time > 600:
+            print("El script se ha ejecutado durante 10 minutos.")
+            break
+
         count = count_unopened_urls()
+        
         if count > 0:
             urls = get_unopened_urls()
             for url in urls:
