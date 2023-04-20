@@ -163,138 +163,145 @@ async def main(url):
                         row.insert(4, match_id)
                         writer.writerow(row)
             if "/match-summary/point-by-point" in href: 
-                print("PointByPoint")
-                await page.goto(href)
-                await asyncio.sleep(5)
-                result_array = []
-                count = await page.evaluate('''
-                    () => {
-                        // Seleccionar todos los elementos que coincidan con el selector CSS
-                        const elements = document.querySelectorAll('.matchHistoryRow');
-                        // Obtener la cantidad de elementos encontrados
-                        return elements.length;
-                    }
-                ''')
-                print(f'El elemento aparece {count} veces en la página.')
-                
-                for i in range(2, count+2):
+                for i in range(5):
+                    new_href = href+"/" + str(i)  # añadir el número a la URL
+                    addToCsv = str(i) 
+                    print("PointByPoint",new_href)
+                    await page.goto(new_href)
+                    await asyncio.sleep(5)
+                    result_array = []
+                    count = await page.evaluate('''
+                        () => {
+                            // Seleccionar todos los elementos que coincidan con el selector CSS
+                            const elements = document.querySelectorAll('.matchHistoryRow');
+                            // Obtener la cantidad de elementos encontrados
+                            return elements.length;
+                        }
+                    ''')
+                    print(f'El elemento aparece {count} veces en la página.')
                     
-                    xpath = f'//*[@id="detail"]/div[9]/div[{i}]/div[1]'
-                    xpath1 = f'//*[@id="detail"]/div[9]/div[{i}]/div[2]/div[1]'
-                    xpath2 = f'//*[@id="detail"]/div[9]/div[{i}]/div[2]/div[2]'
-                    xpath3 = f'//*[@id="detail"]/div[9]/div[{i}]/div[3]'
+                    for i in range(2, count+2):
+                        
+                        xpath = f'//*[@id="detail"]/div[9]/div[{i}]/div[1]'
+                        xpath1 = f'//*[@id="detail"]/div[9]/div[{i}]/div[2]/div[1]'
+                        xpath2 = f'//*[@id="detail"]/div[9]/div[{i}]/div[2]/div[2]'
+                        xpath3 = f'//*[@id="detail"]/div[9]/div[{i}]/div[3]'
 
-                    element = await page.xpath(xpath)
-                    element1 = await page.xpath(xpath1)
-                    element2 = await page.xpath(xpath2)
-                    element3 = await page.xpath(xpath3)
+                        element = await page.xpath(xpath)
+                        element1 = await page.xpath(xpath1)
+                        element2 = await page.xpath(xpath2)
+                        element3 = await page.xpath(xpath3)
 
-                    text = await element[0].getProperty('textContent')
-                    text1 = await element1[0].getProperty('textContent')
-                    text2 = await element2[0].getProperty('textContent')
-                    text3 = await element3[0].getProperty('textContent')
+                        text = await element[0].getProperty('textContent')
+                        text1 = await element1[0].getProperty('textContent')
+                        text2 = await element2[0].getProperty('textContent')
+                        text3 = await element3[0].getProperty('textContent')
 
-                    text = await text.jsonValue()
-                    text1 = await text1.jsonValue()
-                    text2 = await text2.jsonValue()
-                    text3 = await text3.jsonValue()
+                        text = await text.jsonValue()
+                        text1 = await text1.jsonValue()
+                        text2 = await text2.jsonValue()
+                        text3 = await text3.jsonValue()
 
-                    row = []
-                    if text.strip() != "":
-                        row.append(text)
-                    else:
-                        row.append("-")
-                    if text1.strip() != "":
-                        row.append(text1)
-                    else:
-                        row.append("-")
-                    if text2.strip() != "":
-                        row.append(text2)
-                    else:
-                        row.append("-")
-                    if text3.strip() != "":
-                        row.append(text3)
-                    else:
-                        row.append("-")
+                        row = []
+                        if text.strip() != "":
+                            row.append(text)
+                        else:
+                            row.append("-")
+                        if text1.strip() != "":
+                            row.append(text1)
+                        else:
+                            row.append("-")
+                        if text2.strip() != "":
+                            row.append(text2)
+                        else:
+                            row.append("-")
+                        if text3.strip() != "":
+                            row.append(text3)
+                        else:
+                            row.append("-")
+                        
+                        result_array.append(row)
                     
-                    result_array.append(row)
+                    url_parts = url.split("/")
                 
-                url_parts = url.split("/")
-            
-                print("HREF",href)
-                print(stats)
-                # Extraer el código del partido
-                # Extraer el código del partido
-                identificador = href.split("/match/")[1].split("/")[0]
-                # Imprimir el resultado
-                print(f"El código del partido es: {identificador}")
-                print(f"Saving stats to: csv/basketball/pointByPoint/pointByPoint.csv")
-                # Abrir el archivo CSV en modo escritura
-                # Definir el nombre del archivo CSV            
-                # Write data to CSV file
-                with open(f"csv/basketball/pointByPoint/pointByPoint_{identificador}.csv", 'w', newline='') as file:
-                    writer = csv.writer(file)
-                    writer.writerow(['Stat', 'Home', 'Away','MatchId'])
-                    for row in stats:
-                        row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
-                        row_with_id.append(identificador)
-                        writer.writerow(row_with_id)
-                print(f"Archivo CSV guardado exitosamente: {filename}")
+                    print("HREF",href)
+                    print(stats)
+                    # Extraer el código del partido
+                    # Extraer el código del partido
+                    identificador = href.split("/match/")[1].split("/")[0]
+                    # Imprimir el resultado
+                    print(f"El código del partido es: {identificador}")
+                    print(f"Saving stats to: csv/basketball/pointByPoint/pointByPoint.csv")
+                    # Abrir el archivo CSV en modo escritura
+                    # Definir el nombre del archivo CSV            
+                    # Write data to CSV file
+                    with open(f"csv/basketball/pointByPoint/pointByPoint_{identificador}_{addToCsv}.csv", 'w', newline='') as file:
+                        writer = csv.writer(file)
+                        writer.writerow(['Stat', 'Home', 'Away','MatchId','Quarter'])
+                        for row in result_array:
+                            row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
+                            row_with_id.append(identificador)
+                            row_with_id.append(addToCsv)
+                            writer.writerow(row_with_id)
+                    print(f"Archivo CSV guardado exitosamente: {filename}")
             if "/match-summary/match-statistics" in href: 
-                print("Stats")
-                await page.goto(href)
-                await asyncio.sleep(5)
-                 # Get all elements with the class name "stat__homeValue"
-                elementsHome = await page.querySelectorAll('.stat__homeValue')
-                
-                # Extract the text content of each element
-                texts = []
-                for element in elementsHome:
-                    text = await page.evaluate('(element) => element.textContent', element)
-                    texts.append(text)
+                for i in range(5):
+                    new_href = href+"/" + str(i)  # añadir el número a la URL
+                    addToCsv = str(i) 
+                    print("Quarter",new_href)
+                    await page.goto(new_href)
+                    await asyncio.sleep(5)
+                    # Get all elements with the class name "stat__homeValue"
+                    elementsHome = await page.querySelectorAll('.stat__homeValue')
+                    
+                    # Extract the text content of each element
+                    texts = []
+                    for element in elementsHome:
+                        text = await page.evaluate('(element) => element.textContent', element)
+                        texts.append(text)
 
-                # Get all elements with the class name "stat__awayValue"
-                elementsAway = await page.querySelectorAll('.stat__awayValue')
-                
-                # Extract the text content of each element
-                away = []
-                for element in elementsAway:
-                    text = await page.evaluate('(element) => element.textContent', element)
-                    away.append(text)
+                    # Get all elements with the class name "stat__awayValue"
+                    elementsAway = await page.querySelectorAll('.stat__awayValue')
+                    
+                    # Extract the text content of each element
+                    away = []
+                    for element in elementsAway:
+                        text = await page.evaluate('(element) => element.textContent', element)
+                        away.append(text)
 
-                # Get all elements with the class name "stat__categoryName"
-                elementsName = await page.querySelectorAll('.stat__categoryName')
-                
-                # Extract the text content of each element
-                name = []
-                for element in elementsName:
-                    text = await page.evaluate('(element) => element.textContent', element)
-                    name.append(text)
+                    # Get all elements with the class name "stat__categoryName"
+                    elementsName = await page.querySelectorAll('.stat__categoryName')
+                    
+                    # Extract the text content of each element
+                    name = []
+                    for element in elementsName:
+                        text = await page.evaluate('(element) => element.textContent', element)
+                        name.append(text)
 
-                # Create a bidimensional array by zipping the three arrays together
-                stats = list(zip(name, texts, away))
+                    # Create a bidimensional array by zipping the three arrays together
+                    stats = list(zip(name, texts, away))
 
-                # Write the bidimensional array to a CSV file
-                
-                print("HREF",href)
-                print(stats)
-                # Extraer el código del partido
-                # Extraer el código del partido
-                identificador = href.split("/match/")[1].split("/")[0]
-                # Imprimir el resultado
-                print(f"El código del partido es: {identificador}")
-                print(f"Saving stats to: csv/basketball/quarters/quarters.csv")
-                # Abrir el archivo CSV en modo escritura
-                # Definir el nombre del archivo CSV            
-                # Write data to CSV file
-                with open(f"csv/basketball/quarters/quarters_{identificador}.csv", 'w', newline='') as file:
-                    writer = csv.writer(file)
-                    writer.writerow(['Stat', 'Home', 'Away'])
-                    for row in stats:
-                        row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
-                        row_with_id.append(identificador)
-                        writer.writerow(row_with_id)
-                print(f"Archivo CSV guardado exitosamente: {filename}")
+                    # Write the bidimensional array to a CSV file
+                    
+                    print("HREF",href)
+                    print(stats)
+                    # Extraer el código del partido
+                    # Extraer el código del partido
+                    identificador = href.split("/match/")[1].split("/")[0]
+                    # Imprimir el resultado
+                    print(f"El código del partido es: {identificador}")
+                    print(f"Saving stats to: csv/basketball/quarters/quarters.csv")
+                    # Abrir el archivo CSV en modo escritura
+                    # Definir el nombre del archivo CSV            
+                    # Write data to CSV file
+                    with open(f"csv/basketball/quarters/quarters_{identificador}_{addToCsv}.csv", 'w', newline='') as file:
+                            writer = csv.writer(file)
+                            writer.writerow(['Stat', 'Home', 'Away','MatchId'])
+                            for row in stats:
+                                row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
+                                row_with_id.append(identificador)
+                                writer.writerow(row_with_id)
+                            print(f"Archivo CSV guardado exitosamente: {filename}")        
     await browser.close()
 
 if __name__ == '__main__':
