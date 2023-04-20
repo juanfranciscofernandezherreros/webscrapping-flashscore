@@ -12,6 +12,23 @@ from pyppeteer import launch
 import config.database
 import sys
 import csv
+
+def create_urls_table():
+    cnx = config.database.conectar()
+    cursor = cnx.cursor()
+    query = ("CREATE TABLE IF NOT EXISTS urls ("
+             "id BIGINT NOT NULL AUTO_INCREMENT,"
+             "urls VARCHAR(200) UNIQUE,"
+             "country VARCHAR(200),"
+             "isOpened VARCHAR(200),"
+             "whenHasOpened int,"
+             "PRIMARY KEY (id)"
+             ")")
+    cursor.execute(query)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
 def consulta_count(mycursor):
     # Generate the SELECT statement
     select_query = "SELECT urls,isOpened FROM urls WHERE isOpened='F'"

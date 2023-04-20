@@ -1,12 +1,30 @@
 #python index2.py https://www.flashscore.com/basketball/ 
 import argparse
 import asyncio
-import mysql.connector
 import config.database
 import time
 from pyppeteer import launch
 
+def create_urls_table():
+    """Comprobar si existe la tabla urls"""    
+    cnx = config.database.conectar()
+    cursor = cnx.cursor()
+    query = ("CREATE TABLE IF NOT EXISTS urls ("
+             "id BIGINT NOT NULL AUTO_INCREMENT,"
+             "urls VARCHAR(200) UNIQUE,"
+             "country VARCHAR(200),"
+             "isOpened VARCHAR(200),"
+             "whenHasOpened int,"
+             "PRIMARY KEY (id)"
+             ")")
+    cursor.execute(query)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
 def count_unopened_urls():
+    """Cuenta la cantidad de URLs que aún no han sido abiertas"""    
     cnx = config.database.conectar()
     cursor = cnx.cursor()
     query = ("SELECT COUNT(*) FROM urls WHERE isOpened = 'F'")
@@ -17,6 +35,7 @@ def count_unopened_urls():
     return count
 
 def get_unopened_urls():
+    """Obtiene una lista de URLs que aún no han sido abiertas"""
     cnx = config.database.conectar()
     cursor = cnx.cursor()
     query = ("SELECT urls FROM urls WHERE isOpened = 'F'")
@@ -27,6 +46,7 @@ def get_unopened_urls():
     return urls
 
 def insert_url(url):
+    """Inserta una nueva URL en la base de datos"""
     cnx = config.database.conectar()
     cursor = cnx.cursor()
     add_url = ("INSERT INTO urls "
@@ -39,6 +59,7 @@ def insert_url(url):
     cnx.close()
 
 def update_url(url):
+    """Actualiza el estado de una URL a 'abierta' en la base de datos"""
     cnx = config.database.conectar()
     cursor = cnx.cursor()
     update_url = ("UPDATE urls "
@@ -51,6 +72,7 @@ def update_url(url):
     cnx.close()
 
 def check_url_exists(url):
+    """Verifica si una URL ya existe en la base de datos"""
     cnx = config.database.conectar()
     cursor = cnx.cursor()
     query = ("SELECT urls FROM urls WHERE urls=%s")
@@ -62,6 +84,7 @@ def check_url_exists(url):
     return result is not None
 
 async def extract_hrefs(url):
+    """Extrae los enlaces (hrefs) de una página web"""
     browser = await launch()
     page = await browser.newPage()
     await page.goto(url)
@@ -70,10 +93,11 @@ async def extract_hrefs(url):
     }''')
     await page.close()
     await browser.close()
-    filtered_hrefs = set(filter(lambda x: 'basketball' in x and x.count('/') in [5, 6, 7], hrefs))
+    filtered_hrefs = set(filter(lambda x: 'basketball' in x and x.count('/') in [5, 6, 7] and 'news' not in x, hrefs))
     return filtered_hrefs
 
 async def main(url=None):
+    """Función principal que ejecuta el script"""
     if url:
         print(f"La URL proporcionada es {url}.")
         if(check_url_exists(url) == False):
@@ -94,7 +118,10 @@ async def main(url=None):
                 # Do something with the extracted links
                 for href in hrefs:
                     print(f"Extracted link: {href}")
-                
+                    if(check_url_exists(href) == False):
+                        insert_url(href)
+                    else:
+                        print("Ya existe este HREF",href)                                  
                 update_url(url[0])
                 
                 time.sleep(5)
@@ -104,6 +131,7 @@ async def main(url=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script que acepta una URL opcionalmente.')
+    create_urls_table()
     parser.add_argument('url', nargs='?', help='URL opcional.')
     args = parser.parse_args()
     loop = asyncio.get_event_loop()
