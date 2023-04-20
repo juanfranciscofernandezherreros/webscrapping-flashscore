@@ -65,6 +65,7 @@ async def main(url):
             print("URL",href)
             id = href.split('/')[4]                
             if "/match-summary/player-statistics" in href:  
+                print("PlayerStatistics")
                 await page.goto(href)
                 # Get all elements with the class name "lf__participantNumber"
                 await asyncio.sleep(5)              
@@ -103,7 +104,8 @@ async def main(url):
                 header = "namePlayer,ids"
                 filename = f"{id}_player.csv"
                 exportarCsv.exportarCsv(player_info, header, "csv/basketball/players/"+filename)
-            if "/match-summary/lineups" in href:                
+            if "/match-summary/lineups" in href:     
+                print("LineUps")           
                 await page.goto(href)
                 # Get all elements with the class name "lf__participantNumber"
                 await asyncio.sleep(5)
@@ -226,7 +228,7 @@ async def main(url):
                     for row in result_array:
                         writer.writerow(row)
             if "/match-summary/match-statistics" in href: 
-                print("stats")
+                print("Stats")
                 await page.goto(href)
                 await asyncio.sleep(5)
                  # Get all elements with the class name "stat__homeValue"
@@ -261,17 +263,25 @@ async def main(url):
 
                 # Write the bidimensional array to a CSV file
                 
-                number = url.split("/")[-1]
-                print("Quarter" + number)
-                match_id = url.split("/")[-5]
-                print("MatchId" + match_id)
-                print(f"Saving stats to: csv/basketball/quarters/quarters_{number}_{match_id}.csv")
-                with open(f"csv/basketball/quarters/quarters_{number}_{match_id}.csv", 'w', newline='') as file:
+                print("HREF",href)
+                print(stats)
+                # Extraer el código del partido
+                # Extraer el código del partido
+                identificador = href.split("/match/")[1].split("/")[0]
+                # Imprimir el resultado
+                print(f"El código del partido es: {identificador}")
+                print(f"Saving stats to: csv/basketball/quarters/quarters.csv")
+                # Abrir el archivo CSV en modo escritura
+                # Definir el nombre del archivo CSV            
+                # Write data to CSV file
+                with open(f"csv/basketball/quarters/quarters_{identificador}.csv", 'w', newline='') as file:
                     writer = csv.writer(file)
-                    writer.writerow(['Name', 'Home', 'Away', 'MatchId', 'Quarter'])
+                    writer.writerow(['Stat', 'Home', 'Away'])
                     for row in stats:
-                        writer.writerow(row + (match_id, number))
-                
+                        row_with_id = list(row)  # convert the tuple to a list so that we can add the identifier
+                        row_with_id.append(identificador)
+                        writer.writerow(row_with_id)
+                print(f"Archivo CSV guardado exitosamente: {filename}")
     await browser.close()
 
 if __name__ == '__main__':
