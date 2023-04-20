@@ -98,44 +98,49 @@ async def extract_hrefs(url):
 
 async def main(url=None):
     """Función principal que ejecuta el script"""
-    start_time = time.time() # Guarda la hora de inicio    
     if url:
         print(f"La URL proporcionada es {url}.")
         if(check_url_exists(url) == False):
             insert_url(url)
     else:
         print("No se proporcionó ninguna URL.")
-        
-    while True:
 
-        # Verifica si han pasado 10 minutos
-        if time.time() - start_time > 600:
-            print("El script se ha ejecutado durante 10 minutos.")
-            break
+    start_time = time.time()
+    time_limit_reached = False  # added flag to keep track of time limit
+
+    while not time_limit_reached:       
 
         count = count_unopened_urls()
-        
         if count > 0:
             urls = get_unopened_urls()
             for url in urls:
-                print(f"Abriendo URL: {url[0]}")
+
+                iteration_time  = time.time()
+                print("Start Time" , start_time)
+                print("Iteration Time" , iteration_time)
+
+                if time.time() - start_time >= 60:
+                    print("Se ha alcanzado el tiempo límite de un minuto.")
+                    time_limit_reached = True  # set flag to True
+                    break  # break out of both loops
+                else:
+                    print(f"Abriendo URL: {url[0]}")                
+                    # Scrape the page
+                    hrefs = await extract_hrefs(url[0])
+                    
+                    # Do something with the extracted links
+                    for href in hrefs:
+                        print(f"Extracted link: {href}")
+                        if(check_url_exists(href) == False):
+                            insert_url(href)
+                        else:
+                            print("Ya existe este HREF",href)                                  
+                    update_url(url[0])
                 
-                # Scrape the page
-                hrefs = await extract_hrefs(url[0])
-                
-                # Do something with the extracted links
-                for href in hrefs:
-                    print(f"Extracted link: {href}")
-                    if(check_url_exists(href) == False):
-                        insert_url(href)
-                    else:
-                        print("Ya existe este HREF",href)                                  
-                update_url(url[0])
-                
-                time.sleep(5)
         else:
             print("No hay URLs por abrir.")
             break
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script que acepta una URL opcionalmente.')
