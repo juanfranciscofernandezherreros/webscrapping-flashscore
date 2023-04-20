@@ -1,4 +1,6 @@
+#python index2.py https://www.flashscore.com/basketball/ 
 import argparse
+import asyncio
 import mysql.connector
 import config.database
 import time
@@ -66,11 +68,12 @@ async def extract_hrefs(url):
     hrefs = await page.evaluate('''() => {
         return [...document.querySelectorAll('a')].map(elem => elem.href);
     }''')
+    await page.close()
     await browser.close()
-    return hrefs
+    filtered_hrefs = set(filter(lambda x: 'basketball' in x and x.count('/') in [5, 6, 7], hrefs))
+    return filtered_hrefs
 
-
-def main(url=None):
+async def main(url=None):
     if url:
         print(f"La URL proporcionada es {url}.")
         if(check_url_exists(url) == False):
@@ -85,14 +88,23 @@ def main(url=None):
             for url in urls:
                 print(f"Abriendo URL: {url[0]}")
                 
+                # Scrape the page
+                hrefs = await extract_hrefs(url[0])
+                
+                # Do something with the extracted links
+                for href in hrefs:
+                    print(f"Extracted link: {href}")
+                
                 update_url(url[0])
-                # Code to open the URL goes here
-                time.sleep(5) # wait for 5 seconds before opening the next URL
+                
+                time.sleep(5)
         else:
             print("No hay URLs por abrir.")
             break
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script que acepta una URL opcionalmente.')
     parser.add_argument('url', nargs='?', help='URL opcional.')
     args = parser.parse_args()
-    main(args.url)
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main(args.url))
