@@ -11,6 +11,7 @@
     "database.server.name": "dbserver1",
     "database.whitelist": "bigdataetl",
     "database.history.kafka.bootstrap.servers": "kafka:9092",
-    "database.history.kafka.topic": "schema-changes.bigdataetl"
+    "database.history.kafka.topic": "schema-changes.bigdataetl",
+    "value.converter.schemas.enable": false
   }
 }

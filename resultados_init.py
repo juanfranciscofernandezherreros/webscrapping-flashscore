@@ -8,7 +8,7 @@ import fixtures_init
 #py .\resultados_init.py results europe euroleague
 #py .\resultados_init.py results france lnb
 #py .\resultados_init.py fixtures france lnb
-
+#py .\resultados_init.py results turkey super-lig
 async def main(url, country, competition):
     # establish a connection to the MySQL database
     mydb = config.database.conectar()

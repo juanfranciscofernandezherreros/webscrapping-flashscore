@@ -1,56 +1,75 @@
-version: '3'
+version: '2'
 services:
-  zookeeper:
-    image: quay.io/debezium/zookeeper
-    ports:
-     - 2181:2181
-     - 2888:2888
-     - 3888:3888
-  kafka:
-    image: quay.io/debezium/kafka
-    ports:
-     - 9092:9092
-    links:
-     - zookeeper
-    environment:
-     - ZOOKEEPER_CONNECT=zookeeper:2181
   mysql:
-    image: quay.io/debezium/example-mysql
-    ports:
-     - 3307:3307
-    environment:
-     - MYSQL_ROOT_PASSWORD=debezium
-     - MYSQL_USER=mysqluser 
-     - MYSQL_PASSWORD=mysqlpw 
-  connect:
-    image: debezium/connect:1.8
-    ports:
-     - 8083:8083
-    links:
-     - kafka
-     - mysql
-     - postgres
-    environment:
-     - BOOTSTRAP_SERVERS=kafka:9092
-     - GROUP_ID=1
-     - CONFIG_STORAGE_TOPIC=my_connect_configs
-     - OFFSET_STORAGE_TOPIC=my_connect_offsets
-     - STATUS_STORAGE_TOPIC=my_source_connect_statuses
-  mysql-db:
-    image: quay.io/debezium/example-mysql
-    hostname: mysql-db
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'bigdataetl'
-      MYSQL_USER: 'user_bigdataetl'
-      MYSQL_PASSWORD: 'password_bigdataetl'
-      MYSQL_ROOT_PASSWORD: 'password_for_root_user'
+    image: debezium/example-mysql:1.8
+    container_name: mysql
+    hostname: mysql
     ports:
       - '3306:3306'
-    volumes:
-      - my-db-volume:/var/lib/mysql
-volumes:
-  my-db-volume:
-  #https://github.com/nowwin4u/cdc-kafka-debezium
-  #docker run -p 9000:9000 -e KAFKA_BROKERCONNECT=kafka:9092 obsidiandynamics/kafdrop
+    environment:
+      MYSQL_ROOT_PASSWORD: debezium
+      MYSQL_USER: mysqluser
+      MYSQL_PASSWORD: mysqlpw
+  mongodb:
+    image: quay.io/debezium/example-mongodb:1.8
+    hostname: mongodb
+    ports:
+     - 27017:27017
+    environment:
+     - MONGODB_USER=debezium
+     - MONGODB_PASSWORD=dbz
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.5.3
+    container_name: zookeerper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - '2181:2181'
+
+  kafka:
+    image: confluentinc/cp-enterprise-kafka:5.5.3
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    links:
+      - zookeeper
+    ports:
+      - '9092:9092'
+      - '29092:29092'
+  schema-registry:
+    container_name: schema-registry
+    image: confluentinc/cp-schema-registry:4.0.3
+    environment:
+      - SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=zookeeper:2181
+      - SCHEMA_REGISTRY_HOST_NAME=schema-registry
+      - SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081
+    ports:
+      - '8081:8081'
+
+  kafka-connect:
+      container_name: kafka-connect
+      image: debezium/connect:1.8
+      ports:
+        - '8083:8083'
+      links:
+        - kafka
+        - zookeeper
+      environment:
+         - BOOTSTRAP_SERVERS=kafka:9092
+         - GROUP_ID=medium_debezium
+         - CONFIG_STORAGE_TOPIC=my_connect_configs
+         - CONFIG_STORAGE_REPLICATION_FACTOR=1
+         - OFFSET_STORAGE_TOPIC=my_connect_offsets
+         - OFFSET_STORAGE_REPLICATION_FACTOR=1
+         - STATUS_STORAGE_TOPIC=my_connect_statuses
+         - STATUS_STORAGE_REPLICATION_FACTOR=1
+         - REST_ADVERTISED_HOST_NAME=medium_debezium

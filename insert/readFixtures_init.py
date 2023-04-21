@@ -1,13 +1,14 @@
 import csv
 import glob
 import mysql.connector
+import config.database
 
 # Connect to the MySQL server
 db = mysql.connector.connect(
     host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
+    user="root",
+    password="debezium",
+    database="inventory"
 )
 
 def create_table():
