@@ -1,16 +1,37 @@
-https://medium.com/nagoya-foundation/simple-cdc-with-debezium-kafka-a27b28d8c3b8
+# Foobar
 
-kafka-topics --bootstrap-server=localhost:9092 --list
+Foobar is a Python library for dealing with word pluralization.
 
-curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 127.0.0.1:8083/connectors/ --data "@register-mysql.json"
+## Installation
 
-curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 127.0.0.1:8083/connectors/ --data "@register-mongo-fixtures"
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
+```bash
+pip install foobar
+```
 
-FIXTURES
+## Usage
 
-kafka-console-consumer --bootstrap-server localhost:9092 --topic dbserver1.inventory.fixtures --from-beginning
+```python
+import foobar
 
-docker run -p 127.0.0.1:27017:27017 --name some-mongo -d mongo
+# returns 'words'
+foobar.pluralize('word')
 
-INSERT INTO inventory.urls (urls, country, isOpened, whenHasOpened) VALUES('https://www.flashscore.com/basketball/', '', 'F', );
+# returns 'geese'
+foobar.pluralize('goose')
+
+# returns 'phenomenon'
+foobar.singularize('phenomena')
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
