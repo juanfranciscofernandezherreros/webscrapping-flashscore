@@ -1,7 +1,6 @@
 import csv
 import glob
 import mysql.connector
-import config.database
 
 # Connect to the MySQL server
 db = mysql.connector.connect(

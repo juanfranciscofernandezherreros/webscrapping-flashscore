@@ -11,7 +11,7 @@
         "database.include.list": "inventory",
         "database.history.kafka.bootstrap.servers": "kafka:9092",
         "database.history.kafka.topic": "schema-changes.inventory",
-        "table.include.list": "inventory.customers, inventory.orders",
+        "table.include.list": "inventory.customers, inventory.orders,inventory.fixtures",
         "column.exclude.list": "inventory.customers.email",
         "snapshot.mode": "initial",
         "snapshot.locking.mode": "none"

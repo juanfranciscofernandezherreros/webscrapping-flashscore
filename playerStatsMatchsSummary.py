@@ -43,6 +43,10 @@ async def main(url):
     urls_folder = os.path.join(basketball_folder, "playerStatistics")
     if not os.path.exists(urls_folder):
         os.mkdir(urls_folder)
+    # Create a subfolder called "matchSummary"
+    urls_folder = os.path.join(basketball_folder, "matchSummary")
+    if not os.path.exists(urls_folder):
+        os.mkdir(urls_folder)
     # Obtener el elemento contenedor de los enlaces
     tabs_container = await page.waitForSelector('.tabs__group')
     # Obtener todos los elementos "a" dentro del contenedor
@@ -67,7 +71,32 @@ async def main(url):
         for link in tabs_links:
             href = await (await link.getProperty('href')).jsonValue()
             print("URL",href)
-            id = href.split('/')[4]                
+            id = href.split('/')[4]
+            if "/match-summary/match-summary" in href:  
+                print("Sumary") 
+                await page.goto(href)
+                # Get all elements with the class name "lf__participantNumber"
+                await asyncio.sleep(5)              
+                data = []
+                count = len(await page.querySelectorAll('#detail > div.section.psc__section > div > div.ui-table.playerStatsTable > div.ui-table__body > div:nth-child(n)'))
+                for i in range(1, count+1):
+                    selector = f'#detail > div.section.psc__section > div > div.ui-table.playerStatsTable > div.ui-table__body > div:nth-child({i}) > *'
+                    selectorHrefs = f'#detail > div.section.psc__section > div > div.ui-table.playerStatsTable > div.ui-table__body > div:nth-child({i}) > a'
+                    elementsLinks = await page.querySelectorAll(selectorHrefs) # get all anchor tags in the row
+                    elements = await page.querySelectorAll(selector)
+                    row = []
+                    for element in elements:
+                        element_text = await page.evaluate('(element) => element.textContent', element)
+                        row.append(element_text)
+                    for elementLink in elementsLinks:
+                        href = await page.evaluate('(element) => element.href', elementLink) # get href attribute of the first anchor tag
+                        playerId = href.split('/')[5]
+                        row.append(playerId)
+                        row.append(matchId)
+                    data.append(row)
+                header = "namePlayer, team, pts, reb, ast, mins, fgm, fga, two_pm,two_pa, three_pm, three_pa, ftm, fta, valoracion, offensiverebounds,deffensiverebounds, personalFours, steals, turnovers,blockedShot, blockedAgains, technicalFouls, playerId, matchId "
+                filename = f"{id}_stats.csv"
+                exportarCsv.exportarCsv(data, header, "csv/basketball/matchSummary/"+filename)
             if "/match-summary/player-statistics" in href:  
                 print("PlayerStatistics")
                 await page.goto(href)
