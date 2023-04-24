@@ -9,16 +9,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: debezium
       MYSQL_USER: mysqluser
-      MYSQL_PASSWORD: mysqlpw
-  mongodb:
-    image: quay.io/debezium/example-mongodb:1.8
-    hostname: mongodb
-    ports:
-     - 27017:27017
-    environment:
-     - MONGODB_USER=debezium
-     - MONGODB_PASSWORD=dbz
-
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     container_name: zookeerper

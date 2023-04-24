@@ -1,8 +1,0 @@
-{
-    "name": "my-mongodb-sink",
-    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-    "connection.uri": "mongodb://localhost:27017",
-    "topics": "dbserver1.inventory.fixtures",
-    "tasks.max": "1",
-    "database": "mygrocerylist"
-}
