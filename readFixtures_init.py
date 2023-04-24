@@ -1,15 +1,10 @@
 import csv
 import glob
 import mysql.connector
-import os 
+import config.database
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = config.database.conectar()
 
 def create_table():
     cursor = db.cursor()
@@ -17,18 +12,23 @@ def create_table():
     cursor.execute("""
         SELECT COUNT(*)
         FROM information_schema.tables
-        WHERE table_name = 'players'
+        WHERE table_name = 'fixtures'
     """)
     table_exists = cursor.fetchone()[0]
 
     if not table_exists:
         cursor.execute("""
-            CREATE TABLE players (
-            id BIGINT NOT NULL AUTO_INCREMENT,
-            player_name VARCHAR(200),
-            player_id VARCHAR(200) UNIQUE,	
-            PRIMARY KEY (id)
-        );
+            CREATE TABLE fixtures (
+                id BIGINT NOT NULL AUTO_INCREMENT,
+                EventTimeUTC VARCHAR(255),
+                EventTime VARCHAR(255),
+                homeTeam VARCHAR(255),
+                awayTeam VARCHAR(255),
+                matchId VARCHAR(255),
+                country VARCHAR(255), 
+                competition VARCHAR(255),                                   
+                PRIMARY KEY (id)
+            );
         """)
     
     cursor.close()
@@ -40,20 +40,24 @@ def read_csv_files(csv_files):
     for file in csv_files:
         print("File: " + file)
         with open(file, newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',')  # Use semicolon as delimiter
+            reader = csv.reader(csvfile, delimiter=';')  # Use semicolon as delimiter
             next(reader) # Skip header row
             for row in reader:
                 print(row)
-                # Split the row into parts using ',' as a separator
                 parts1 = row[0]
                 parts2 = row[1]
-                
-                all_data.append([parts1, parts2]) # Add row to all_data                
+                parts3 = row[2]
+                parts4 = row[3]
+                parts5 = row[4]     
+                parts6 = row[5]                
+                parts7 = row[6]                           
+                all_data.append([parts1, parts2, parts3, parts4, parts5,parts6,parts7]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO players (player_name, player_id) \
-    VALUES (%s, %s)"
+    sql = "INSERT INTO fixtures (EventTimeUTC, EventTime, homeTeam, awayTeam, matchId,country,competition) \
+    VALUES (%s, %s, %s, %s, %s,%s,%s)"
 
+    
     # Create arrays to store successes and errors
     success_count = 0
     error_count = 0
@@ -62,10 +66,10 @@ def read_csv_files(csv_files):
            
     for row in all_data:
         values = tuple(row)
-        cursor = db.cursor()
-        
+        cursor = db.cursor()        
         try:
             cursor.execute(sql, values)
+            print(sql)
             db.commit()
             success_count += 1
             successes.append(row)
@@ -80,8 +84,8 @@ def read_csv_files(csv_files):
 
 if __name__ == '__main__':
     create_table()
-        
-    csv_files = glob.glob('../csv/basketball/players/*.csv')
-    all_data = read_csv_files(csv_files)    
+    csv_files = glob.glob('csv/basketball/fixtures/*.csv')
+    all_data = read_csv_files(csv_files)
+    
     # Close the database connection
     db.close()

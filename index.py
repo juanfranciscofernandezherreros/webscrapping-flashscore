@@ -8,7 +8,7 @@ from pyppeteer import launch
 def create_urls_table():
     """Comprobar si existe la tabla urls"""    
     cnx = config.database.conectar()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor() 
     query = ("CREATE TABLE IF NOT EXISTS urls ("
          "id BIGINT NOT NULL AUTO_INCREMENT,"
          "urls VARCHAR(200) UNIQUE,"

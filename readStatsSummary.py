@@ -2,14 +2,10 @@ import csv
 import glob
 import mysql.connector
 import os 
+import config.database
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = config.database.conectar()
 
 def create_table():
     cursor = db.cursor()
@@ -124,7 +120,7 @@ def read_csv_files(csv_files):
 if __name__ == '__main__':
     create_table()
         
-    csv_files = glob.glob('../csv/basketball/summary/*.csv')
+    csv_files = glob.glob('csv/basketball/summary/*.csv')
     all_data = read_csv_files(csv_files)    
     # Close the database connection
     db.close()

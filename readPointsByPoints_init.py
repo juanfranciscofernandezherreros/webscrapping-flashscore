@@ -1,40 +1,28 @@
 import csv
 import glob
 import mysql.connector
+import config.database
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = config.database.conectar()
 
 def create_table():
     cursor = db.cursor()
 
     cursor.execute("""
-        SELECT COUNT(*)
-        FROM information_schema.tables
-        WHERE table_name = 'archive'
+        CREATE TABLE IF NOT EXISTS pointByPoints (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            actionLocal VARCHAR(200),
+            totalPointsLocal VARCHAR(200),
+            totalPointsVisitor VARCHAR(200),    
+            actionVisitor VARCHAR(200),
+            quarter VARCHAR(200),
+            matchId VARCHAR(200),
+            PRIMARY KEY (id)
+        );
     """)
-    table_exists = cursor.fetchone()[0]
 
-    if not table_exists:
-        cursor.execute("""
-            CREATE TABLE archive (
-                id BIGINT NOT NULL AUTO_INCREMENT,
-                country VARCHAR(50),
-                league VARCHAR(50),
-                sessionYear VARCHAR(50),
-                teamName VARCHAR(50),
-                teamId VARCHAR(50),
-                PRIMARY KEY (id)
-            );
-        """)
-    
     cursor.close()
-
 
 def read_csv_files(csv_files):
     all_data = []
@@ -46,19 +34,20 @@ def read_csv_files(csv_files):
             next(reader) # Skip header row
             for row in reader:
                 print(row)
-                # Split the row into parts using ',' as a separator
+                # Split the row into parts using ';' as a separator
                 parts1 = row[0]
                 parts2 = row[1]
                 parts3 = row[2]
                 parts4 = row[3]
                 parts5 = row[4]
+                parts6 = row[5]
 
 
-                all_data.append([parts1, parts2, parts3, parts4, parts5]) # Add row to all_data                
+                all_data.append([parts1, parts2, parts3, parts4, parts5, parts6]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO archive (country, league, sessionYear , teamName, teamId) \
-    VALUES (%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO pointByPoints (actionLocal, totalPointsLocal, totalPointsVisitor, actionVisitor, quarter, matchId ) \
+    VALUES (%s, %s, %s, %s, %s, %s)"
 
     
     # Create arrays to store successes and errors
@@ -87,7 +76,7 @@ def read_csv_files(csv_files):
 
 if __name__ == '__main__':
     create_table()
-    csv_files = glob.glob('../csv/basketball/archive/*.csv')
+    csv_files = glob.glob('csv/basketball/pointByPoint/*.csv')
     all_data = read_csv_files(csv_files)
     
     # Close the database connection

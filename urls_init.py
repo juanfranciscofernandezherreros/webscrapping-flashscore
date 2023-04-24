@@ -2,7 +2,7 @@ import asyncio
 import csv
 import os
 from pyppeteer import launch
-import sys
+
 async def get_hrefs(url, num_slashes):
     browser = await launch(headless=True)
     page = await browser.newPage()

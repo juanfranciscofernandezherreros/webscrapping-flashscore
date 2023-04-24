@@ -1,32 +1,36 @@
 import csv
 import glob
 import mysql.connector
+import config.database
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = config.database.conectar()
 
 def create_table():
     cursor = db.cursor()
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS pointByPoints (
-            id BIGINT NOT NULL AUTO_INCREMENT,
-            actionLocal VARCHAR(200),
-            totalPointsLocal VARCHAR(200),
-            totalPointsVisitor VARCHAR(200),    
-            actionVisitor VARCHAR(200),
-            quarter VARCHAR(200),
-            matchId VARCHAR(200),
-            PRIMARY KEY (id)
-        );
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_name = 'quarters'
     """)
+    table_exists = cursor.fetchone()[0]
 
+    if not table_exists:
+        cursor.execute("""
+            CREATE TABLE quarters (
+                id BIGINT NOT NULL AUTO_INCREMENT,
+                attribute VARCHAR(50),
+                homePercentage VARCHAR(50),
+                visitorPercentage VARCHAR(50),
+                matchId VARCHAR(50),
+                quarter VARCHAR(50),
+                PRIMARY KEY (id)
+            );
+        """)
+    
     cursor.close()
+
 
 def read_csv_files(csv_files):
     all_data = []
@@ -38,21 +42,28 @@ def read_csv_files(csv_files):
             next(reader) # Skip header row
             for row in reader:
                 print(row)
-                # Split the row into parts using ';' as a separator
+                # Split the row into parts using ',' as a separator
                 parts1 = row[0]
                 parts2 = row[1]
                 parts3 = row[2]
                 parts4 = row[3]
                 parts5 = row[4]
-                parts6 = row[5]
+                # Remove % symbol only if there is one in the string
+                if parts2.count('%') == 1:
+                    parts2 = parts2.replace("%", "") + '%'
+                else:
+                    parts2 = parts2 + '%'
+                if parts3.count('%') == 1:
+                    parts3 = parts3.replace("%", "") + '%'
+                else:
+                    parts3 = parts3 + '%'
+                parts4 = row[3]
+                parts5 = row[4]
 
-
-                all_data.append([parts1, parts2, parts3, parts4, parts5, parts6]) # Add row to all_data                
+                all_data.append([parts1, parts2, parts3, parts4,parts5]) # Add row to all_data                
     
     # Prepare SQL statement
-    sql = "INSERT INTO pointByPoints (actionLocal, totalPointsLocal, totalPointsVisitor, actionVisitor, quarter, matchId ) \
-    VALUES (%s, %s, %s, %s, %s, %s)"
-
+    sql = "INSERT INTO quarters (attribute, homePercentage, visitorPercentage, matchId, quarter) VALUES (%s, %s, %s, %s, %s)"
     
     # Create arrays to store successes and errors
     success_count = 0
@@ -80,7 +91,7 @@ def read_csv_files(csv_files):
 
 if __name__ == '__main__':
     create_table()
-    csv_files = glob.glob('../csv/basketball/pointByPoint/*.csv')
+    csv_files = glob.glob('csv/basketball/quarters/*.csv')
     all_data = read_csv_files(csv_files)
     
     # Close the database connection

@@ -5,15 +5,13 @@ import mysql.connector
 from pyppeteer import launch
 import os
 import datetime
+# Connect to the MySQL server
+import config.database
 
-async def main(url):
+async def main(url):    
+
     # Connect to the MySQL server
-    db = mysql.connector.connect(
-        host="localhost",
-        user="user_bigdataetl",
-        password="password_bigdataetl",
-        database="bigdataetl"
-    )
+    db = config.database.conectar()
 
     # Check if the connection was successful
     if db.is_connected():

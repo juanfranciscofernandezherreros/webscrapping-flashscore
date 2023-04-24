@@ -2,14 +2,10 @@ import csv
 import glob
 import mysql.connector
 import asyncio
+import config.database
 
 # Connect to the MySQL server
-db = mysql.connector.connect(
-    host="localhost",
-    user="user_bigdataetl",
-    password="password_bigdataetl",
-    database="bigdataetl"
-)
+db = config.database.conectar()
 
 def create_table():
     cursor = db.cursor()
@@ -93,7 +89,7 @@ async def main(csv_files):
 
 async def run():
     create_table()
-    csv_files = glob.glob('../csv/basketball/results/*.csv')
+    csv_files = glob.glob('csv/basketball/results/*.csv')
     await main(csv_files)
 
 if __name__ == '__main__':
