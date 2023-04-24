@@ -68,6 +68,21 @@ Cierra el archivo CSV.
 Cierra el navegador.
 Si se ejecuta el archivo directamente, extrae la URL del primer argumento de la línea de comandos y llama a la función main() con esa URL.
 ```
-## License
+## resultados_init.py
+
+```python
+Este script realiza lo siguiente:
+
+Importa los módulos necesarios: mysql.connector, asyncio, resultsMatch, config.database, sys, os y fixtures_init.
+Define una función main que acepta tres argumentos: url, country y competition.
+Establece una conexión a una base de datos MySQL utilizando la información de conexión almacenada en el archivo config/database.py.
+Crea un objeto cursor para ejecutar consultas en la base de datos.
+Ejecuta una consulta SELECT en la tabla urls para buscar filas que contengan la cadena de texto especificada en los argumentos url, country y competition.
+Recupera los resultados de la consulta y los almacena en la variable myresult.
+Si el argumento url contiene la cadena "results" y la variable myresult contiene al menos una fila, ejecuta la función resultsMatch.main para cada una de las filas recuperadas de la base de datos. Esta función se encarga de extraer los resultados de un partido a partir de la URL especificada y almacenarlos en la base de datos.
+Si el argumento url contiene la cadena "fixtures" y la variable myresult contiene al menos una fila, ejecuta la función fixtures_init.main para cada una de las filas recuperadas de la base de datos. Esta función se encarga de extraer la información de los próximos partidos a partir de la URL especificada y almacenarlos en la base de datos.
+Si el argumento url no contiene la cadena "results" ni la cadena "fixtures" o si la variable myresult está vacía, muestra un mensaje indicando que la URL no cumple con los criterios de búsqueda.
+En el bloque if __name__ == '__main__':, obtiene los argumentos de línea de comando utilizando la función sys.argv y llama a la función asyncio.run para ejecutar la función main con los argumentos especificados.
+```
 
 [MIT](https://choosealicense.com/licenses/mit/)
