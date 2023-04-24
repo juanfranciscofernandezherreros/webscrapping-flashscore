@@ -12,7 +12,7 @@ def create_urls_table():
     query = ("CREATE TABLE IF NOT EXISTS urls ("
          "id BIGINT NOT NULL AUTO_INCREMENT,"
          "urls VARCHAR(200) UNIQUE,"
-c         "isOpened VARCHAR(200),"
+         "isOpened VARCHAR(200),"
          "PRIMARY KEY (id)"
          ")")
     cursor.execute(query)
