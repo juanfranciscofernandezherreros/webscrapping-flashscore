@@ -1,0 +1,105 @@
+Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarter;4th Quarter;Overtime Home;1st Quarter Away;2nd Quarter Away;3rd Quarter Away;4th Quarter Away;Overtime Away;MatchId;Country;Competition
+1681052400;09.04.2023-17:00;Gravelines-Dunkerque;Lyon-Villeurbanne;15;22;17;20;;15;22;12;19;;g_3_6DmGOSim;france;lnb
+1681052400;09.04.2023-17:00;Paris;Limoges;27;26;12;23;;19;7;27;28;;g_3_Ig0doPrd;france;lnb
+1681052400;09.04.2023-17:00;Pau-Orthez;Monaco;20;16;13;23;;17;29;21;27;;g_3_UFY19TK9;france;lnb
+1680976800;08.04.2023-20:00;Ada Blois;Le Portel;17;17;21;19;;19;20;20;20;;g_3_M5uC6ZE4;france;lnb
+1680976800;08.04.2023-20:00;Dijon;Cholet;23;20;26;33;;11;23;23;25;;g_3_UVrK4DqH;france;lnb
+1680976800;08.04.2023-20:00;Nancy;Le Mans;28;28;20;24;;15;24;19;22;;g_3_ATdlmoEq;france;lnb
+1680976800;08.04.2023-20:00;Nanterre;Fos-sur-Mer;18;29;17;29;;31;22;15;20;;g_3_OW0hn5Tk;france;lnb
+1680966000;08.04.2023-17:00;Boulogne-Levallois;Strasbourg;26;23;24;20;;24;17;21;18;;g_3_jupG5gUA;france;lnb
+1680890400;07.04.2023-20:00;Roanne;JL Bourg;26;26;21;35;;24;32;24;31;;g_3_dpa0pqb2;france;lnb
+1680719400;05.04.2023-20:30;Paris;Fos-sur-Mer;27;22;22;29;;24;23;25;25;;g_3_8x8uVUEJ;france;lnb
+1680631200;04.04.2023-20:00;Gravelines-Dunkerque;Monaco;16;12;14;25;;19;19;20;15;;g_3_4STd2xyo;france;lnb
+1680631200;04.04.2023-20:00;JL Bourg;Le Portel;23;17;17;19;;14;24;8;25;;g_3_b7Ql8776;france;lnb
+1680631200;04.04.2023-20:00;Le Mans;Lyon-Villeurbanne;29;9;30;11;;14;22;22;22;;g_3_SOVLQc1C;france;lnb
+1680454800;02.04.2023-19:00;Monaco;Boulogne-Levallois;20;20;22;25;;24;13;17;14;;g_3_hAqCP8xs;france;lnb
+1680447600;02.04.2023-17:00;Lyon-Villeurbanne;Roanne;30;23;28;15;;25;18;18;17;;g_3_nT6qUlUP;france;lnb
+1680372000;01.04.2023-20:00;Cholet;Nanterre;22;31;12;15;;22;16;20;28;;g_3_UH3ojEUN;france;lnb
+1680372000;01.04.2023-20:00;Le Mans;Dijon;27;21;26;22;;19;25;26;11;;g_3_l2pIphho;france;lnb
+1680372000;01.04.2023-20:00;Limoges;Pau-Orthez;17;21;20;23;;14;23;26;26;;g_3_KtqI9xFh;france;lnb
+1680372000;01.04.2023-20:00;Nancy;JL Bourg;15;20;22;25;;28;20;28;20;;g_3_0ji38eph;france;lnb
+1680372000;01.04.2023-20:00;Strasbourg;Ada Blois;13;26;16;30;;29;18;25;23;;g_3_rFt87Fab;france;lnb
+1680285600;31.03.2023-20:00;Fos-sur-Mer;Gravelines-Dunkerque;17;17;17;12;;15;21;21;12;;g_3_ngbjkYqU;france;lnb
+1680285600;31.03.2023-20:00;Le Portel;Paris;18;18;13;35;;21;12;17;21;;g_3_25Ya9yVo;france;lnb
+1680028200;28.03.2023-20:30;Boulogne-Levallois;Le Mans;19;21;21;28;;19;22;14;28;;g_3_r11ZhGp5;france;lnb
+1680028200;28.03.2023-20:30;Dijon;Limoges;16;19;19;21;;15;15;25;14;;g_3_d45whz0B;france;lnb
+1680026400;28.03.2023-20:00;Ada Blois;Nancy;9;21;22;23;;29;13;14;22;;g_3_0xCUgdVb;france;lnb
+1680026400;28.03.2023-20:00;Gravelines-Dunkerque;Roanne;33;20;18;25;;19;27;29;26;;g_3_jR4sifFH;france;lnb
+1680026400;28.03.2023-20:00;Nanterre;Pau-Orthez;22;17;13;33;;22;17;16;9;;g_3_j7vEAIan;france;lnb
+1679850000;26.03.2023-19:00;Limoges;Monaco;18;23;14;28;;21;21;19;15;;g_3_nXMp9mh0;france;lnb
+1679836500;26.03.2023-15:15;JL Bourg;Dijon;20;12;14;23;;15;20;16;24;;g_3_2sp4wyoI;france;lnb
+1679770800;25.03.2023-20:00;Cholet;Paris;20;15;11;17;;19;19;30;11;;g_3_d4q8xe0O;france;lnb
+1679770800;25.03.2023-20:00;Fos-sur-Mer;Lyon-Villeurbanne;22;14;20;18;;12;29;23;16;;g_3_hANtATxf;france;lnb
+1679770800;25.03.2023-20:00;Nanterre;Nancy;24;19;22;16;;16;23;20;16;;g_3_zVEIdbot;france;lnb
+1679770800;25.03.2023-20:00;Pau-Orthez;Ada Blois;27;16;12;16;9;20;20;11;20;12;g_3_CGuABbpt;france;lnb
+1679770800;25.03.2023-20:00;Strasbourg;Gravelines-Dunkerque;26;20;18;26;;20;26;13;32;;g_3_MoDQfxGh;france;lnb
+1679684400;24.03.2023-20:00;Le Portel;Boulogne-Levallois;22;19;10;27;;20;21;23;13;;g_3_A7mCyFFU;france;lnb
+1679684400;24.03.2023-20:00;Roanne;Le Mans;31;20;31;23;;18;20;37;17;;g_3_ELDMeI0n;france;lnb
+1679425200;21.03.2023-20:00;Gravelines-Dunkerque;Cholet;26;22;25;19;;8;21;30;19;;g_3_SOiitw1a;france;lnb
+1679425200;21.03.2023-20:00;Monaco;Le Portel;27;23;19;30;;21;11;20;26;;g_3_drUXBk8s;france;lnb
+1679079600;17.03.2023-20:00;Ada Blois;Roanne;22;21;35;18;;22;27;18;18;;g_3_MRlqraWn;france;lnb
+1679079600;17.03.2023-20:00;Paris;Nanterre;17;24;23;21;;18;19;18;24;;g_3_EJOxB9Nm;france;lnb
+1678820400;14.03.2023-20:00;Le Portel;Pau-Orthez;22;16;19;21;;12;21;18;19;;g_3_ngE3jFEU;france;lnb
+1678820400;14.03.2023-20:00;Lyon-Villeurbanne;Boulogne-Levallois;20;27;23;16;;12;22;15;20;;g_3_fZs6GVaQ;france;lnb
+1678636800;12.03.2023-17:00;Nanterre;Lyon-Villeurbanne;15;24;10;12;;19;24;26;13;;g_3_xfDCmL8P;france;lnb
+1678636800;12.03.2023-17:00;Roanne;Monaco;17;23;20;14;;25;19;22;19;;g_3_v3avquHt;france;lnb
+1678561200;11.03.2023-20:00;JL Bourg;Ada Blois;26;20;26;29;;11;13;15;18;;g_3_6HyaF9dq;france;lnb
+1678561200;11.03.2023-20:00;Le Mans;Gravelines-Dunkerque;32;28;31;17;;22;24;12;28;;g_3_SWP7DmRe;france;lnb
+1678561200;11.03.2023-20:00;Strasbourg;Paris;19;26;26;25;;23;22;20;11;;g_3_fwIgyiJ2;france;lnb
+1678544100;11.03.2023-15:15;Limoges;Cholet;19;12;23;11;;28;24;25;5;;g_3_tzUBC7t2;france;lnb
+1678476600;10.03.2023-20:30;Boulogne-Levallois;Nancy;22;30;22;19;;17;18;22;30;;g_3_zZlXJklS;france;lnb
+1678476600;10.03.2023-20:30;Dijon;Fos-sur-Mer;15;31;23;26;;31;16;21;29;;g_3_p8z3ETBk;france;lnb
+1678215600;07.03.2023-20:00;Pau-Orthez;Boulogne-Levallois;23;27;11;15;;25;21;15;17;;g_3_YkAaieaO;france;lnb
+1678039200;05.03.2023-19:00;Lyon-Villeurbanne;Strasbourg;22;27;10;19;;18;24;21;9;;g_3_AmLQPHGI;france;lnb
+1678032000;05.03.2023-17:00;Monaco;Nanterre;25;21;30;32;;25;11;29;22;;g_3_lvKUOyWO;france;lnb
+1677956400;04.03.2023-20:00;Cholet;JL Bourg;25;30;17;27;;20;23;23;22;;g_3_joFTaUdd;france;lnb
+1677956400;04.03.2023-20:00;Dijon;Ada Blois;23;27;22;19;;15;19;19;24;;g_3_S2bCODZd;france;lnb
+1677956400;04.03.2023-20:00;Gravelines-Dunkerque;Paris;18;18;16;24;;18;24;24;20;;g_3_0GdKMi49;france;lnb
+1677956400;04.03.2023-20:00;Limoges;Nancy;22;16;18;26;;17;22;16;21;;g_3_drjTKVYL;france;lnb
+1677951000;04.03.2023-18:30;Le Portel;Roanne;25;12;21;26;;23;25;23;24;;g_3_EJ0OLBJF;france;lnb
+1677870000;03.03.2023-20:00;Fos-sur-Mer;Le Mans;18;22;17;14;;30;13;10;15;;g_3_6gcGNXl3;france;lnb
+1676217600;12.02.2023-17:00;Paris;Pau-Orthez;28;18;31;20;;24;32;18;27;;g_3_vTAehypI;france;lnb
+1676211300;12.02.2023-15:15;JL Bourg;Monaco;22;32;22;14;;33;27;12;16;;g_3_ELRHRwn6;france;lnb
+1676142000;11.02.2023-20:00;Ada Blois;Gravelines-Dunkerque;21;20;25;23;;27;20;23;22;;g_3_6uIs9YZ9;france;lnb
+1676142000;11.02.2023-20:00;Nancy;Le Portel;21;19;19;20;;17;16;18;22;;g_3_E5Lk7C4M;france;lnb
+1676142000;11.02.2023-20:00;Nanterre;Limoges;25;22;18;22;;18;17;19;16;;g_3_dUAf6WJS;france;lnb
+1676142000;11.02.2023-20:00;Strasbourg;Cholet;30;16;23;21;;29;22;26;15;;g_3_CfGP0Asj;france;lnb
+1676055600;10.02.2023-20:00;Boulogne-Levallois;Dijon;17;25;24;27;;32;19;19;16;;g_3_zFMo8hkG;france;lnb
+1676055600;10.02.2023-20:00;Roanne;Fos-sur-Mer;24;20;27;10;9;28;21;11;21;12;g_3_IXGL1jSq;france;lnb
+1675612800;05.02.2023-17:00;Lyon-Villeurbanne;Dijon;26;26;21;26;;15;9;22;14;;g_3_t8T9TaHg;france;lnb
+1675612800;05.02.2023-17:00;Monaco;Paris;24;29;26;24;;21;21;19;20;;g_3_KbSDSJWa;france;lnb
+1675537200;04.02.2023-20:00;JL Bourg;Limoges;23;18;29;28;;13;30;10;22;;g_3_vTxqlXcp;france;lnb
+1675537200;04.02.2023-20:00;Pau-Orthez;Fos-sur-Mer;19;23;19;13;;17;15;11;20;;g_3_0xCigHUB;france;lnb
+1675520100;04.02.2023-15:15;Ada Blois;Boulogne-Levallois;17;25;15;21;;21;22;17;17;;g_3_zaYNhDkT;france;lnb
+1675520100;04.02.2023-15:15;Cholet;Le Mans;21;26;19;17;;36;24;26;17;;g_3_IJymmiDj;france;lnb
+1675450800;03.02.2023-20:00;Gravelines-Dunkerque;Nanterre;20;16;25;32;;13;10;16;17;;g_3_WMPUBzji;france;lnb
+1675450800;03.02.2023-20:00;Le Portel;Strasbourg;20;23;21;18;;14;23;15;19;;g_3_pQTYAf5c;france;lnb
+1675450800;03.02.2023-20:00;Roanne;Nancy;27;28;29;14;;24;22;23;26;;g_3_SlJwAEK3;france;lnb
+1675008000;29.01.2023-17:00;Lyon-Villeurbanne;Monaco;16;18;11;18;;16;18;15;23;;g_3_EocDUu2m;france;lnb
+1675001700;29.01.2023-15:15;Strasbourg;JL Bourg;28;15;29;17;;23;26;15;16;;g_3_d8ZJggzN;france;lnb
+1674932400;28.01.2023-20:00;Dijon;Paris;20;17;34;28;;27;31;13;17;;g_3_bgwabHLi;france;lnb
+1674932400;28.01.2023-20:00;Le Mans;Pau-Orthez;14;31;28;24;;20;12;12;31;;g_3_KQfffcF5;france;lnb
+1674932400;28.01.2023-20:00;Limoges;Gravelines-Dunkerque;21;23;15;19;;17;12;18;14;;g_3_6Jt7dej4;france;lnb
+1674932400;28.01.2023-20:00;Nancy;Cholet;25;24;18;16;;19;16;24;21;;g_3_lrWBeF5A;france;lnb
+1674932400;28.01.2023-20:00;Nanterre;Le Portel;15;15;26;27;;22;17;24;24;;g_3_2ozGfZKG;france;lnb
+1674847800;27.01.2023-20:30;Boulogne-Levallois;Roanne;22;25;19;18;;30;26;18;28;;g_3_K2veac6o;france;lnb
+1674846000;27.01.2023-20:00;Fos-sur-Mer;Ada Blois;14;15;25;23;;12;15;23;23;;g_3_SSs3cyyb;france;lnb
+1674403200;22.01.2023-17:00;Paris;Lyon-Villeurbanne;19;19;19;12;;19;20;23;24;;g_3_zeb9VLns;france;lnb
+1674399600;22.01.2023-16:00;Monaco;Nancy;14;25;20;24;;17;23;23;16;;g_3_IFBsz2vQ;france;lnb
+1674327600;21.01.2023-20:00;Cholet;Ada Blois;18;26;18;24;;22;23;17;20;;g_3_EPHTrxM4;france;lnb
+1674327600;21.01.2023-20:00;Gravelines-Dunkerque;JL Bourg;19;19;18;17;;13;13;23;20;;g_3_AiBxsGjH;france;lnb
+1674327600;21.01.2023-20:00;Nanterre;Dijon;24;13;19;12;;28;29;12;19;;g_3_r59pufLT;france;lnb
+1674327600;21.01.2023-20:00;Pau-Orthez;Roanne;21;18;22;16;;27;8;21;29;;g_3_tzdjew0a;france;lnb
+1674327600;21.01.2023-20:00;Strasbourg;Le Mans;21;22;31;18;;21;26;15;27;;g_3_Ic0CzETp;france;lnb
+1674241200;20.01.2023-20:00;Le Portel;Limoges;23;21;20;20;;12;17;17;22;;g_3_lrAttz6N;france;lnb
+1674068400;18.01.2023-20:00;Fos-sur-Mer;Boulogne-Levallois;21;10;30;21;;30;22;16;15;;g_3_hGGXsdyB;france;lnb
+1673895600;16.01.2023-20:00;Lyon-Villeurbanne;Le Mans;29;16;22;24;;27;29;15;24;;g_3_4C7wyrPJ;france;lnb
+1673805600;15.01.2023-19:00;Dijon;Boulogne-Levallois;28;22;19;25;;21;38;15;29;;g_3_Ygb6vNUI;france;lnb
+1673802000;15.01.2023-18:00;Cholet;Monaco;24;27;21;16;;26;15;27;21;;g_3_27TfCbnJ;france;lnb
+1673798400;15.01.2023-17:00;Paris;Strasbourg;29;26;26;34;;22;20;23;19;;g_3_6aELpbih;france;lnb
+1673792100;15.01.2023-15:15;Ada Blois;Pau-Orthez;23;18;42;24;;19;15;30;29;;g_3_nDdndJpg;france;lnb
+1673722800;14.01.2023-20:00;JL Bourg;Fos-sur-Mer;26;14;16;13;;14;10;24;20;;g_3_f3a2u3FC;france;lnb
+1673722800;14.01.2023-20:00;Limoges;Nanterre;17;16;27;33;;31;27;22;25;;g_3_ppQCnKMu;france;lnb
+1673722800;14.01.2023-20:00;Nancy;Gravelines-Dunkerque;21;22;20;19;;15;16;18;6;;g_3_OzPGovxn;france;lnb
+1673636400;13.01.2023-20:00;Roanne;Le Portel;20;16;25;18;;20;16;19;13;;g_3_K2IPqI6b;france;lnb
+1673290800;09.01.2023-20:00;Boulogne-Levallois;Lyon-Villeurbanne;24;20;20;20;;20;21;24;18;;g_3_OGUjDvXC;france;lnb
