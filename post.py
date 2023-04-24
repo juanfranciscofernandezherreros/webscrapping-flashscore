@@ -20,7 +20,7 @@ if mydb.is_connected():
     ya_existe = []
     insertados = []
     errores = []
-    with open('datos.csv') as csv_file:
+    with open('csv/datos.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader) # Saltar la primera fila que contiene los nombres de las columnas
         for row in csv_reader:
