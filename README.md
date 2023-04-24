@@ -38,13 +38,36 @@ Finalmente, el script actualiza el estado de la URL original a "abierta" en la b
 El script utiliza el módulo "argparse" para aceptar una URL opcional como argumento de línea de comandos. Si no se proporciona ninguna URL, el script simplemente comienza a buscar enlaces en la base de datos.
 ```
 
-## Contributing
+## fixtures.py
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+```python
+Este script realiza lo siguiente paso a paso:
 
-Please make sure to update tests as appropriate.
-
+Importa los módulos necesarios, tales como asyncio, csv, pyppeteer, datetime, urllib, glob, os, mysql.connector, resultsMatch, config.database, sys y fixtures_init.
+Define una función main(uri) que recibe una URL como parámetro.
+Verifica si existe una carpeta llamada "csv". Si no existe, la crea.
+Crea una subcarpeta llamada "basketball" dentro de la carpeta "csv". Si no existe, la crea.
+Crea una subcarpeta llamada "fixtures" dentro de la subcarpeta "basketball". Si no existe, la crea.
+Inicia el navegador mediante la función launch() de pyppeteer, sin que sea visible en la pantalla (headless=False).
+Abre una nueva página mediante la función newPage() del navegador.
+Navega a la URL especificada en el parámetro mediante la función goto() de la página.
+Obtiene todos los elementos que contienen la clase CSS "event" mediante la función querySelectorAll().
+Extrae el identificador de cada elemento mediante la función getProperty() y lo almacena en una lista llamada ids.
+Obtiene todos los elementos que contienen la clase CSS "event__time" y los almacena en una variable llamada events.
+Obtiene todos los elementos que contienen la clase CSS "event__participant--home" y los almacena en una variable llamada eventHome.
+Obtiene todos los elementos que contienen la clase CSS "event__participant--away" y los almacena en una variable llamada awayHome.
+Crea una lista vacía llamada data.
+Extrae el nombre de la competición, la temporada y la categoría de la URL, y los combina en una cadena de texto que almacena en la variable text.
+Genera una marca de tiempo actual y la almacena en la variable time_str.
+Itera sobre los elementos en la variable events, y para cada uno extrae el identificador, la fecha y hora del evento, el nombre del equipo local y el nombre del equipo visitante.
+Agrega el identificador, la fecha y hora del evento, el nombre del equipo local y el nombre del equipo visitante a la lista data.
+Extrae el nombre de dominio de la URL y lo usa como el nombre del archivo CSV que se va a crear.
+Abre el archivo CSV en modo de escritura y crea un objeto escritor CSV con la función writer().
+Escribe las filas en el archivo CSV utilizando el objeto escritor CSV.
+Cierra el archivo CSV.
+Cierra el navegador.
+Si se ejecuta el archivo directamente, extrae la URL del primer argumento de la línea de comandos y llama a la función main() con esa URL.
+```
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
