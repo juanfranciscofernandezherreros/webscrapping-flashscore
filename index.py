@@ -1,4 +1,4 @@
-#python index2.py https://www.flashscore.com/basketball/ 
+#python index.py https://www.flashscore.com/basketball/ 
 import argparse
 import asyncio
 import config.database

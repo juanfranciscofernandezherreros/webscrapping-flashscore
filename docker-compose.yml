@@ -8,7 +8,7 @@ services:
       - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: debezium
-      MYSQL_USER: mysqluser
+      MYSQL_USER: root
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     container_name: zookeerper

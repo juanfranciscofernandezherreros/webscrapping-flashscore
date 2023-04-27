@@ -1,14 +1,11 @@
 import mysql.connector
 import os
+import config.database
 
-mydb = mysql.connector.connect(
-        host="localhost",
-        user="user_bigdataetl",
-        password="password_bigdataetl",
-        database="bigdataetl"
-    )
+# Connect to the MySQL server
+db = config.database.conectar()
 
-mycursor = mydb.cursor()
+mycursor = db.cursor()
 
 folder_path = './init-db'
 
@@ -19,11 +16,11 @@ for sql_file in sql_files:
         query = f.read()
     try:
         mycursor.execute(query)
-        mydb.commit()
+        db.commit()
         print(sql_file, "se ha ejecutado correctamente.")
     except mysql.connector.Error as error:
         print(sql_file, "no se ha podido ejecutar. Error:", error)
         
 
 mycursor.close()
-mydb.close()
+db.close()

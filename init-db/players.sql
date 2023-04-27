@@ -1,6 +1,0 @@
-CREATE TABLE players (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-	player_name VARCHAR(200),
-	player_id VARCHAR(200) UNIQUE,	
-    PRIMARY KEY (id)
-);

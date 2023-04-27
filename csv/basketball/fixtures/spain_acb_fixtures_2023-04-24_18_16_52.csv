@@ -1,13 +1,4 @@
 EventTimeUTC;EventTimeUTC;homeTeam;awayTeam;matchId;Countries;Competitions
-1682179200;22.04.2023-18:00;Basquet Girona;Granada;g_3_Ob1lGyvf;spain;acb
-1682189100;22.04.2023-20:45;Barcelona;Gran Canaria;g_3_tzdgFeg0;spain;acb
-1682189100;22.04.2023-20:45;Valencia;Bilbao;g_3_KQfcEF86;spain;acb
-1682245800;23.04.2023-12:30;Manresa;Murcia;g_3_Emf1DZNC;spain;acb
-1682247600;23.04.2023-13:00;Tenerife;Breogan;g_3_QNc5CgwJ;spain;acb
-1682262000;23.04.2023-17:00;Basket Zaragoza;Unicaja;g_3_6JzhzcVP;spain;acb
-1682262000;23.04.2023-17:00;Obradoiro CAB;Real Betis;g_3_SSylywGJ;spain;acb
-1682265600;23.04.2023-18:00;Joventut Badalona;Real Madrid;g_3_bBSJVGws;spain;acb
-1682272800;23.04.2023-20:00;Fuenlabrada;Baskonia;g_3_x2RNUzgm;spain;acb
 1682528400;26.04.2023-19:00;Bilbao;Tenerife;g_3_QopJDrIe;spain;acb
 1682537400;26.04.2023-21:30;Basket Zaragoza;Manresa;g_3_p82pHHOm;spain;acb
 1682784000;29.04.2023-18:00;Granada;Tenerife;g_3_YTKWSENa;spain;acb
@@ -19,6 +10,8 @@ EventTimeUTC;EventTimeUTC;homeTeam;awayTeam;matchId;Countries;Competitions
 1682866800;30.04.2023-17:00;Real Betis;Barcelona;g_3_vmNNmGaP;spain;acb
 1682872200;30.04.2023-18:30;Unicaja;Joventut Badalona;g_3_G8Ekqz8t;spain;acb
 1682877600;30.04.2023-20:00;Baskonia;Breogan;g_3_bX3frfNn;spain;acb
+1683135000;03.05.2023-19:30;Unicaja;Manresa;g_3_6HZmhVjB;spain;acb
+1683142200;03.05.2023-21:30;Tenerife;Murcia;g_3_EsZiik6H;spain;acb
 1683385200;06.05.2023-17:00;Obradoiro CAB;Granada;g_3_xO2bsExg;spain;acb
 1683388800;06.05.2023-18:00;Basket Zaragoza;Joventut Badalona;g_3_6c72tYia;spain;acb
 1683388800;06.05.2023-18:00;Real Betis;Bilbao;g_3_SCeBvCMB;spain;acb
@@ -31,15 +24,12 @@ EventTimeUTC;EventTimeUTC;homeTeam;awayTeam;matchId;Countries;Competitions
 1683651600;09.05.2023-19:00;Basquet Girona;Real Betis;g_3_WbsyeX6h;spain;acb
 1683660600;09.05.2023-21:30;Granada;Basket Zaragoza;g_3_p2oufiMb;spain;acb
 1683738000;10.05.2023-19:00;Bilbao;Breogan;g_3_SQzpgBy5;spain;acb
-1683743400;10.05.2023-20:30;Unicaja;Manresa;g_3_6HZmhVjB;spain;acb
-1683747000;10.05.2023-21:30;Tenerife;Murcia;g_3_EsZiik6H;spain;acb
 1683822600;11.05.2023-18:30;Joventut Badalona;Baskonia;g_3_zcN0kTzU;spain;acb
 1683831600;11.05.2023-21:00;Fuenlabrada;Gran Canaria;g_3_hYXej9LN;spain;acb
 1683910800;12.05.2023-19:00;Barcelona;Obradoiro CAB;g_3_CIESpmqo;spain;acb
 1683918000;12.05.2023-21:00;Valencia;Real Madrid;g_3_QL2A9WLo;spain;acb
 1683993600;13.05.2023-18:00;Basket Zaragoza;Basquet Girona;g_3_4C1E8jyh;spain;acb
 1684003500;13.05.2023-20:45;Real Betis;Granada;g_3_MmdJ7Ajb;spain;acb
-1684003500;13.05.2023-20:45;Unicaja;Tenerife;g_3_f1fR5lLA;spain;acb
 1684058400;14.05.2023-12:00;Murcia;Bilbao;g_3_0veN6U54;spain;acb
 1684060200;14.05.2023-12:30;Breogan;Manresa;g_3_6ybV48zH;spain;acb
 1684076400;14.05.2023-17:00;Joventut Badalona;Obradoiro CAB;g_3_nZBamt5q;spain;acb
@@ -55,3 +45,4 @@ EventTimeUTC;EventTimeUTC;homeTeam;awayTeam;matchId;Countries;Competitions
 1684598400;20.05.2023-18:00;Murcia;Barcelona;g_3_p4CYaJlk;spain;acb
 1684598400;20.05.2023-18:00;Real Betis;Real Madrid;g_3_jsDU0aZr;spain;acb
 1684598400;20.05.2023-18:00;Unicaja;Bilbao;g_3_MBf66LBL;spain;acb
+1684665000;21.05.2023-12:30;Unicaja;Tenerife;g_3_f1fR5lLA;spain;acb

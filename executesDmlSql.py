@@ -1,14 +1,13 @@
 import mysql.connector
 import os
+import config.database
 
-mydb = mysql.connector.connect(
-        host="localhost",
-        user="user_bigdataetl",
-        password="password_bigdataetl",
-        database="bigdataetl"
-    )
+import config.database
 
-mycursor = mydb.cursor()
+# Connect to the MySQL server
+db = config.database.conectar()
+
+mycursor = db.cursor()
 
 folder_path = './init-mysql'
 
@@ -19,7 +18,7 @@ for sql_file in sql_files:
         query = f.read()
     try:
         mycursor.execute(query)
-        mydb.commit()
+        db.commit()
         print(sql_file, "se ha ejecutado correctamente.")
     except mysql.connector.Error as error:
         if "insert" in query.lower():
@@ -29,4 +28,4 @@ for sql_file in sql_files:
             print(sql_file, "no se ha podido ejecutar. Error:", error)
 
 mycursor.close()
-mydb.close()
+db.close()

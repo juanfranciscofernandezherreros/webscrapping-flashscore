@@ -1,4 +1,19 @@
 Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarter;4th Quarter;Overtime Home;1st Quarter Away;2nd Quarter Away;3rd Quarter Away;4th Quarter Away;Overtime Away;MatchId;Country;Competition
+1682262000;23.04.2023-17:00;Pau-Orthez;JL Bourg;16;31;12;28;;14;26;19;20;;g_3_niqcA953;france;lnb
+1682254800;23.04.2023-15:00;Fos-sur-Mer;Strasbourg;21;18;25;23;;23;16;16;10;;g_3_Y1hmsJog;france;lnb
+1682013600;20.04.2023-20:00;Monaco;Strasbourg;19;20;23;25;2;29;25;13;20;11;g_3_KMEc6oxJ;france;lnb
+1681840800;18.04.2023-20:00;Nancy;Dijon;12;21;23;22;;27;18;25;21;;g_3_Ojo0vHVB;france;lnb
+1681657200;16.04.2023-17:00;Lyon-Villeurbanne;Le Portel;18;20;30;18;;20;16;16;16;;g_3_0zmKNn7g;france;lnb
+1681657200;16.04.2023-17:00;Monaco;Fos-sur-Mer;24;22;29;23;;20;26;13;24;;g_3_vRoOM6Ma;france;lnb
+1681581600;15.04.2023-20:00;Ada Blois;Le Mans;12;23;22;15;;21;16;17;14;;g_3_b5iZhy22;france;lnb
+1681581600;15.04.2023-20:00;Gravelines-Dunkerque;Pau-Orthez;18;24;20;8;;10;15;19;14;;g_3_bXsM8dUb;france;lnb
+1681581600;15.04.2023-20:00;JL Bourg;Nanterre;23;27;27;16;;19;17;21;24;;g_3_WIksiFWE;france;lnb
+1681581600;15.04.2023-20:00;Limoges;Boulogne-Levallois;14;22;26;22;;21;26;15;21;;g_3_xdjwheH8;france;lnb
+1681581600;15.04.2023-20:00;Paris;Nancy;19;27;31;22;;33;18;20;20;;g_3_Spqjkg1R;france;lnb
+1681581600;15.04.2023-20:00;Strasbourg;Dijon;17;27;30;19;;20;23;17;15;;g_3_UgVHpD9r;france;lnb
+1681408800;13.04.2023-20:00;Cholet;Roanne;18;24;19;20;;19;19;18;18;;g_3_pMgojZoL;france;lnb
+1681322400;12.04.2023-20:00;Dijon;Monaco;15;15;12;23;;22;19;23;16;;g_3_xKYPrive;france;lnb
+1681322400;12.04.2023-20:00;Le Mans;Limoges;16;25;15;21;;18;16;17;20;;g_3_6FjeucG5;france;lnb
 1681052400;09.04.2023-17:00;Gravelines-Dunkerque;Lyon-Villeurbanne;15;22;17;20;;15;22;12;19;;g_3_6DmGOSim;france;lnb
 1681052400;09.04.2023-17:00;Paris;Limoges;27;26;12;23;;19;7;27;28;;g_3_Ig0doPrd;france;lnb
 1681052400;09.04.2023-17:00;Pau-Orthez;Monaco;20;16;13;23;;17;29;21;27;;g_3_UFY19TK9;france;lnb
@@ -31,7 +46,7 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1679770800;25.03.2023-20:00;Cholet;Paris;20;15;11;17;;19;19;30;11;;g_3_d4q8xe0O;france;lnb
 1679770800;25.03.2023-20:00;Fos-sur-Mer;Lyon-Villeurbanne;22;14;20;18;;12;29;23;16;;g_3_hANtATxf;france;lnb
 1679770800;25.03.2023-20:00;Nanterre;Nancy;24;19;22;16;;16;23;20;16;;g_3_zVEIdbot;france;lnb
-1679770800;25.03.2023-20:00;Pau-Orthez;Ada Blois;27;16;12;16;9;20;20;11;20;12;g_3_CGuABbpt;france;lnb
+1679770800;25.03.2023-20:00;Pau-Orthez;Ada Blois;27;16;12;16;2;20;20;11;20;11;g_3_CGuABbpt;france;lnb
 1679770800;25.03.2023-20:00;Strasbourg;Gravelines-Dunkerque;26;20;18;26;;20;26;13;32;;g_3_MoDQfxGh;france;lnb
 1679684400;24.03.2023-20:00;Le Portel;Boulogne-Levallois;22;19;10;27;;20;21;23;13;;g_3_A7mCyFFU;france;lnb
 1679684400;24.03.2023-20:00;Roanne;Le Mans;31;20;31;23;;18;20;37;17;;g_3_ELDMeI0n;france;lnb
@@ -65,7 +80,7 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1676142000;11.02.2023-20:00;Nanterre;Limoges;25;22;18;22;;18;17;19;16;;g_3_dUAf6WJS;france;lnb
 1676142000;11.02.2023-20:00;Strasbourg;Cholet;30;16;23;21;;29;22;26;15;;g_3_CfGP0Asj;france;lnb
 1676055600;10.02.2023-20:00;Boulogne-Levallois;Dijon;17;25;24;27;;32;19;19;16;;g_3_zFMo8hkG;france;lnb
-1676055600;10.02.2023-20:00;Roanne;Fos-sur-Mer;24;20;27;10;9;28;21;11;21;12;g_3_IXGL1jSq;france;lnb
+1676055600;10.02.2023-20:00;Roanne;Fos-sur-Mer;24;20;27;10;2;28;21;11;21;11;g_3_IXGL1jSq;france;lnb
 1675612800;05.02.2023-17:00;Lyon-Villeurbanne;Dijon;26;26;21;26;;15;9;22;14;;g_3_t8T9TaHg;france;lnb
 1675612800;05.02.2023-17:00;Monaco;Paris;24;29;26;24;;21;21;19;20;;g_3_KbSDSJWa;france;lnb
 1675537200;04.02.2023-20:00;JL Bourg;Limoges;23;18;29;28;;13;30;10;22;;g_3_vTxqlXcp;france;lnb
@@ -91,15 +106,3 @@ Event Time UTC;Event Time;Home Team;Away Team;1st Quarter;2nd Quarter;3rd Quarte
 1674327600;21.01.2023-20:00;Nanterre;Dijon;24;13;19;12;;28;29;12;19;;g_3_r59pufLT;france;lnb
 1674327600;21.01.2023-20:00;Pau-Orthez;Roanne;21;18;22;16;;27;8;21;29;;g_3_tzdjew0a;france;lnb
 1674327600;21.01.2023-20:00;Strasbourg;Le Mans;21;22;31;18;;21;26;15;27;;g_3_Ic0CzETp;france;lnb
-1674241200;20.01.2023-20:00;Le Portel;Limoges;23;21;20;20;;12;17;17;22;;g_3_lrAttz6N;france;lnb
-1674068400;18.01.2023-20:00;Fos-sur-Mer;Boulogne-Levallois;21;10;30;21;;30;22;16;15;;g_3_hGGXsdyB;france;lnb
-1673895600;16.01.2023-20:00;Lyon-Villeurbanne;Le Mans;29;16;22;24;;27;29;15;24;;g_3_4C7wyrPJ;france;lnb
-1673805600;15.01.2023-19:00;Dijon;Boulogne-Levallois;28;22;19;25;;21;38;15;29;;g_3_Ygb6vNUI;france;lnb
-1673802000;15.01.2023-18:00;Cholet;Monaco;24;27;21;16;;26;15;27;21;;g_3_27TfCbnJ;france;lnb
-1673798400;15.01.2023-17:00;Paris;Strasbourg;29;26;26;34;;22;20;23;19;;g_3_6aELpbih;france;lnb
-1673792100;15.01.2023-15:15;Ada Blois;Pau-Orthez;23;18;42;24;;19;15;30;29;;g_3_nDdndJpg;france;lnb
-1673722800;14.01.2023-20:00;JL Bourg;Fos-sur-Mer;26;14;16;13;;14;10;24;20;;g_3_f3a2u3FC;france;lnb
-1673722800;14.01.2023-20:00;Limoges;Nanterre;17;16;27;33;;31;27;22;25;;g_3_ppQCnKMu;france;lnb
-1673722800;14.01.2023-20:00;Nancy;Gravelines-Dunkerque;21;22;20;19;;15;16;18;6;;g_3_OzPGovxn;france;lnb
-1673636400;13.01.2023-20:00;Roanne;Le Portel;20;16;25;18;;20;16;19;13;;g_3_K2IPqI6b;france;lnb
-1673290800;09.01.2023-20:00;Boulogne-Levallois;Lyon-Villeurbanne;24;20;20;20;;20;21;24;18;;g_3_OGUjDvXC;france;lnb

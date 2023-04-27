@@ -1,6 +1,0 @@
-CREATE TABLE teams (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-	team_name VARCHAR(200),
-	team_id VARCHAR(200) UNIQUE,	
-    PRIMARY KEY (id)
-);

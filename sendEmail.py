@@ -1,4 +1,3 @@
-#https://stackoverflow.com/questions/16512592/login-credentials-not-working-with-gmail-smtp
 import smtplib
 from email.mime.text import MIMEText
 
