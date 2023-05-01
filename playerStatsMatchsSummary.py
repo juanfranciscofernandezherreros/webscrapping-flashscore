@@ -21,11 +21,26 @@ async def main(url):
     for tab in tabs:
         tab_text = await page.evaluate('(element) => element.textContent', tab)
         print("TABS",tab_text)
+        href = await tab.getProperty('href')
+        href_val = await href.jsonValue()
+        print("href:", href_val)
         if tab_text == "Summary":
             print("Summary")
             summary_data = await _get_summary_data(page)
-            await _write_summary_to_csv(game_id, summary_data)    
-
+            await _write_summary_to_csv(game_id, summary_data)     
+        # Navigate to the player statistics page
+        if tab_text == "Player Statistics":
+                print("Player Statistics")
+                href = await tab.getProperty('href')
+                href_val = await href.jsonValue()
+                url = href_val + "/0"
+                print("Navigating to:", url)
+                await page.goto(url)            
+                await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.            
+                # Get all cell elements and their text
+                data = await _get_player_stats_data(page)
+                await _write_playerStatistics_to_csv(game_id, data)     
+                
     await browser.close()
 
 
@@ -52,6 +67,34 @@ async def _get_summary_data(page):
         "quarter_scores": quarter_scores
     }
 
+async def _get_player_stats_data(page):
+    row_selector = '.playerStatsTable__row'
+    row_elements = await page.querySelectorAll(row_selector)
+    data = []
+
+    for row_element in row_elements:
+        # Extract the text content of each cell element in the row
+        row_data = await page.evaluate('''(row) => {
+            const cells = row.querySelectorAll('.playerStatsTable__cell');
+            const rowData = [];
+            for (const cell of cells) {
+                rowData.push(cell.textContent.trim());
+            }
+            return rowData;
+        }''', row_element)
+
+        # Extract the href value from the first cell element in the row
+        href_element = await row_element.querySelector('.playerStatsTable__participantCell')
+        href = await href_element.getProperty('href')
+        href_val = await href.jsonValue()
+        href_parts = href_val.split('/')
+        player_name = href_parts[-2]
+        player_id = href_parts[-1]
+        row_data.insert(1, player_name)  # Insert the href value as the second element of the row
+        row_data.insert(2, player_id)  # Insert the href value as the third element of the row
+        data.append(row_data)  # Append the row data to the list of data
+
+    return data
 
 async def _write_summary_to_csv(game_id, summary_data):
     filename = f"csv/basketball/summary/{game_id}_summary.csv"
@@ -59,6 +102,18 @@ async def _write_summary_to_csv(game_id, summary_data):
         writer = csv.writer(f)
         writer.writerow(["Game ID", "Total Home", "Total Away", "Q1 Local", "Q1 Away", "Q2 Local", "Q2 Away", "Q3 Local", "Q3 Away", "Q4 Local", "Q4 Away", "Q5 Local", "Q5 Away"])
         writer.writerow([game_id, summary_data["total_home"], summary_data["total_away"]] + summary_data["quarter_scores"])
+
+async def _write_playerStatistics_to_csv(game_id, player_stats_data):
+    filename = f"csv/basketball/playerStatistics/{game_id}_playerStatistics.csv"
+    with open(filename, "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(["Player Name", "Player ID", "Team", "Min", "Pts", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "TOV", "STL", "BLK", "PF", "+/-", "Game ID"])
+        for row in player_stats_data:
+            row.append(game_id)  # Add the Game ID to the row data
+            writer.writerow(row)
+
+
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
