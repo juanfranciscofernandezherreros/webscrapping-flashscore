@@ -51,9 +51,31 @@ async def main(url):
                 await asyncio.sleep(5) 
                 # Get all cell elements and their text
                 data = await _get_match_stats_data(page)
-                await _write_matchStatistics_to_csv(game_id, data)     
-    await browser.close()
+                await _write_matchStatistics_to_csv(game_id, data)
+        # Navigate to the player statistics page
 
+        if tab_text == "Lineups":
+            print("Lineups")
+            href = await tab.getProperty('href')
+            href_val = await href.jsonValue()
+            url = href_val
+            print("Navigating to:", url)
+            await page.goto(url)            
+            await asyncio.sleep(5) 
+            # Get all cell elements and their text
+            data = await _get_lineUps_data(page) 
+            print(data)
+            filename = f"csv/basketball/lineups/{game_id}_lineups.csv"
+            # Escribir los datos en un archivo CSV
+            with open(filename, 'w', newline='') as csvfile:
+                fieldnames = ['number', 'flag', 'name', 'player_id', 'player_code', 'game_id']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for d in data:
+                    d['game_id'] = game_id
+                    writer.writerow(d)
+        
+    await browser.close()
 
 async def _get_summary_data(page):
     total_home = await page.querySelector('.smh__part.smh__score.smh__home.smh__part--current')
@@ -112,7 +134,8 @@ async def _get_match_stats_data(page):
     elements = await page.querySelectorAll('.stat__category')
     data = []
     
-    # Loop over the elements and extract the text content of each group of elements
+    # Lo
+    # op over the elements and extract the text content of each group of elements
     for element in elements:
         # Use element.querySelectorAll to extract the three matching elements
         value_elements = await element.querySelectorAll('.stat__homeValue, .stat__categoryName, .stat__awayValue')
@@ -126,6 +149,19 @@ async def _get_match_stats_data(page):
     
     return data
 
+async def _get_lineUps_data(page):
+    print("LineUps")
+    data = []
+    elements = await page.querySelectorAll('.lf__participantNumber, .lf__participantFlag, .lf__participantName')
+    for i in range(0, len(elements), 3):
+        number, flag, name_elem = elements[i:i+3]
+        number_text = await page.evaluate('(element) => element.textContent', number)
+        flag_title = await page.evaluate('(element) => element.getAttribute("title")', flag)
+        name_text = await page.evaluate('(element) => element.textContent', name_elem)
+        name_href = await page.evaluate('(element) => element.getAttribute("href")', name_elem)
+        player_id, player_code = name_href.split('/')[2:4]
+        data.append({'number': number_text, 'flag': flag_title, 'name': name_text, 'player_id': player_id, 'player_code': player_code})
+    return data
 
 async def _write_summary_to_csv(game_id, summary_data):
     filename = f"csv/basketball/summary/{game_id}_summary.csv"
@@ -149,9 +185,14 @@ async def _write_matchStatistics_to_csv(game_id, player_stats_data):
         writer = csv.writer(f)
         writer.writerow(["Local", "Stats", "Visitor","Game ID"])
         for row in player_stats_data:
-            row.append(game_id)  # Add the Game ID to the row data
             writer.writerow(row)
 
+async def _write_lineups_to_csv(game_id, summary_data):
+    filename = f"csv/basketball/summary/{game_id}_summary.csv"
+    with open(filename, "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([game_id, summary_data["number"]])
+            
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
