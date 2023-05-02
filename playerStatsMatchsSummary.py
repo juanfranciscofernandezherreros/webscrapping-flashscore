@@ -82,9 +82,10 @@ async def main(url):
             print("Navigating to:", url)
             await page.goto(url)            
             await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.
-            data = await _get_matchHistory_data(page)       
+            data = await _get_matchHistory_data(page)
+            game_id = url.split("/")[-5]
+            await _write_pointByPoint_to_csv(data,game_id)            
             print(data)
-            # close the browser
     await browser.close()
 
 async def _get_summary_data(page):
@@ -194,7 +195,6 @@ async def _get_matchHistory_data(page):
                 # If there are two items in the temp list, add a "/" and the list to the main list and reset the temp list
                 if (i + 1) % 2 == 0:
                     texts.append('-'.join(temp_list))
-                    texts.append(game_id)
                     temp_list = []
 
             # If there is one item left in the temp list, add it to the main list
@@ -227,12 +227,15 @@ async def _write_matchStatistics_to_csv(game_id, player_stats_data):
         for row in player_stats_data:
             writer.writerow(row)
 
-async def _write_pointByPoint_to_csv(game_id, summary_data):
-    filename = f"csv/basketball/pointByPoint/{game_id}_pointByPoint.csv"
+
+async def _write_pointByPoint_to_csv(data, game_id):
+    filename = f"csv/basketball/pointByPoint/{game_id}_pointByPoints.csv"
     with open(filename, "w", newline='') as f:
         writer = csv.writer(f)
-        writer.writerow([game_id, summary_data["number"]])
-            
+        writer.writerow(["Player Name", "Game ID"])
+        for row in data:
+            writer.writerow([row, game_id])
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
