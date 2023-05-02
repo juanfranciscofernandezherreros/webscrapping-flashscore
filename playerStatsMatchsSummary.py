@@ -53,7 +53,6 @@ async def main(url):
                 data = await _get_match_stats_data(page)
                 await _write_matchStatistics_to_csv(game_id, data)
         # Navigate to the player statistics page
-
         if tab_text == "Lineups":
             print("Lineups")
             href = await tab.getProperty('href')
@@ -74,7 +73,46 @@ async def main(url):
                 for d in data:
                     d['game_id'] = game_id
                     writer.writerow(d)
-        
+        # Navigate to the player statistics page
+        if tab_text == "Match History":
+            print("Match History")
+            game_id = url.split("/")[-4]
+            href = await tab.getProperty('href')
+            href_val = await href.jsonValue()
+            url = href_val + "/0"
+            print("Navigating to:", url)
+            await page.goto(url)            
+            await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.
+            # Wait for the selector to appear on the page
+            # Wait for the selector to appear on the page
+            await page.waitForSelector('.matchHistoryRow__score')
+            # Get a list of all matching elements
+            elements = await page.querySelectorAll('.matchHistoryRow__score')
+            # Loop through each element and extract the text
+            # Initialize an empty array
+            texts = []
+            # Definir una lista temporal para almacenar los pares de elementos con "/" entre ellos
+            temp_list = []
+            print("GameId" , game_id)
+            # Loop through each element and extract the text
+            for i, element in enumerate(elements):
+                text = await page.evaluate('(element) => element.textContent', element)
+                # Add the text to the temp list
+                temp_list.append(text)
+                # If there are two items in the temp list, add a "/" and the list to the main list and reset the temp list
+                if (i + 1) % 2 == 0:
+                    texts.append('-'.join(temp_list))
+                    texts.append(game_id)
+                    temp_list = []
+
+            # If there is one item left in the temp list, add it to the main list
+            if len(temp_list) == 1:
+                texts.append(temp_list[0])
+
+            # Print the array of text values
+            print(texts)
+
+            # close the browser
     await browser.close()
 
 async def _get_summary_data(page):
