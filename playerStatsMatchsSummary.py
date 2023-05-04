@@ -35,11 +35,15 @@ async def main(url):
                 href_val = await href.jsonValue()
                 url = href_val + "/0"
                 print("Navigating to:", url)
-                await page.goto(url)            
-                await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.            
-                # Get all cell elements and their text
+                await page.goto(url)     
+                await asyncio.sleep(5)            
                 data = await _get_player_stats_data(page)
-                await _write_playerStatistics_to_csv(game_id, data)     
+                await _write_playerStatistics_to_csv(game_id, data)         
+                subLinks = await extract_hrefs(url,"player-statistics")
+                for link in subLinks:
+                    print(link)    
+                    await page.goto(url)                
+                   
         # Navigate to the player statistics page
         if tab_text == "Stats":
                 print("Stats")
@@ -48,6 +52,7 @@ async def main(url):
                 url = href_val + "/0"
                 print("Navigating to:", url)
                 await page.goto(url)            
+                print("URL", await extract_hrefs(url,"match-statistics"))        
                 await asyncio.sleep(5) 
                 # Get all cell elements and their text
                 data = await _get_match_stats_data(page)
@@ -63,7 +68,6 @@ async def main(url):
             await asyncio.sleep(5) 
             # Get all cell elements and their text
             data = await _get_lineUps_data(page) 
-            print(data)
             filename = f"csv/basketball/lineups/{game_id}_lineups.csv"
             # Escribir los datos en un archivo CSV
             with open(filename, 'w', newline='') as csvfile:
@@ -77,10 +81,12 @@ async def main(url):
         if tab_text == "Match History":
             print("Match History")
             href = await tab.getProperty('href')
-            href_val = await href.jsonValue()
+            href_val = await href.jsonValue()            
             url = href_val + "/0"
             print("Navigating to:", url)
-            await page.goto(url)            
+            #GetAllHrefs
+            await page.goto(url)    
+            print("URL", await extract_hrefs(url,"point-by-point"))        
             await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.
             data = await _get_matchHistory_data(page)
             game_id = url.split("/")[-5]
@@ -236,6 +242,17 @@ async def _write_pointByPoint_to_csv(data, game_id):
         for row in data:
             writer.writerow([row, game_id])
 
+async def extract_hrefs(url ,frase):
+    """Extract hrefs from a webpage"""
+    browser = await launch()
+    page = await browser.newPage()
+    await page.goto(url)
+    hrefs = await page.evaluate('''() => {
+        return [...document.querySelectorAll('a')].map(elem => elem.href);
+    }''')
+    filtered_hrefs = set(filter(lambda x: frase in x, hrefs))
+    await browser.close()
+    return filtered_hrefs
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
