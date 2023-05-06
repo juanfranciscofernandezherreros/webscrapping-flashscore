@@ -7,6 +7,7 @@ import asyncio
 import config.database
 import sys
 import os
+import re
 
 async def main(url):
     browser = await launch(headless=False)
@@ -33,30 +34,49 @@ async def main(url):
                 print("Player Statistics")
                 href = await tab.getProperty('href')
                 href_val = await href.jsonValue()
-                url = href_val + "/0"
+                url = href_val + "/0"                
                 print("Navigating to:", url)
                 await page.goto(url)     
-                await asyncio.sleep(5)            
-                data = await _get_player_stats_data(page)
-                await _write_playerStatistics_to_csv(game_id, data)         
-                subLinks = await extract_hrefs(url,"player-statistics")
-                for link in subLinks:
-                    print(link)    
-                    await page.goto(url)                
-                   
+                await asyncio.sleep(5)                                                 
         # Navigate to the player statistics page
         if tab_text == "Stats":
-                print("Stats")
+                print("MatchStatistics")
                 href = await tab.getProperty('href')
                 href_val = await href.jsonValue()
                 url = href_val + "/0"
                 print("Navigating to:", url)
                 await page.goto(url)            
-                print("URL", await extract_hrefs(url,"match-statistics"))        
+                subLinks = await extract_hrefs(url,"match-statistics")
                 await asyncio.sleep(5) 
-                # Get all cell elements and their text
-                data = await _get_match_stats_data(page)
-                await _write_matchStatistics_to_csv(game_id, data)
+                for link in subLinks:
+                    print("SubLink" , link) 
+                    if link.count('/') == 8:
+                        print('The URL contains exactly 8 slashes.')
+                        await page.goto(link)  
+                        await asyncio.sleep(5) 
+                        data = await _get_match_stats_data(page)
+                        number = re.search(r'/(\d+)$', link).group(1)
+                        if data:
+                            # Convert data from list of lists to list of dictionaries
+                            data_dicts = [dict(zip(['local', 'stat', 'visitor','quarter', 'game_id'], d)) for d in data]
+                            filename = f"csv/basketball/matchStatistics/{game_id}_{number}_matchStatistics.csv"
+                            try:
+                                # Check if directory exists and create it if it doesn't
+                                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                                # Write the data to CSV file
+                                with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+                                    fieldnames = ['local', 'stat', 'visitor','quarter', 'game_id']
+                                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                                    writer.writeheader()
+                                    for d in data_dicts:
+                                        d['quarter'] = number
+                                        d['game_id'] = game_id
+                                        writer.writerow(d)
+                                print(f"CSV file {filename} has been generated successfully.")
+                            except Exception as e:
+                                print(f"Error generating CSV file {filename}: {e}")
+                        else:
+                            print("No data retrieved from the page.")                              
         # Navigate to the player statistics page
         if tab_text == "Lineups":
             print("Lineups")
@@ -90,7 +110,6 @@ async def main(url):
             await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.
             data = await _get_matchHistory_data(page)
             game_id = url.split("/")[-5]
-            await _write_pointByPoint_to_csv(data,game_id)            
             print(data)
     await browser.close()
 
@@ -216,31 +235,14 @@ async def _write_summary_to_csv(game_id, summary_data):
         writer.writerow(["Game ID", "Total Home", "Total Away", "Q1 Local", "Q1 Away", "Q2 Local", "Q2 Away", "Q3 Local", "Q3 Away", "Q4 Local", "Q4 Away", "Q5 Local", "Q5 Away"])
         writer.writerow([game_id, summary_data["total_home"], summary_data["total_away"]] + summary_data["quarter_scores"])
 
-async def _write_playerStatistics_to_csv(game_id, player_stats_data):
-    filename = f"csv/basketball/playerStatistics/{game_id}_playerStatistics.csv"
+async def _write_playerStatistics_to_csv(game_id, player_stats_data,numero):
+    filename = f"csv/basketball/playerStatistics/{game_id}_{numero}_playerStatistics.csv"
     with open(filename, "w", newline='') as f:
         writer = csv.writer(f)
         writer.writerow(["Player Name", "Player ID", "Team", "Min", "Pts", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", "FTM", "FTA", "FT%", "OREB", "DREB", "REB", "AST", "TOV", "STL", "BLK", "PF", "+/-", "Game ID"])
         for row in player_stats_data:
             row.append(game_id)  # Add the Game ID to the row data
             writer.writerow(row)
-
-async def _write_matchStatistics_to_csv(game_id, player_stats_data):
-    filename = f"csv/basketball/matchStatistics/{game_id}_matchStatistics.csv"
-    with open(filename, "w", newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(["Local", "Stats", "Visitor","Game ID"])
-        for row in player_stats_data:
-            writer.writerow(row)
-
-
-async def _write_pointByPoint_to_csv(data, game_id):
-    filename = f"csv/basketball/pointByPoint/{game_id}_pointByPoints.csv"
-    with open(filename, "w", newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(["Player Name", "Game ID"])
-        for row in data:
-            writer.writerow([row, game_id])
 
 async def extract_hrefs(url ,frase):
     """Extract hrefs from a webpage"""
