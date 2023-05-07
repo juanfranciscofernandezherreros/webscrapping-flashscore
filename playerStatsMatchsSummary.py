@@ -104,13 +104,38 @@ async def main(url):
             href_val = await href.jsonValue()            
             url = href_val + "/0"
             print("Navigating to:", url)
-            #GetAllHrefs
-            await page.goto(url)    
-            print("URL", await extract_hrefs(url,"point-by-point"))        
-            await asyncio.sleep(5)  # Wait for 5 seconds after navigating to the page.
-            data = await _get_matchHistory_data(page)
-            game_id = url.split("/")[-5]
-            print(data)
+            await page.goto(url)            
+            subLinks1 = await extract_hrefs(url,"point-by-point")
+            await asyncio.sleep(5)
+            for link in subLinks1:
+                print("SubLink" , link)            
+                if link.count('/') == 8:
+                        print('The URL contains exactly 8 slashes.')
+                        await page.goto(link)  
+                        await asyncio.sleep(5) 
+                        data = await _get_matchHistory_data(page)
+                        number = re.search(r'/(\d+)$', link).group(1)
+                        if data:
+                            # Convert data from list of lists to list of dictionaries
+                            data_dicts = [dict(zip(['local', 'main', 'visitor','quarter', 'game_id'], d)) for d in data]
+                            filename = f"csv/basketball/pointByPoint/{game_id}_{number}_pointByPoint.csv"
+                            try:
+                                # Check if directory exists and create it if it doesn't
+                                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                                # Write the data to CSV file
+                                with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+                                    fieldnames = ['local', 'stat', 'visitor','quarter', 'game_id']
+                                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                                    writer.writeheader()
+                                    for d in data_dicts:
+                                        d['quarter'] = number
+                                        d['game_id'] = game_id
+                                        writer.writerow(d)
+                                print(f"CSV file {filename} has been generated successfully.")
+                            except Exception as e:
+                                print(f"Error generating CSV file {filename}: {e}")
+                        else:
+                            print("No data retrieved from the page.")
     await browser.close()
 
 async def _get_summary_data(page):
@@ -215,18 +240,10 @@ async def _get_matchHistory_data(page):
             # Loop through each element and extract the text
             for i, element in enumerate(elements):
                 text = await page.evaluate('(element) => element.textContent', element)
-                # Add the text to the temp list
-                temp_list.append(text)
-                # If there are two items in the temp list, add a "/" and the list to the main list and reset the temp list
-                if (i + 1) % 2 == 0:
-                    texts.append('-'.join(temp_list))
-                    temp_list = []
-
-            # If there is one item left in the temp list, add it to the main list
-            if len(temp_list) == 1:
-                texts.append(temp_list[0])
-
-            return texts
+                if i % 2 == 0:
+                    print(text, end='-')
+                else:
+                    print(text)
 
 async def _write_summary_to_csv(game_id, summary_data):
     filename = f"csv/basketball/summary/{game_id}_summary.csv"
