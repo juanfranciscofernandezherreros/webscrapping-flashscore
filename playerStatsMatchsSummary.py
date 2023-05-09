@@ -57,7 +57,6 @@ async def main(url):
                         data = await _get_match_stats_data(page)
                         number = re.search(r'/(\d+)$', link).group(1)
                         if data:
-                            # Convert data from list of lists to list of dictionaries
                             data_dicts = [dict(zip(['local', 'stat', 'visitor','quarter', 'game_id'], d)) for d in data]
                             filename = f"csv/basketball/matchStatistics/{game_id}_{number}_matchStatistics.csv"
                             try:
@@ -87,16 +86,19 @@ async def main(url):
             await page.goto(url)            
             await asyncio.sleep(5) 
             # Get all cell elements and their text
-            data = await _get_lineUps_data(page) 
-            filename = f"csv/basketball/lineups/{game_id}_lineups.csv"
-            # Escribir los datos en un archivo CSV
-            with open(filename, 'w', newline='') as csvfile:
-                fieldnames = ['number', 'flag', 'name', 'player_id', 'player_code', 'game_id']
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                writer.writeheader()
-                for d in data:
-                    d['game_id'] = game_id
-                    writer.writerow(d)
+            data = await _get_lineUps_data(page)
+            if data:
+                filename = f"csv/basketball/lineups/{game_id}_lineups.csv"
+                # Escribir los datos en un archivo CSV
+                with open(filename, 'w', newline='') as csvfile:
+                    fieldnames = ['number', 'flag', 'name', 'player_id', 'player_code', 'game_id']
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    for d in data:
+                        d['game_id'] = game_id
+                        writer.writerow(d)
+            else:
+                print("No data retrieved from the page.")
         # Navigate to the player statistics page
         if tab_text == "Match History":
             print("Match History")
@@ -114,23 +116,18 @@ async def main(url):
                         await page.goto(link)  
                         await asyncio.sleep(5) 
                         data = await _get_matchHistory_data(page)
-                        number = re.search(r'/(\d+)$', link).group(1)
                         if data:
-                            # Convert data from list of lists to list of dictionaries
-                            data_dicts = [dict(zip(['local', 'main', 'visitor','quarter', 'game_id'], d)) for d in data]
-                            filename = f"csv/basketball/pointByPoint/{game_id}_{number}_pointByPoint.csv"
+                            number = re.search(r'/(\d+)$', link).group(1)
+                            filename = f"csv/basketball/pointByPoint/{game_id}_{number}_pointByPoint.csv"                        
                             try:
                                 # Check if directory exists and create it if it doesn't
                                 os.makedirs(os.path.dirname(filename), exist_ok=True)
                                 # Write the data to CSV file
-                                with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-                                    fieldnames = ['local', 'stat', 'visitor','quarter', 'game_id']
-                                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                                    writer.writeheader()
-                                    for d in data_dicts:
-                                        d['quarter'] = number
-                                        d['game_id'] = game_id
-                                        writer.writerow(d)
+                                with open(filename, 'w', newline='') as csvfile:
+                                    writer = csv.writer(csvfile)
+                                    writer.writerow(['Match', 'Scores','Game_Id','Quarter'])
+                                    for i, score in enumerate(data):
+                                        writer.writerow([i+1, score,game_id,number])
                                 print(f"CSV file {filename} has been generated successfully.")
                             except Exception as e:
                                 print(f"Error generating CSV file {filename}: {e}")
@@ -225,25 +222,26 @@ async def _get_lineUps_data(page):
     return data
 
 async def _get_matchHistory_data(page):
-            game_id = url.split("/")[-4]
-            # Wait for the selector to appear on the page
-            # Wait for the selector to appear on the page
-            await page.waitForSelector('.matchHistoryRow__score')
-            # Get a list of all matching elements
-            elements = await page.querySelectorAll('.matchHistoryRow__score')
-            # Loop through each element and extract the text
-            # Initialize an empty array
-            texts = []
-            # Definir una lista temporal para almacenar los pares de elementos con "/" entre ellos
-            temp_list = []
-            print("GameId" , game_id)
-            # Loop through each element and extract the text
-            for i, element in enumerate(elements):
-                text = await page.evaluate('(element) => element.textContent', element)
-                if i % 2 == 0:
-                    print(text, end='-')
-                else:
-                    print(text)
+    game_id = url.split("/")[-4]
+    # Wait for the selector to appear on the page
+    await page.waitForSelector('.matchHistoryRow__score')
+    # Get a list of all matching elements
+    elements = await page.querySelectorAll('.matchHistoryRow__score')
+    # Initialize an empty array to store the extracted texts
+    texts = []
+    # Loop through each element and extract the text
+    for i, element in enumerate(elements):
+        text = await page.evaluate('(element) => element.textContent', element)
+        if i % 2 == 0:
+            # If i is even, append the text to the texts array
+            texts.append(text)
+        else:
+            # If i is odd, concatenate the previous element with the current element
+            concatenated_text = texts.pop() + '/' + text
+            # Append the concatenated text to the texts array
+            texts.append(concatenated_text)
+    # Return the texts array
+    return texts
 
 async def _write_summary_to_csv(game_id, summary_data):
     filename = f"csv/basketball/summary/{game_id}_summary.csv"
