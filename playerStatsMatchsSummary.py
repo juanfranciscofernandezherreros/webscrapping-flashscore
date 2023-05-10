@@ -31,13 +31,63 @@ async def main(url):
             await _write_summary_to_csv(game_id, summary_data)     
         # Navigate to the player statistics page
         if tab_text == "Player Statistics":
-                print("Player Statistics")
+                print("PlayerStatistics")
                 href = await tab.getProperty('href')
                 href_val = await href.jsonValue()
-                url = href_val + "/0"                
+                url = href_val + "/0"
                 print("Navigating to:", url)
-                await page.goto(url)     
-                await asyncio.sleep(5)                                                 
+                await page.goto(url)            
+                subLinks = await extract_hrefs(url,"player-statistics")
+                await asyncio.sleep(5) 
+                for link in subLinks:
+                    print("SubLink" , link) 
+                    if link.count('/') == 8:
+                        print('The URL contains exactly 8 slashes.')
+                        await page.goto(link)  
+                        await asyncio.sleep(5)
+                        data = await _get_player_stats_data(page)
+                        if data:
+                            number = re.search(r'/(\d+)$', link).group(1)
+                            filename = f"csv/basketball/playerStatistics/{game_id}_{number}_playerStatistics.csv"                        
+                            try:
+                                # Check if directory exists and create it if it doesn't
+                                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                                # Write the data to CSV file
+                                with open(filename, 'w', newline='') as csvfile:
+                                    writer = csv.writer(csvfile)
+                                    writer.writerow(['Player', 'Player_Id', 'Team', 'Pts', 'Reb', 'Ast', 'Min', 'Fgm', 'Fga', '2pm', '2pa', '3pm', '3pa', 'Ftm', 'Fta', '+/-', 'or', 'dr', 'pf', 'st', 'to', 'bs', 'ba', 'tfs', 'game_id', 'team_number'])
+                                    for i, score in enumerate(data):                                        
+                                        writer.writerow([data[i][0],
+                                                         data[i][1],
+                                                         data[i][3],
+                                                         data[i][4],
+                                                         data[i][5],
+                                                         data[i][6],
+                                                         data[i][7],
+                                                         data[i][8],
+                                                         data[i][9],
+                                                         data[i][10],
+                                                         data[i][11],
+                                                         data[i][12],
+                                                         data[i][13],
+                                                         data[i][14],
+                                                         data[i][15],
+                                                         data[i][16],
+                                                         data[i][17],
+                                                         data[i][18],
+                                                         data[i][19],
+                                                         data[i][20],
+                                                         data[i][21],
+                                                         data[i][22],
+                                                         data[i][23],
+                                                         data[i][24],
+                                                         game_id,
+                                                         number])
+                                print(f"CSV file {filename} has been generated successfully.")
+                            except Exception as e:
+                                print(f"Error generating CSV file {filename}: {e}")
+                        else:
+                            print("No data retrieved from the page.")
         # Navigate to the player statistics page
         if tab_text == "Stats":
                 print("MatchStatistics")
@@ -184,7 +234,7 @@ async def _get_player_stats_data(page):
         row_data.insert(1, player_name)  # Insert the href value as the second element of the row
         row_data.insert(2, player_id)  # Insert the href value as the third element of the row
         data.append(row_data)  # Append the row data to the list of data
-
+        print(data)
     return data
 
 async def _get_match_stats_data(page):
